@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useUI } from '../context/UIContext'
+import logoImage from '../assets/logo image.jpg'
 
 const FIRST_LOAD_KEY = 'sd-intro-played'
 const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)'
@@ -133,7 +134,7 @@ export default function IntroAnimation() {
           <img
             ref={logoRef}
             className="intro-logo"
-            src="/images/logo.jpg"
+            src={logoImage}
             alt=""
             draggable="false"
             onLoad={() => setLogoReady(true)}
