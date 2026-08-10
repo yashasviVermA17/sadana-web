@@ -1,0 +1,183 @@
+import { Link } from 'react-router-dom'
+import { ArrowUpRight, MapPin, MessageCircle, Phone } from 'lucide-react'
+import { navLinks, contact, whatsappUrl } from '../data/site'
+import { categories } from '../data/products'
+import logoImage from '../assets/logo image.jpg'
+
+const year = new Date().getFullYear()
+
+export default function Footer() {
+  return (
+    <footer className="bg-charcoal text-cream">
+      <div className="mx-auto max-w-none px-5 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+          <div className="max-w-sm">
+            <Link
+              to="/"
+              aria-label="Sadana Decor — Home"
+              className="flex items-center"
+            >
+              <img
+                src={logoImage}
+                alt="Sadana Decor logo"
+                className="h-10 w-auto"
+              />
+            </Link>
+            <p className="mt-5 text-sm leading-relaxed text-taupe">
+              SADANA Decor & Interior — all types of interior & exterior products under
+              one roof. Premium, durable and modern solutions for homes, offices and
+              commercial spaces across Indore.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-2.5">
+              {['Interior', 'Exterior', 'Under One Roof'].map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-white/12 px-3.5 py-1.5 text-xs text-taupe"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-linen">
+              Explore
+            </h3>
+            <ul className="mt-5 space-y-3">
+              {navLinks.map((link) => (
+                <li key={link.to}>
+                  <Link
+                    to={link.to}
+                    className="group inline-flex items-center gap-1.5 text-sm text-smoke transition-colors duration-300 hover:text-brand"
+                  >
+                    {link.label}
+                    <ArrowUpRight
+                      className="h-3.5 w-3.5 opacity-0 transition-all duration-300 group-hover:opacity-100"
+                      aria-hidden="true"
+                    />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-linen">
+              Products
+            </h3>
+            <ul className="mt-5 space-y-3">
+              {categories.map((cat) => (
+                <li key={cat}>
+                  <Link
+                    to={`/products?category=${encodeURIComponent(cat)}`}
+                    className="group inline-flex items-center gap-1.5 text-sm text-smoke transition-colors duration-300 hover:text-brand"
+                  >
+                    {cat}
+                    <ArrowUpRight
+                      className="h-3.5 w-3.5 opacity-0 transition-all duration-300 group-hover:opacity-100"
+                      aria-hidden="true"
+                    />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-linen">
+              Visit Us
+            </h3>
+            <ul className="mt-5 space-y-4 text-sm text-taupe">
+              <li className="flex items-start gap-3">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden="true" />
+                <span>
+                  {contact.showroom.lines.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </span>
+              </li>
+            </ul>
+            <div className="mt-5 flex items-center gap-2.5">
+              <a
+                href={`tel:+91${contact.phone.lines[0].replace(/\s/g, '')}`}
+                aria-label="Call Sadana Decor"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 text-smoke transition-colors duration-300 hover:border-brand hover:text-brand"
+              >
+                <Phone className="h-4 w-4" aria-hidden="true" />
+              </a>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Chat with Sadana Decor on WhatsApp"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 text-smoke transition-colors duration-300 hover:border-brand hover:text-brand"
+              >
+                <MessageCircle className="h-4 w-4" aria-hidden="true" />
+              </a>
+              <a
+                href="https://www.instagram.com/sadanadecor/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Follow Sadana Decor on Instagram"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 text-smoke transition-colors duration-300 hover:border-brand hover:text-brand"
+              >
+                <svg
+                  className="h-4 w-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/12 pt-8 sm:flex-row sm:items-center">
+          <p className="text-xs text-fog">
+            © {year} SADANA Decor & Interior. All rights reserved.
+          </p>
+          <p className="text-xs text-fog">
+            Vijay Nagar, Indore (M.P.) — Interior & Exterior Products Under One Roof.
+          </p>
+        </div>
+      </div>
+
+      <div className="border-t border-white/12">
+        <div className="mx-auto flex max-w-none flex-col items-center justify-between gap-4 px-5 py-6 sm:flex-row sm:px-6 lg:px-8">
+          <p className="text-center text-sm text-smoke sm:text-left">
+            Get in touch — we reply within a working day.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-medium text-cream transition-colors duration-300 hover:bg-brand-dark"
+            >
+              <MessageCircle className="h-4 w-4" aria-hidden="true" />
+              Chat on WhatsApp
+            </a>
+            <a
+              href={`tel:+91${contact.phone.lines[0].replace(/\s/g, '')}`}
+              className="inline-flex items-center gap-2 rounded-full border border-white/25 px-5 py-2.5 text-sm font-medium text-cream transition-colors duration-300 hover:border-brand hover:text-brand"
+            >
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              Call Sadana Decor
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}
