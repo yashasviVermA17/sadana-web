@@ -66,11 +66,11 @@ export default function ProductDetail({ productId: propProductId }) {
             className="img-settle block h-full w-full object-cover"
           />
           <div
-            className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-charcoal/20"
+            className="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/50 to-charcoal/25"
             aria-hidden="true"
           />
 
-          <div className="relative mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-5 pb-12 sm:px-6 lg:px-8 lg:pb-16">
+          <div className="relative mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-5 pb-10 sm:px-6 sm:pb-12 lg:px-8 lg:pb-16">
             <Reveal>
               <Breadcrumb
                 light
@@ -84,18 +84,18 @@ export default function ProductDetail({ productId: propProductId }) {
               />
             </Reveal>
             <Reveal delay={100}>
-              <span className="mt-6 inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.22em] text-brand">
+              <span className="mt-5 inline-flex items-center gap-2.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand sm:mt-6 sm:text-xs">
                 <span className="h-px w-8 bg-brand" aria-hidden="true" />
                 {product.category}
               </span>
             </Reveal>
             <Reveal delay={160}>
-              <h1 className="mt-4 max-w-3xl font-serif text-4xl leading-[1.08] text-cream sm:text-5xl lg:text-[4.25rem]">
+              <h1 className="mt-3 max-w-3xl font-serif text-[2.1rem] leading-[1.12] text-cream sm:mt-4 sm:text-5xl lg:text-[4.25rem]">
                 {product.name}
               </h1>
             </Reveal>
             <Reveal delay={240}>
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-cream/80 sm:text-lg">
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-cream/80 sm:mt-6 sm:text-lg">
                 {product.short}
               </p>
             </Reveal>

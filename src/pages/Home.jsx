@@ -33,32 +33,32 @@ function Hero() {
           className="block h-full w-full object-cover object-center"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/35 to-charcoal/15"
+          className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/45 to-charcoal/15"
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-5 pb-16 sm:px-6 lg:px-8 lg:pb-20">
-          <span className="inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.24em] text-cream/80">
+        <div className="relative mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-5 pb-14 sm:px-6 sm:pb-16 lg:px-8 lg:pb-20">
+          <span className="inline-flex items-center gap-2.5 text-[11px] font-semibold uppercase tracking-[0.24em] text-cream/80 sm:text-xs">
             <span className="h-px w-8 bg-brand" aria-hidden="true" />
             Sadana Decor · Since 2010
           </span>
 
-          <h1 className="mt-5 max-w-3xl font-serif text-4xl leading-[1.08] text-cream sm:text-5xl lg:text-[4.25rem]">
+          <h1 className="mt-4 max-w-3xl font-serif text-[2.15rem] leading-[1.1] text-cream sm:mt-5 sm:text-5xl lg:text-[4.25rem]">
             Creating Elegant Spaces for Beautiful Living
           </h1>
 
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-cream/85 sm:text-lg">
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-cream/85 sm:mt-6 sm:text-lg">
             Premium Interior Solutions for Homes, Offices &amp; Commercial Spaces.
           </p>
 
-          <p className="mt-5 max-w-2xl text-sm leading-relaxed text-cream/70 sm:text-base">
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-cream/70 sm:mt-5 sm:text-base">
             Since 2010, SADANA Decor &amp; Interior has brought every interior and exterior
             product under one roof in Indore — wall finishes, wallpapers, ceilings, flooring,
             doors, panels, soft furnishings and architectural cladding — designed with the
             latest trends and matched to every style and budget.
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center gap-3.5">
+          <div className="mt-7 flex flex-wrap items-center gap-3.5 sm:mt-9">
             <Button to="/products" size="lg">
               Explore Collection
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" aria-hidden="true" />

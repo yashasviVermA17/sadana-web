@@ -12,30 +12,30 @@ export default function PageHero({ image, breadcrumb, eyebrow, title, subtitle, 
           className={`img-settle block h-full w-full object-${fit}`}
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/45 to-charcoal/20"
+          className="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/50 to-charcoal/25"
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-5 pb-12 sm:px-6 lg:px-8 lg:pb-16">
+        <div className="relative mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-5 pb-10 sm:px-6 sm:pb-12 lg:px-8 lg:pb-16">
           <Reveal>
             <Breadcrumb items={breadcrumb} light />
           </Reveal>
           {eyebrow && (
             <Reveal delay={100}>
-              <span className="mt-6 inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.22em] text-brand">
+              <span className="mt-5 inline-flex items-center gap-2.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand sm:mt-6 sm:text-xs">
                 <span className="h-px w-8 bg-brand" aria-hidden="true" />
                 {eyebrow}
               </span>
             </Reveal>
           )}
           <Reveal delay={160}>
-            <h1 className="mt-4 max-w-3xl font-serif text-4xl leading-[1.1] text-cream sm:text-5xl">
+            <h1 className="mt-3 max-w-3xl font-serif text-[2.1rem] leading-[1.12] text-cream sm:mt-4 sm:text-5xl">
               {title}
             </h1>
           </Reveal>
           {subtitle && (
             <Reveal delay={220}>
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-cream/75 sm:text-lg">
+              <p className="mt-4 max-w-xl text-sm leading-relaxed text-cream/80 sm:mt-5 sm:text-lg">
                 {subtitle}
               </p>
             </Reveal>
