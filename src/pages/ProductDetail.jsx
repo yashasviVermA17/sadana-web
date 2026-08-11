@@ -10,6 +10,7 @@ import ProductCard from '../components/ProductCard'
 import SectionHeading from '../components/SectionHeading'
 import { getProduct, productProjects, relatedProducts } from '../data/products'
 import { getProject, projects } from '../data/projects'
+import { getProductShopCategory } from '../data/filters'
 import { useUI } from '../context/UIContext'
 
 const relatedVisible = { base: 1.1, sm: 2.2, lg: 3, xl: 3 }
@@ -23,9 +24,10 @@ function DetailRow({ label, children }) {
   )
 }
 
-export default function ProductDetail() {
-  const { id } = useParams()
+export default function ProductDetail({ productId: propProductId }) {
+  const { productId } = useParams()
   const { openQuote } = useUI()
+  const id = propProductId || productId
   const product = getProduct(id)
 
   if (!product) {
@@ -40,6 +42,7 @@ export default function ProductDetail() {
     )
   }
 
+  const shopCategory = getProductShopCategory(product)
   const related = relatedProducts(product)
   const relatedProjectIds = productProjects[product.id] || []
   const featuredIds = [...relatedProjectIds]
@@ -55,16 +58,48 @@ export default function ProductDetail() {
 
   return (
     <>
-      <section className="border-b border-charcoal/10 bg-mist">
-        <div className="mx-auto max-w-none px-5 py-14 sm:px-6 lg:px-8">
-          <Reveal>
-            <Breadcrumb
-              items={[
-                { label: 'Products', to: '/products' },
-                { label: product.name },
-              ]}
-            />
-          </Reveal>
+      <section data-hero>
+        <div className="relative h-[65vh] min-h-[440px] w-full overflow-hidden sm:h-[70vh] lg:h-[78vh]">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="img-settle block h-full w-full object-cover"
+          />
+          <div
+            className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-charcoal/20"
+            aria-hidden="true"
+          />
+
+          <div className="relative mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-5 pb-12 sm:px-6 lg:px-8 lg:pb-16">
+            <Reveal>
+              <Breadcrumb
+                light
+                items={[
+                  { label: 'Products', to: '/products' },
+                  ...(shopCategory
+                    ? [{ label: shopCategory.name, to: `/products/${shopCategory.slug}` }]
+                    : []),
+                  { label: product.name },
+                ]}
+              />
+            </Reveal>
+            <Reveal delay={100}>
+              <span className="mt-6 inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.22em] text-brand">
+                <span className="h-px w-8 bg-brand" aria-hidden="true" />
+                {product.category}
+              </span>
+            </Reveal>
+            <Reveal delay={160}>
+              <h1 className="mt-4 max-w-3xl font-serif text-4xl leading-[1.08] text-cream sm:text-5xl lg:text-[4.25rem]">
+                {product.name}
+              </h1>
+            </Reveal>
+            <Reveal delay={240}>
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-cream/80 sm:text-lg">
+                {product.short}
+              </p>
+            </Reveal>
+          </div>
         </div>
       </section>
 

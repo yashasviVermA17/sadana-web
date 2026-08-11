@@ -17,15 +17,16 @@ export const FILTER_GROUPS = [
     key: 'category',
     title: 'Category',
     options: [
-      { label: 'Marble', test: match(/marble/) },
-      { label: 'PVC Panels', test: match(/pvc|wood plastic composite/) },
-      { label: 'Wallpapers', test: match(/wallpaper/) },
-      { label: 'False Ceiling', test: (p) => p.category === 'Ceilings' },
+      { label: 'Marble', slug: 'marble', test: match(/marble/) },
+      { label: 'PVC Panels', slug: 'pvc-panels', test: match(/pvc|wood plastic composite/) },
+      { label: 'Wallpapers', slug: 'wallpapers', test: match(/wallpaper/) },
+      { label: 'False Ceiling', slug: 'false-ceiling', category: 'Ceilings', test: (p) => p.category === 'Ceilings' },
       {
         label: 'Furniture',
+        slug: 'furniture',
         test: match(/furniture|wardrobe|kitchen|cabinet|shutter|counter/),
       },
-      { label: 'Flooring', test: (p) => p.category === 'Flooring' },
+      { label: 'Flooring', slug: 'flooring', category: 'Flooring', test: (p) => p.category === 'Flooring' },
     ],
   },
   {
@@ -108,3 +109,18 @@ export const searchProducts = (products, query) => {
 
 export const countActiveFilters = (filters) =>
   Object.values(filters).reduce((total, list) => total + (list?.length || 0), 0)
+
+export const shopCategories = FILTER_GROUPS[0].options.map(({ label, slug, category, test }) => ({
+  name: label,
+  slug,
+  category,
+  test,
+}))
+
+export const getShopCategoryBySlug = (slug) => shopCategories.find((c) => c.slug === slug)
+
+export const getProductShopCategory = (product) =>
+  shopCategories.find((c) => c.category && c.category === product.category) ||
+  shopCategories.find((c) => c.test(product))
+
+export const getProductShopSlug = (product) => getProductShopCategory(product)?.slug

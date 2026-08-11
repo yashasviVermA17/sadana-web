@@ -1,14 +1,84 @@
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { Check, X } from 'lucide-react'
 import { FILTER_GROUPS, countActiveFilters } from '../data/filters'
 
-function FilterPanel({ filters, onToggle, onClear }) {
+function CategoryLink({ to, active, children, onClose }) {
+  return (
+    <li>
+      <Link
+        to={to}
+        onClick={onClose}
+        aria-current={active ? 'page' : undefined}
+        className="group flex cursor-pointer items-center gap-3 py-1"
+      >
+        <span
+          aria-hidden="true"
+          className={`grid h-[18px] w-[18px] shrink-0 place-items-center rounded-full border-[1.5px] transition-all duration-200 ${
+            active ? 'border-brand bg-brand' : 'border-brand/50 group-hover:border-brand'
+          }`}
+        >
+          <span
+            className={`h-[6px] w-[6px] rounded-full bg-cream transition-opacity duration-200 ${
+              active ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        </span>
+        <span
+          className={`text-sm transition-colors duration-200 ${
+            active ? 'font-medium text-charcoal' : 'text-stone group-hover:text-charcoal'
+          }`}
+        >
+          {children}
+        </span>
+      </Link>
+    </li>
+  )
+}
+
+function FilterPanel({ categories, activeCategorySlug, filters, onToggle, onClear, onClose }) {
   const activeCount = countActiveFilters(filters)
 
   return (
     <div>
-      {FILTER_GROUPS.map((group, i) => (
-        <section key={group.key} className={i === 0 ? 'pt-1' : 'mt-8 border-t border-charcoal/10 pt-7'}>
+      {categories && categories.length > 0 && (
+        <section className="pb-7">
+          <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-charcoal">
+            Categories
+          </h3>
+          <ul className="mt-4 space-y-1.5">
+            <CategoryLink
+              to="/products"
+              onClose={onClose}
+              active={!activeCategorySlug}
+            >
+              All Products
+            </CategoryLink>
+            {categories.map((cat) => (
+              <CategoryLink
+                key={cat.slug}
+                to={`/products/${cat.slug}`}
+                onClose={onClose}
+                active={cat.slug === activeCategorySlug}
+              >
+                {cat.name}
+              </CategoryLink>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {FILTER_GROUPS.filter((g) => g.key !== 'category').map((group, i) => (
+        <section
+          key={group.key}
+          className={
+            categories && categories.length > 0
+              ? 'mt-8 border-t border-charcoal/10 pt-7'
+              : i === 0
+                ? 'pt-1'
+                : 'mt-8 border-t border-charcoal/10 pt-7'
+          }
+        >
           <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-charcoal">
             {group.title}
           </h3>
@@ -66,7 +136,15 @@ function FilterPanel({ filters, onToggle, onClear }) {
   )
 }
 
-export default function FilterSidebar({ filters, onToggle, onClear, open, onClose }) {
+export default function FilterSidebar({
+  categories,
+  activeCategorySlug,
+  filters,
+  onToggle,
+  onClear,
+  open,
+  onClose,
+}) {
   useEffect(() => {
     if (!open) return undefined
     const prev = document.body.style.overflow
@@ -85,7 +163,14 @@ export default function FilterSidebar({ filters, onToggle, onClear, open, onClos
     <>
       <aside className="hidden w-[230px] shrink-0 lg:block">
         <div className="sticky top-24 max-h-[calc(100vh-7.5rem)] overflow-y-auto rounded-card border border-charcoal/10 bg-white px-5 py-6 lg:py-7">
-          <FilterPanel filters={filters} onToggle={onToggle} onClear={onClear} />
+          <FilterPanel
+            categories={categories}
+            activeCategorySlug={activeCategorySlug}
+            filters={filters}
+            onToggle={onToggle}
+            onClear={onClear}
+            onClose={onClose}
+          />
         </div>
       </aside>
 
@@ -121,7 +206,14 @@ export default function FilterSidebar({ filters, onToggle, onClear, open, onClos
             </button>
           </div>
           <div className="min-h-0 flex-1 overflow-y-auto px-5 py-6">
-            <FilterPanel filters={filters} onToggle={onToggle} onClear={onClear} />
+            <FilterPanel
+              categories={categories}
+              activeCategorySlug={activeCategorySlug}
+              filters={filters}
+              onToggle={onToggle}
+              onClear={onClear}
+              onClose={onClose}
+            />
           </div>
         </div>
       </div>

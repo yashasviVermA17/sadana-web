@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, MapPin, MessageCircle, Phone } from 'lucide-react'
 import { navLinks, contact, whatsappUrl } from '../data/site'
-import { categories } from '../data/products'
-import logoImage from '../assets/logo image.jpg'
+import { shopCategories } from '../data/filters'
 
 const year = new Date().getFullYear()
 
@@ -12,18 +11,7 @@ export default function Footer() {
       <div className="mx-auto max-w-none px-5 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div className="max-w-sm">
-            <Link
-              to="/"
-              aria-label="Sadana Decor — Home"
-              className="flex items-center"
-            >
-              <img
-                src={logoImage}
-                alt="Sadana Decor logo"
-                className="h-10 w-auto"
-              />
-            </Link>
-            <p className="mt-5 text-sm leading-relaxed text-taupe">
+            <p className="text-sm leading-relaxed text-taupe">
               SADANA Decor & Interior — all types of interior & exterior products under
               one roof. Premium, durable and modern solutions for homes, offices and
               commercial spaces across Indore.
@@ -67,13 +55,13 @@ export default function Footer() {
               Products
             </h3>
             <ul className="mt-5 space-y-3">
-              {categories.map((cat) => (
-                <li key={cat}>
+              {shopCategories.map((cat) => (
+                <li key={cat.slug}>
                   <Link
-                    to={`/products?category=${encodeURIComponent(cat)}`}
+                    to={`/products/${cat.slug}`}
                     className="group inline-flex items-center gap-1.5 text-sm text-smoke transition-colors duration-300 hover:text-brand"
                   >
-                    {cat}
+                    {cat.name}
                     <ArrowUpRight
                       className="h-3.5 w-3.5 opacity-0 transition-all duration-300 group-hover:opacity-100"
                       aria-hidden="true"

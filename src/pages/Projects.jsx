@@ -6,7 +6,7 @@ import Button from '../components/Button'
 import PageHero from '../components/PageHero'
 import { projectCategories, projectsByCategory } from '../data/projects'
 import { useUI } from '../context/UIContext'
-import imgHero from '../assets/Parametric wall panel1.jpg'
+import imgHero from '../assets/project hero image 2.jpg'
 
 export default function Projects() {
   const [params, setParams] = useSearchParams()
@@ -23,6 +23,7 @@ export default function Projects() {
     <>
       <PageHero
         image={imgHero}
+        fit="contain"
         breadcrumb={[{ label: 'Projects' }]}
         eyebrow="Our Projects"
         title="Spaces we designed, delivered and stand behind"

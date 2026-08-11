@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowUpRight, Search, X } from 'lucide-react'
-import { products, categories } from '../data/products'
+import { products } from '../data/products'
+import { getProductShopSlug, shopCategories } from '../data/filters'
 import { projects } from '../data/projects'
 import { useUI } from '../context/UIContext'
 
@@ -73,7 +74,7 @@ export default function SearchOverlay() {
             p.short.toLowerCase().includes(q),
         )
         .slice(0, 6),
-      categories: categories.filter((c) => c.toLowerCase().includes(q)).slice(0, 4),
+      categories: shopCategories.filter((c) => c.name.toLowerCase().includes(q)).slice(0, 4),
     }
   }, [query])
 
@@ -135,15 +136,18 @@ export default function SearchOverlay() {
                       Products
                     </p>
                     <div>
-                      {results.products.map((p) => (
-                        <ResultRow
-                          key={p.id}
-                          type="Product"
-                          title={p.name}
-                          subtitle={`${p.category} — ${p.short}`}
-                          onClick={() => go(`/products/${p.id}`)}
-                        />
-                      ))}
+                      {results.products.map((p) => {
+                        const shopSlug = getProductShopSlug(p)
+                        return (
+                          <ResultRow
+                            key={p.id}
+                            type="Product"
+                            title={p.name}
+                            subtitle={`${p.category} — ${p.short}`}
+                            onClick={() => go(shopSlug ? `/products/${shopSlug}/${p.id}` : `/products/${p.id}`)}
+                          />
+                        )
+                      })}
                     </div>
                   </div>
                 )}
@@ -175,11 +179,11 @@ export default function SearchOverlay() {
                     <div>
                       {results.categories.map((c) => (
                         <ResultRow
-                          key={c}
+                          key={c.slug}
                           type="Category"
-                          title={c}
+                          title={c.name}
                           subtitle="View products in this category"
-                          onClick={() => go(`/products?category=${encodeURIComponent(c)}`)}
+                          onClick={() => go(`/products/${c.slug}`)}
                         />
                       ))}
                     </div>

@@ -1,7 +1,7 @@
 import Breadcrumb from './Breadcrumb'
 import Reveal from './Reveal'
 
-export default function PageHero({ image, breadcrumb, eyebrow, title, subtitle, children }) {
+export default function PageHero({ image, breadcrumb, eyebrow, title, subtitle, children, fit = 'cover' }) {
   return (
     <section data-hero>
       <div className="relative h-[65vh] min-h-[440px] w-full overflow-hidden sm:h-[70vh] lg:h-[78vh]">
@@ -9,7 +9,7 @@ export default function PageHero({ image, breadcrumb, eyebrow, title, subtitle, 
           src={image}
           alt=""
           aria-hidden="true"
-          className="img-settle block h-full w-full object-cover"
+          className={`img-settle block h-full w-full object-${fit}`}
         />
         <div
           className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/45 to-charcoal/20"

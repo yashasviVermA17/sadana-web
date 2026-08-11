@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Reveal from './Reveal'
 import SectionHeading from './SectionHeading'
 import { products } from '../data/products'
+import { getProductShopSlug } from '../data/filters'
 
 const MIN_ITEMS = 6
 
@@ -143,10 +144,12 @@ function MarqueeRow({ items, reverse = false, duration = 42 }) {
         >
           {[0, 1].map((dup) => (
             <div className="marquee-set" key={dup} aria-hidden={dup === 1}>
-              {set.map((product) => (
+              {set.map((product) => {
+                const shopSlug = getProductShopSlug(product)
+                return (
                 <Link
                   key={`${dup}-${product.id}`}
-                  to={`/products/${product.id}`}
+                  to={shopSlug ? `/products/${shopSlug}` : '/products'}
                   className="group w-[280px] shrink-0 overflow-hidden rounded-card border border-charcoal/10 bg-ivory transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-card sm:w-[340px]"
                 >
                   <div className="relative img-zoom aspect-[4/3] overflow-hidden">
@@ -166,7 +169,8 @@ function MarqueeRow({ items, reverse = false, duration = 42 }) {
                     </h3>
                   </div>
                 </Link>
-              ))}
+                )
+              })}
             </div>
           ))}
         </div>
@@ -204,7 +208,7 @@ export default function CollectionSlider() {
           align="center"
           eyebrow="Our Collection"
           title="Everything You Need to Decorate"
-          text="Drag or swipe any row to browse — tap once to pause, click a piece to explore it in detail."
+          text="Drag or swipe any row to browse — tap once to pause, click a piece to explore its category on the products page."
           className="max-w-2xl"
         />
 

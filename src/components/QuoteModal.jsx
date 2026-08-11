@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { CheckCircle2, X } from 'lucide-react'
 import { useUI } from '../context/UIContext'
-import { whatsappUrl } from '../data/site'
+import { whatsappNumber, whatsappUrl } from '../data/site'
 import Button from './Button'
 
 const inputClasses =
@@ -40,6 +40,17 @@ export default function QuoteModal() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    const text = encodeURIComponent(
+      [
+        'New Quote Request - Sadana Decor',
+        '',
+        `Name: ${form.name}`,
+        `Email: ${form.email}`,
+        `Phone: ${form.phone}`,
+        `Requirement: ${form.message}`,
+      ].join('\n')
+    )
+    window.open(`https://wa.me/${whatsappNumber}?text=${text}`, '_blank', 'noopener,noreferrer')
     setSubmitted(true)
   }
 
@@ -77,10 +88,10 @@ export default function QuoteModal() {
               <span className="grid h-16 w-16 place-items-center rounded-full bg-brand-soft">
                 <CheckCircle2 className="h-8 w-8 text-brand" aria-hidden="true" />
               </span>
-              <h4 className="font-serif text-xl text-charcoal">Enquiry received</h4>
+              <h4 className="font-serif text-xl text-charcoal">Enquiry sent on WhatsApp</h4>
               <p className="max-w-sm text-sm leading-relaxed text-stone">
-                Thank you, {form.name || 'friend'}. Our design team will get back to
-                you within one working day. Need a faster reply?
+                Thank you, {form.name || 'friend'}. Your details are on their way to
+                us on WhatsApp — our design team will reply within one working day.
               </p>
               <Button href={whatsappUrl} target="_blank" variant="outline" className="mt-1">
                 Chat on WhatsApp

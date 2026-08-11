@@ -10,7 +10,7 @@ export default function ProjectCard({ project }) {
         to={`/projects/${project.id}`}
         className="group relative block h-full overflow-hidden rounded-card border border-charcoal/10 bg-ivory shadow-soft transition-[border-color,box-shadow] duration-300 hover:border-brand/40 hover:shadow-[0_24px_60px_-24px_rgb(200_90_50/0.35)]"
       >
-        <div className="relative img-zoom aspect-[4/3] overflow-hidden">
+        <div className="relative img-zoom aspect-[3/4] overflow-hidden">
           <TiltImage
             src={project.cover}
             alt={project.title}

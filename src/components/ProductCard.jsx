@@ -1,13 +1,23 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
+import { getProductShopSlug } from '../data/filters'
 import TiltCard from './TiltCard'
 import TiltImage from './TiltImage'
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, categoryFirst = true }) {
+  const shopSlug = getProductShopSlug(product)
+  const to = categoryFirst
+    ? shopSlug
+      ? `/products/${shopSlug}`
+      : '/products'
+    : shopSlug
+      ? `/products/${shopSlug}/${product.id}`
+      : `/products/${product.id}`
+
   return (
     <TiltCard className="h-full">
       <Link
-        to={`/products/${product.id}`}
+        to={to}
         className="group relative block h-full overflow-hidden rounded-card border border-charcoal/10 bg-ivory shadow-soft transition-[border-color,box-shadow] duration-300 hover:border-brand/40 hover:shadow-[0_24px_60px_-24px_rgb(200_90_50/0.35)]"
       >
         <div className="relative img-zoom aspect-[4/3] overflow-hidden">

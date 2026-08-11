@@ -9,7 +9,7 @@ import Testimonials from '../components/Testimonials'
 import CollectionSlider from '../components/CollectionSlider'
 import { products } from '../data/products'
 import { projects } from '../data/projects'
-import imgHero from '../assets/Sofa.jpg'
+import imgHero from '../assets/home page hero image.png'
 
 const featuredIds = [
   'uv-marble-sheets',
@@ -30,7 +30,7 @@ function Hero() {
         <img
           src={imgHero}
           alt="Premium interior design by Sadana Decor"
-          className="block h-full w-full object-cover"
+          className="block h-full w-full object-cover object-center"
         />
         <div
           className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/35 to-charcoal/15"
@@ -90,7 +90,7 @@ function FeaturedCollection() {
       </div>
 
       <Reveal className="mt-12">
-        <ProductGrid items={featured} />
+        <ProductGrid items={featured} categoryFirst />
       </Reveal>
     </section>
   )

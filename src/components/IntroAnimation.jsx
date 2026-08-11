@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useUI } from '../context/UIContext'
-import logoImage from '../assets/logo image.jpg'
+import logoImage from '../assets/logo image white rounded.png'
 
 const FIRST_LOAD_KEY = 'sd-intro-played'
 const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)'

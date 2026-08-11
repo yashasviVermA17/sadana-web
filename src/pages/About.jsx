@@ -10,9 +10,9 @@ import TiltCard from '../components/TiltCard'
 import TiltImage from '../components/TiltImage'
 import { useUI } from '../context/UIContext'
 import { values } from '../data/site'
-import imgStory from '../assets/Mosaic tiles.jpg'
+import imgStory from '../assets/abut page image.png'
 import imgCtaBg from '../assets/Parametric wall panel.jpg'
-import imgHero from '../assets/Sofa.jpg'
+import imgHero from '../assets/about hero image.png'
 
 function MissionVision() {
   const cards = [

@@ -1,5 +1,12 @@
 import { useEffect } from 'react'
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useParams,
+} from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import FloatingContact from './components/FloatingContact'
@@ -10,6 +17,8 @@ import { UIProvider } from './context/UIContext'
 import Home from './pages/Home'
 import Products from './pages/Products'
 import ProductDetail from './pages/ProductDetail'
+import { getProduct } from './data/products'
+import { getProductShopSlug, getShopCategoryBySlug } from './data/filters'
 import Projects from './pages/Projects'
 import ProjectDetail from './pages/ProjectDetail'
 import About from './pages/About'
@@ -23,6 +32,32 @@ function ScrollToTop() {
   return null
 }
 
+function ProductPage() {
+  const { slug } = useParams()
+
+  if (slug) {
+    const category = getShopCategoryBySlug(slug)
+    if (category) return <Products activeCategorySlug={category.slug} />
+
+    const product = getProduct(slug)
+    if (product) {
+      const shopSlug = getProductShopSlug(product)
+      return shopSlug ? (
+        <Navigate to={`/products/${shopSlug}/${product.id}`} replace />
+      ) : (
+        <ProductDetail productId={product.id} />
+      )
+    }
+  }
+
+  return <Products activeCategorySlug={null} />
+}
+
+function ProductDetailRoute() {
+  const { productId } = useParams()
+  return <ProductDetail productId={productId} />
+}
+
 function Layout() {
   const { pathname } = useLocation()
 
@@ -33,8 +68,9 @@ function Layout() {
       <main key={pathname} className="page-enter">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/products" element={<ProductPage />} />
+          <Route path="/products/:slug" element={<ProductPage />} />
+          <Route path="/products/:slug/:productId" element={<ProductDetailRoute />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:id" element={<ProjectDetail />} />
           <Route path="/about" element={<About />} />

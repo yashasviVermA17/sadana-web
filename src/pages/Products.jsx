@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Search, SlidersHorizontal, X } from 'lucide-react'
 import FilterSidebar from '../components/FilterSidebar'
 import ProductGrid from '../components/ProductGrid'
@@ -11,39 +11,27 @@ import {
   EMPTY_FILTERS,
   countActiveFilters,
   filterProducts,
+  getShopCategoryBySlug,
   searchProducts,
+  shopCategories,
   toggleFilter,
 } from '../data/filters'
-import imgHero from '../assets/3 D panel.jpg'
+import imgHero from '../assets/product hera image 2.jpg'
 
-const categoryAliases = {
-  wallpapers: 'Wall Finishes',
-  curtains: 'Soft Furnishings',
-  'wooden-flooring': 'Flooring',
-  blinds: 'Soft Furnishings',
-  'pvc-panels': 'Wall Finishes',
-  'artificial-grass': 'Exterior & Outdoor',
-  'home-decor': 'Soft Furnishings',
-  'office-decor': 'All',
-}
-
-export default function Products() {
-  const [params, setParams] = useSearchParams()
+export default function Products({ activeCategorySlug }) {
+  const navigate = useNavigate()
   const [filters, setFilters] = useState(EMPTY_FILTERS)
   const [query, setQuery] = useState('')
   const [drawerOpen, setDrawerOpen] = useState(false)
 
-  const urlCategory = useMemo(() => {
-    const raw = params.get('category')
-    if (!raw) return null
-    const alias = categoryAliases[raw]
-    if (alias === 'All') return null
-    return alias || raw
-  }, [params])
+  const activeCategory = useMemo(
+    () => (activeCategorySlug ? getShopCategoryBySlug(activeCategorySlug) : null),
+    [activeCategorySlug],
+  )
 
   const baseItems = useMemo(
-    () => (urlCategory ? products.filter((p) => p.category === urlCategory) : products),
-    [urlCategory],
+    () => (activeCategory ? products.filter(activeCategory.test) : products),
+    [activeCategory],
   )
 
   const filtered = useMemo(() => {
@@ -52,7 +40,7 @@ export default function Products() {
   }, [baseItems, filters, query])
 
   const activeCount = countActiveFilters(filters)
-  const hasActive = activeCount > 0 || Boolean(query.trim()) || Boolean(urlCategory)
+  const hasActive = activeCount > 0 || Boolean(query.trim()) || Boolean(activeCategory)
 
   const handleToggle = (groupKey, label) =>
     setFilters((prev) => toggleFilter(prev, groupKey, label))
@@ -60,8 +48,8 @@ export default function Products() {
   const clearAll = () => {
     setFilters(EMPTY_FILTERS)
     setQuery('')
-    setParams({})
     setDrawerOpen(false)
+    navigate('/products')
   }
 
   const searchBox = (
@@ -102,7 +90,14 @@ export default function Products() {
     <>
       <PageHero
         image={imgHero}
-        breadcrumb={[{ label: 'Products' }]}
+        breadcrumb={
+          activeCategory
+            ? [
+                { label: 'Products', to: '/products' },
+                { label: activeCategory.name },
+              ]
+            : [{ label: 'Products' }]
+        }
         eyebrow="Our Products"
         title="Surfaces, panels & materials for every space"
         subtitle="Wall panels, blinds, alabaster sheets, decorative surfaces and interior materials — sourced, sampled and supplied by a team that can touch every product we sell."
@@ -111,6 +106,8 @@ export default function Products() {
       <section className="mx-auto max-w-none px-5 py-14 sm:px-6 lg:px-8 lg:py-20">
         <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-12">
           <FilterSidebar
+            categories={shopCategories}
+            activeCategorySlug={activeCategorySlug}
             filters={filters}
             onToggle={handleToggle}
             onClear={clearAll}
@@ -150,14 +147,14 @@ export default function Products() {
 
               <div className="mt-5 lg:hidden">{searchBox}</div>
 
-              {urlCategory && (
+              {activeCategory && (
                 <div className="mt-5 flex items-center gap-2">
                   <span className="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand-soft px-3 py-1 text-xs font-medium text-brand-dark">
-                    {urlCategory}
+                    {activeCategory.name}
                     <button
                       type="button"
-                      onClick={() => setParams({})}
-                      aria-label={`Remove ${urlCategory} filter`}
+                      onClick={() => navigate('/products')}
+                      aria-label={`Remove ${activeCategory.name} category`}
                       className="grid h-4 w-4 place-items-center rounded-full transition-colors duration-200 hover:bg-brand hover:text-cream"
                     >
                       <X className="h-3 w-3" aria-hidden="true" />
@@ -169,7 +166,7 @@ export default function Products() {
 
             {filtered.length > 0 ? (
               <Reveal>
-                <ProductGrid items={filtered} columns="sm:grid-cols-2 xl:grid-cols-3" />
+                <ProductGrid items={filtered} columns="sm:grid-cols-2 xl:grid-cols-3" categoryFirst={false} />
               </Reveal>
             ) : (
               <Reveal className="flex flex-col items-center gap-4 rounded-card border border-dashed border-charcoal/20 bg-ivory px-6 py-20 text-center">
