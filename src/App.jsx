@@ -30,7 +30,7 @@ function Layout() {
     <>
       <IntroAnimation />
       <Header />
-      <main key={pathname} className={`page-enter ${pathname === '/' ? '' : 'pt-[68px]'}`}>
+      <main key={pathname} className="page-enter">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />

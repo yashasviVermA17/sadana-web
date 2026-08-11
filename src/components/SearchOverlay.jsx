@@ -69,7 +69,6 @@ export default function SearchOverlay() {
         .filter(
           (p) =>
             p.title.toLowerCase().includes(q) ||
-            p.location.toLowerCase().includes(q) ||
             p.category.toLowerCase().includes(q) ||
             p.short.toLowerCase().includes(q),
         )
@@ -160,7 +159,7 @@ export default function SearchOverlay() {
                           key={p.id}
                           type="Project"
                           title={p.title}
-                          subtitle={`${p.category} — ${p.location}`}
+                          subtitle={p.category}
                           onClick={() => go(`/projects/${p.id}`)}
                         />
                       ))}

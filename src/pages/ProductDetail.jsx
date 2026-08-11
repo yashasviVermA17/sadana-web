@@ -127,13 +127,10 @@ export default function ProductDetail() {
                 </DetailRow>
               </div>
 
-              <div className="mt-8 flex flex-wrap items-center gap-3.5">
+              <div className="mt-8">
                 <Button onClick={openQuote} size="lg">
                   Get Quote
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" aria-hidden="true" />
-                </Button>
-                <Button to="/contact" variant="outline" size="lg">
-                  Visit Showroom
                 </Button>
               </div>
               <p className="mt-4 text-xs leading-relaxed text-stone">
@@ -183,30 +180,6 @@ export default function ProductDetail() {
               visible={relatedVisible}
               renderItem={(item) => <ProductCard product={item} />}
             />
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="bg-charcoal">
-        <div className="mx-auto flex max-w-none flex-col items-center px-5 py-16 text-center sm:px-6 lg:px-8">
-          <Reveal>
-            <h2 className="max-w-xl font-serif text-3xl text-cream sm:text-4xl">
-              See this material in person at our showroom
-            </h2>
-          </Reveal>
-          <Reveal delay={120}>
-            <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-taupe">
-              Feel the finish, check the light, take a sample home. Vijay Nagar,
-              Indore.
-            </p>
-          </Reveal>
-          <Reveal delay={200}>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5">
-              <Button to="/contact">Visit the Showroom</Button>
-              <Button onClick={openQuote} variant="outlineLight">
-                Request a Quote
-              </Button>
-            </div>
           </Reveal>
         </div>
       </section>

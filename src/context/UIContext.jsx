@@ -8,6 +8,7 @@ export function UIProvider({ children }) {
   const [quoteOpen, setQuoteOpen] = useState(false)
   const [introDone, setIntroDone] = useState(false)
   const [homeReveal, setHomeReveal] = useState(false)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
   const location = useLocation()
 
   const openSearch = useCallback(() => setSearchOpen(true), [])
@@ -16,10 +17,13 @@ export function UIProvider({ children }) {
   const closeQuote = useCallback(() => setQuoteOpen(false), [])
   const finishIntro = useCallback(() => setIntroDone(true), [])
   const startHomeReveal = useCallback(() => setHomeReveal(true), [])
+  const openLightbox = useCallback(() => setLightboxOpen(true), [])
+  const closeLightbox = useCallback(() => setLightboxOpen(false), [])
 
   useEffect(() => {
     setSearchOpen(false)
     setQuoteOpen(false)
+    setLightboxOpen(false)
   }, [location.pathname])
 
   useEffect(() => {
@@ -42,6 +46,9 @@ export function UIProvider({ children }) {
         finishIntro,
         homeReveal,
         startHomeReveal,
+        lightboxOpen,
+        openLightbox,
+        closeLightbox,
       }}
     >
       {children}

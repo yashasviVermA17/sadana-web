@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useParams } from 'react-router-dom'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import Breadcrumb from '../components/Breadcrumb'
@@ -7,6 +8,7 @@ import Reveal from '../components/Reveal'
 import AutoSlider from '../components/AutoSlider'
 import ProjectCard from '../components/ProjectCard'
 import SectionHeading from '../components/SectionHeading'
+import { useUI } from '../context/UIContext'
 import { getProject, relatedProjects } from '../data/projects'
 
 function Lightbox({ images, index, onClose, onPrev, onNext, alt }) {
@@ -27,7 +29,7 @@ function Lightbox({ images, index, onClose, onPrev, onNext, alt }) {
 
   if (index === null) return null
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center bg-charcoal/95 backdrop-blur-sm"
       role="dialog"
@@ -78,7 +80,8 @@ function Lightbox({ images, index, onClose, onPrev, onNext, alt }) {
       <span className="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-medium text-cream">
         {index + 1} / {images.length}
       </span>
-    </div>
+    </div>,
+    document.body,
   )
 }
 
@@ -86,9 +89,16 @@ export default function ProjectDetail() {
   const { id } = useParams()
   const project = getProject(id)
   const [lightbox, setLightbox] = useState(null)
+  const { openLightbox, closeLightbox } = useUI()
 
-  const open = (i) => setLightbox(i)
-  const close = useCallback(() => setLightbox(null), [])
+  const open = (i) => {
+    setLightbox(i)
+    openLightbox()
+  }
+  const close = useCallback(() => {
+    setLightbox(null)
+    closeLightbox()
+  }, [closeLightbox])
   const prev = useCallback(
     () => setLightbox((i) => (project ? (i - 1 + project.gallery.length) % project.gallery.length : 0)),
     [project],
@@ -114,18 +124,19 @@ export default function ProjectDetail() {
 
   return (
     <>
-      <section className="relative flex min-h-screen items-end overflow-hidden">
+      <section data-hero>
+        <div className="relative h-[65vh] min-h-[440px] w-full overflow-hidden sm:h-[70vh] lg:h-[78vh]">
         <img
           src={project.cover}
           alt={project.title}
-          className="img-settle absolute inset-0 h-full w-full object-cover"
+          className="img-settle block h-full w-full object-cover"
         />
         <div
           className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-charcoal/20"
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto w-full max-w-[1320px] px-5 pb-20 pt-36 sm:px-6 lg:px-8 lg:pb-24">
+        <div className="relative mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-5 pb-12 sm:px-6 lg:px-8 lg:pb-16">
           <Reveal>
             <Breadcrumb
               light
@@ -155,11 +166,10 @@ export default function ProjectDetail() {
             <div className="mt-7 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-cream/70">
               <span>{project.scope}</span>
               <span className="h-1 w-1 rounded-full bg-cream/40" aria-hidden="true" />
-              <span>{project.location}</span>
-              <span className="h-1 w-1 rounded-full bg-cream/40" aria-hidden="true" />
               <span>Completed {project.year}</span>
             </div>
           </Reveal>
+        </div>
         </div>
       </section>
 

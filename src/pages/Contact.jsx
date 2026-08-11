@@ -3,6 +3,8 @@ import Button from '../components/Button'
 import ContactCard from '../components/ContactCard'
 import Reveal from '../components/Reveal'
 import PageHero from '../components/PageHero'
+import TiltCard from '../components/TiltCard'
+import TiltImage from '../components/TiltImage'
 import { useUI } from '../context/UIContext'
 import { contact, mapEmbedUrl, whatsappUrl } from '../data/site'
 import imgShowroom from '../assets/Victara panel.jpg'
@@ -132,14 +134,14 @@ export default function Contact() {
             </Reveal>
 
             <Reveal delay={120}>
-              <div className="img-zoom overflow-hidden rounded-card shadow-soft">
-                <img
+              <TiltCard className="img-zoom overflow-hidden rounded-card shadow-soft">
+                <TiltImage
                   src={imgShowroom}
                   alt="SADANA Decor & Interior showroom"
                   loading="lazy"
                   className="aspect-[3/2] w-full object-cover"
                 />
-              </div>
+              </TiltCard>
             </Reveal>
           </div>
         </div>

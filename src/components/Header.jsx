@@ -27,13 +27,22 @@ function Logo({ onNavigate }) {
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const { openSearch, openQuote, homeReveal } = useUI()
+  const [overHero, setOverHero] = useState(true)
+  const { openSearch, openQuote, homeReveal, lightboxOpen } = useUI()
   const location = useLocation()
+
+  function updateOverHero() {
+    const hero = document.querySelector('[data-hero]')
+    if (!hero) {
+      setOverHero(false)
+      return
+    }
+    setOverHero(hero.getBoundingClientRect().bottom > 88)
+  }
 
   useEffect(() => {
     setMenuOpen(false)
-    setScrolled(window.scrollY > 50)
+    updateOverHero()
   }, [location.pathname])
 
   useEffect(() => {
@@ -41,7 +50,7 @@ export default function Header() {
     let ticking = false
     const update = () => {
       ticking = false
-      setScrolled(window.scrollY > 50)
+      updateOverHero()
     }
     const onScroll = () => {
       if (ticking) return
@@ -60,13 +69,15 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b bg-mist/85 backdrop-blur-md transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ease-out ${
-        scrolled
-          ? 'border-charcoal/10 bg-mist/95 shadow-[0_12px_32px_-18px_rgba(39,38,36,0.35)]'
-          : 'border-transparent'
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow,opacity] duration-300 ease-out ${
+        lightboxOpen
+          ? 'pointer-events-none bg-transparent opacity-0'
+          : overHero
+            ? 'bg-transparent'
+            : 'border-b border-charcoal/10 bg-mist shadow-[0_12px_32px_-18px_rgba(39,38,36,0.35)]'
       } ${homeReveal ? 'nav-reveal' : ''}`}
     >
-      <div className="mx-auto flex h-[68px] max-w-none items-center justify-between gap-6 px-5 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-[88px] max-w-none items-center justify-between gap-6 px-5 sm:px-6 lg:px-8">
         <Logo onNavigate={() => setMenuOpen(false)} />
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
@@ -78,7 +89,9 @@ export default function Header() {
                 `relative px-4 py-2 text-sm font-medium tracking-wide transition-colors duration-300 after:absolute after:inset-x-4 after:-bottom-0.5 after:h-0.5 after:origin-left after:rounded-full after:bg-brand after:transition-transform after:duration-300 ${
                   isActive
                     ? 'text-brand after:scale-x-100'
-                    : 'text-stone hover:text-charcoal after:scale-x-0 hover:after:scale-x-100'
+                    : overHero
+                      ? 'text-cream/80 hover:text-cream after:scale-x-0 hover:after:scale-x-100'
+                      : 'text-stone hover:text-charcoal after:scale-x-0 hover:after:scale-x-100'
                 }`
               }
             >
@@ -92,7 +105,11 @@ export default function Header() {
             type="button"
             onClick={openSearch}
             aria-label="Open search"
-            className="grid h-10 w-10 place-items-center rounded-full text-charcoal transition-colors duration-300 hover:bg-brand-soft hover:text-brand"
+            className={`grid h-10 w-10 place-items-center rounded-full transition-colors duration-300 ${
+              overHero
+                ? 'text-cream hover:bg-white/10 hover:text-cream'
+                : 'text-charcoal hover:bg-brand-soft hover:text-brand'
+            }`}
           >
             <Search className="h-[19px] w-[19px]" aria-hidden="true" />
           </button>
@@ -106,7 +123,11 @@ export default function Header() {
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
-            className="grid h-10 w-10 place-items-center rounded-full text-charcoal transition-colors duration-300 hover:bg-brand-soft hover:text-brand lg:hidden"
+            className={`grid h-10 w-10 place-items-center rounded-full transition-colors duration-300 ${
+              overHero
+                ? 'text-cream hover:bg-white/10 hover:text-cream'
+                : 'text-charcoal hover:bg-brand-soft hover:text-brand'
+            } lg:hidden`}
           >
             {menuOpen ? (
               <X className="h-5 w-5" aria-hidden="true" />

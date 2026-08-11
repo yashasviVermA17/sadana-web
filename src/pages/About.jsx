@@ -6,6 +6,8 @@ import Timeline from '../components/Timeline'
 import ValueCard from '../components/ValueCard'
 import SectionHeading from '../components/SectionHeading'
 import PageHero from '../components/PageHero'
+import TiltCard from '../components/TiltCard'
+import TiltImage from '../components/TiltImage'
 import { useUI } from '../context/UIContext'
 import { values } from '../data/site'
 import imgStory from '../assets/Mosaic tiles.jpg'
@@ -97,14 +99,14 @@ export default function About() {
       <section className="mx-auto max-w-none px-5 py-14 sm:px-6 lg:px-8 lg:py-20">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <div className="img-zoom overflow-hidden rounded-card">
-              <img
+            <TiltCard className="img-zoom overflow-hidden rounded-card">
+              <TiltImage
                 src={imgStory}
                 alt="SADANA Decor & Interior showroom"
                 loading="lazy"
                 className="aspect-[3/2] w-full object-cover"
               />
-            </div>
+            </TiltCard>
           </Reveal>
           <Reveal delay={120}>
             <div className="flex flex-col gap-5 text-base leading-relaxed text-stone">

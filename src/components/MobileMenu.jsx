@@ -9,7 +9,7 @@ export default function MobileMenu({ open, onClose }) {
 
   return (
     <div
-      className={`fixed inset-x-0 top-[68px] z-40 origin-top border-b border-charcoal/10 bg-ivory transition-all duration-300 lg:hidden ${
+      className={`fixed inset-x-0 top-[88px] z-40 origin-top border-b border-charcoal/10 bg-ivory transition-all duration-300 lg:hidden ${
         open ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-3 opacity-0'
       }`}
     >

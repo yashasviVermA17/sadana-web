@@ -152,32 +152,6 @@ export default function Footer() {
           </p>
         </div>
       </div>
-
-      <div className="border-t border-white/12">
-        <div className="mx-auto flex max-w-none flex-col items-center justify-between gap-4 px-5 py-6 sm:flex-row sm:px-6 lg:px-8">
-          <p className="text-center text-sm text-smoke sm:text-left">
-            Get in touch — we reply within a working day.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-medium text-cream transition-colors duration-300 hover:bg-brand-dark"
-            >
-              <MessageCircle className="h-4 w-4" aria-hidden="true" />
-              Chat on WhatsApp
-            </a>
-            <a
-              href={`tel:+91${contact.phone.lines[0].replace(/\s/g, '')}`}
-              className="inline-flex items-center gap-2 rounded-full border border-white/25 px-5 py-2.5 text-sm font-medium text-cream transition-colors duration-300 hover:border-brand hover:text-brand"
-            >
-              <Phone className="h-4 w-4" aria-hidden="true" />
-              Call Sadana Decor
-            </a>
-          </div>
-        </div>
-      </div>
     </footer>
   )
 }
