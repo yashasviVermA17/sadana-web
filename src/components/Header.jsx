@@ -5,7 +5,7 @@ import { navLinks } from '../data/site'
 import { useUI } from '../context/UIContext'
 import Button from './Button'
 import MobileMenu from './MobileMenu'
-import logoImage from '../assets/logo image white rounded.png'
+import logoImage from '../assets/logo 2.jpg'
 
 function Logo({ onNavigate }) {
   return (
@@ -19,7 +19,7 @@ function Logo({ onNavigate }) {
         data-header-logo
         src={logoImage}
         alt="Sadana Decor logo"
-        className="h-[36px] w-auto sm:h-[40px]"
+        className="h-[36px] w-auto rounded-[10px] sm:h-[40px]"
       />
     </Link>
   )
