@@ -175,7 +175,7 @@ export default function ProjectDetail() {
 
       <section className="mx-auto max-w-none px-5 py-12 sm:px-6 lg:px-8 lg:py-16">
         <Reveal className="mt-14">
-          <SectionHeading eyebrow="Gallery" title="Inside the space" />
+          <SectionHeading eyebrow="Gallery" title="Our Project" />
         </Reveal>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-5">
           {project.gallery.map((img, i) => {
@@ -212,7 +212,7 @@ export default function ProjectDetail() {
 
       <section className="bg-mist">
         <div className="mx-auto max-w-none px-5 py-16 sm:px-6 lg:px-8 lg:py-20">
-          <SectionHeading eyebrow="Related Projects" title="More spaces like this" />
+          <SectionHeading eyebrow="Related Projects" title="More like this" />
           <Reveal className="mt-10">
             <AutoSlider
               items={related}

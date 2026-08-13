@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Play } from 'lucide-react'
 import Reveal from './Reveal'
 import SectionHeading from './SectionHeading'
 
@@ -26,12 +26,6 @@ function buildEmbedHtml(url) {
 `.trim()
 }
 
-function processInstagramEmbeds() {
-  if (window.instgrm && window.instgrm.Embeds) {
-    window.instgrm.Embeds.process()
-  }
-}
-
 function loadInstagramEmbedScript() {
   if (window.instgrm || document.getElementById('instagram-embed-js')) {
     return
@@ -40,35 +34,85 @@ function loadInstagramEmbedScript() {
   script.id = 'instagram-embed-js'
   script.src = 'https://www.instagram.com/embed.js'
   script.async = true
-  script.onload = processInstagramEmbeds
+  script.onload = () => {}
   script.onerror = () => {}
   document.body.appendChild(script)
 }
 
-function useInstagramEmbeds() {
+function useLoadEmbedScriptOnce() {
   useEffect(() => {
-    let alive = true
-    const poll = () => {
-      if (!window.instgrm) return
-      clearInterval(interval)
-      if (alive) processInstagramEmbeds()
-    }
-    const interval = window.setInterval(poll, 250)
-    processInstagramEmbeds()
     loadInstagramEmbedScript()
-    return () => {
-      alive = false
-      clearInterval(interval)
-    }
   }, [])
 }
 
-function ReelEmbed({ url }) {
+function ReelSkeleton() {
+  return (
+    <div className="relative h-full w-full overflow-hidden rounded-[1rem] bg-linen">
+      <div className="reel-shimmer absolute inset-0" aria-hidden="true" />
+      <div className="absolute inset-0 grid place-items-center">
+        <span className="grid h-14 w-14 place-items-center rounded-full bg-white/80 text-brand shadow-soft backdrop-blur-sm">
+          <Play className="h-6 w-6" aria-hidden="true" />
+        </span>
+      </div>
+    </div>
+  )
+}
+
+function processWhenReady() {
+  if (window.instgrm && window.instgrm.Embeds) {
+    window.instgrm.Embeds.process()
+    return true
+  }
+  return false
+}
+
+function ReelCard({ url }) {
+  const ref = useRef(null)
+  const [active, setActive] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return undefined
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(true)
+            observer.disconnect()
+          }
+        })
+      },
+      { rootMargin: '500px 0px' },
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!active) return undefined
+    if (processWhenReady()) return undefined
+    const interval = window.setInterval(() => {
+      if (processWhenReady()) clearInterval(interval)
+    }, 200)
+    return () => clearInterval(interval)
+  }, [active])
+
   return (
     <div
-      className="reel-embed aspect-[9/16] w-full"
-      dangerouslySetInnerHTML={{ __html: buildEmbedHtml(url) }}
-    />
+      ref={ref}
+      className="reel-card h-full w-full overflow-hidden rounded-[1.25rem] border border-charcoal/10 bg-white p-2 shadow-card"
+    >
+      {active ? (
+        <div
+          className="reel-embed aspect-[9/16] w-full"
+          dangerouslySetInnerHTML={{ __html: buildEmbedHtml(url) }}
+        />
+      ) : (
+        <div className="aspect-[9/16] w-full">
+          <ReelSkeleton />
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -115,7 +159,7 @@ function ReelCarousel() {
             key={url}
             className="reel-slide w-full shrink-0 snap-start pr-7 sm:w-1/2 lg:w-1/3 lg:pr-8"
           >
-            <ReelEmbed url={url} />
+            <ReelCard url={url} />
           </div>
         ))}
       </div>
@@ -145,7 +189,7 @@ function ReelCarousel() {
 }
 
 export default function InstagramReels() {
-  useInstagramEmbeds()
+  useLoadEmbedScriptOnce()
 
   return (
     <section className="bg-ivory">

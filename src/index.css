@@ -665,3 +665,29 @@ img {
 .reel-scroll::-webkit-scrollbar {
   display: none;
 }
+
+.reel-shimmer {
+  background: linear-gradient(
+    100deg,
+    rgba(250, 248, 244, 0) 30%,
+    rgba(250, 248, 244, 0.6) 50%,
+    rgba(250, 248, 244, 0) 70%
+  );
+  background-size: 200% 100%;
+  animation: reel-shimmer 1.5s linear infinite;
+}
+
+@keyframes reel-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reel-shimmer {
+    animation: none;
+  }
+}
