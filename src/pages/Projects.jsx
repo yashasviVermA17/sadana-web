@@ -27,7 +27,7 @@ export default function Projects() {
         breadcrumb={[{ label: 'Projects' }]}
         eyebrow="Our Projects"
         title="Spaces we designed, delivered and stand behind"
-        subtitle="A selection of residential, commercial, hospitality, office and retail spaces — each delivered turnkey by our in-house design and execution team."
+        subtitle="We specialize in offering a wide range of stylish, durable, and modern solutions to transform residential, commercial, and office spaces. A selection of residential, commercial, hospitality, office and retail spaces — each delivered turnkey by our in-house design and execution team."
       />
 
       <section className="mx-auto max-w-none px-5 py-14 sm:px-6 lg:px-8 lg:py-20">

@@ -19,6 +19,10 @@ export const contact = {
     title: 'WhatsApp',
     lines: ['91799 79797'],
   },
+  email: {
+    title: 'Email',
+    lines: ['info@sadanadecor.com'],
+  },
   hours: {
     title: 'Working Hours',
     lines: ['Mon – Sat: 10:00 – 19:30', 'Sunday: By appointment'],

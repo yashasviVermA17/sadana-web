@@ -10,9 +10,9 @@ import TiltCard from '../components/TiltCard'
 import TiltImage from '../components/TiltImage'
 import { useUI } from '../context/UIContext'
 import { values } from '../data/site'
-import imgStory from '../assets/abut page image.png'
+import imgStory from '../assets/about inside image.jpg'
 import imgCtaBg from '../assets/Parametric wall panel.jpg'
-import imgHero from '../assets/about hero image.png'
+import imgHero from '../assets/about hero 3.png'
 
 function MissionVision() {
   const cards = [
@@ -63,7 +63,7 @@ function WhyChooseUs() {
         <SectionHeading
           align="center"
           eyebrow="Why Choose Us"
-          title="The reasons to build with us"
+          title="The reasons to decor with us"
           text="We bring together design, quality and functionality under one roof."
           className="max-w-2xl"
         />
@@ -94,6 +94,10 @@ export default function About() {
         breadcrumb={[{ label: 'About' }]}
         eyebrow="About Us"
         title="Welcome to SADANA Decor & Interior"
+        subtitle="At SADANA DECOR & INTERIOR, we believe every space has a story — and we are here to help you design it with perfection."
+        overlay="bg-gradient-to-t from-charcoal/80 via-charcoal/40 to-charcoal/25"
+        imageClassName="object-top"
+        className="!h-screen !min-h-[560px]"
       />
 
       <section className="mx-auto max-w-none px-5 py-14 sm:px-6 lg:px-8 lg:py-20">

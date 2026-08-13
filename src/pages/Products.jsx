@@ -100,7 +100,7 @@ export default function Products({ activeCategorySlug }) {
         }
         eyebrow="Our Products"
         title="Surfaces, panels & materials for every space"
-        subtitle="Wall panels, blinds, alabaster sheets, decorative surfaces and interior materials — sourced, sampled and supplied by a team that can touch every product we sell."
+        subtitle="Your trusted destination for premium interior and exterior design products — wall panels, blinds, alabaster sheets, decorative surfaces and interior materials, sourced, sampled and supplied by a team that can touch every product we sell."
       />
 
       <section className="mx-auto max-w-none px-5 py-14 sm:px-6 lg:px-8 lg:py-20">

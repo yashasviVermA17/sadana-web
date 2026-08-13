@@ -1,22 +1,24 @@
 import Breadcrumb from './Breadcrumb'
 import Reveal from './Reveal'
 
-export default function PageHero({ image, breadcrumb, eyebrow, title, subtitle, children, fit = 'cover' }) {
+export default function PageHero({ image, breadcrumb, eyebrow, title, subtitle, children, fit = 'cover', className = '', overlay, imageClassName = '' }) {
   return (
     <section data-hero>
-      <div className="relative h-[65vh] min-h-[440px] w-full overflow-hidden sm:h-[70vh] lg:h-[78vh]">
+      <div className={`relative h-[65vh] min-h-[440px] w-full overflow-hidden sm:h-[70vh] lg:h-[78vh] ${className}`}>
         <img
           src={image}
           alt=""
           aria-hidden="true"
-          className={`img-settle block h-full w-full object-${fit}`}
+          className={`img-settle block h-full w-full object-${fit} ${imageClassName}`}
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/50 to-charcoal/25"
+          className={`absolute inset-0 ${
+            overlay || 'bg-gradient-to-t from-charcoal/95 via-charcoal/50 to-charcoal/25'
+          }`}
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-5 pb-10 sm:px-6 sm:pb-12 lg:px-8 lg:pb-16">
+        <div className="absolute inset-0 mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-5 pb-10 sm:px-6 sm:pb-12 lg:px-8 lg:pb-16">
           <Reveal>
             <Breadcrumb items={breadcrumb} light />
           </Reveal>

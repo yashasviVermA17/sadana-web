@@ -1,4 +1,4 @@
-import { MapPin, MessageCircle, Phone, Clock } from 'lucide-react'
+import { Mail, MapPin, MessageCircle, Phone, Clock } from 'lucide-react'
 import Button from '../components/Button'
 import ContactCard from '../components/ContactCard'
 import Reveal from '../components/Reveal'
@@ -89,6 +89,10 @@ export default function Contact() {
               <div className="flex flex-col gap-1 border-t border-white/12 pt-6 text-sm text-taupe">
                 <p className="font-medium text-cream">{contact.hours.lines[0]}</p>
                 <p>{contact.hours.lines[1]}</p>
+                <p className="mt-3 flex items-center gap-2 text-cream">
+                  <Mail className="h-4 w-4 text-brand" aria-hidden="true" />
+                  {contact.email.lines[0]}
+                </p>
               </div>
             </div>
           </Reveal>
@@ -129,6 +133,10 @@ export default function Contact() {
                 <li className="flex items-center gap-3">
                   <MessageCircle className="h-4 w-4 text-brand" aria-hidden="true" />
                   WhatsApp: {contact.whatsapp.lines[0]}
+                </li>
+                <li className="flex items-center gap-3">
+                  <Mail className="h-4 w-4 text-brand" aria-hidden="true" />
+                  Email: {contact.email.lines[0]}
                 </li>
               </ul>
             </Reveal>
