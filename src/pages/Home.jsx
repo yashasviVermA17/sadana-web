@@ -25,27 +25,27 @@ const featuredIds = [
 function Hero() {
   return (
     <section data-hero>
-      <div className="relative h-[85vh] min-h-[520px] w-full overflow-hidden sm:h-[88vh] lg:h-[92vh]">
+      <div className="relative aspect-[1672/941] min-h-[200px] w-full overflow-hidden lg:aspect-auto lg:h-[92vh] lg:min-h-[560px]">
         <img
           src={imgHero}
           alt="Premium interior design by Sadana Decor"
           className="block h-full w-full object-cover object-center"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/45 to-charcoal/15"
+          className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/25 to-charcoal/10 lg:from-charcoal/90 lg:via-charcoal/45 lg:to-charcoal/15"
           aria-hidden="true"
         />
 
-        <div className="absolute inset-0 mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-5 pb-14 sm:px-6 sm:pb-16 lg:px-8 lg:pb-20">
-          <h1 className="max-w-3xl font-serif text-[2.15rem] leading-[1.1] text-cream sm:text-5xl lg:text-[4.25rem]">
+        <div className="absolute inset-0 mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-5 pb-5 sm:px-6 sm:pb-12 lg:px-8 lg:pb-20">
+          <h1 className="max-w-3xl font-serif text-[1.5rem] leading-[1.12] text-cream sm:text-5xl lg:text-[4.25rem]">
             Welcome to SADANA DECOR &amp; INTERIOR
           </h1>
 
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-cream/85 sm:mt-6 sm:text-lg">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-cream/85 sm:mt-5 sm:text-lg">
             All Types Of Interior &amp; Exterior Products Under One Roof
           </p>
 
-          <div className="mt-7 flex flex-wrap items-center gap-3.5 sm:mt-9">
+          <div className="mt-4 flex flex-wrap items-center gap-3.5 sm:mt-8">
             <Button to="/products" size="lg">
               Explore Collection
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" aria-hidden="true" />
