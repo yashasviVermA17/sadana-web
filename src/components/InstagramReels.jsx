@@ -143,8 +143,10 @@ function ReelCarousel() {
   const scrollByPage = (dir) => {
     const el = trackRef.current
     if (!el) return
-    const item = el.querySelector('.reel-slide')
-    const step = item ? item.offsetWidth + 28 : el.clientWidth
+    const slides = el.querySelectorAll('.reel-slide')
+    const first = slides[0]
+    const second = slides[1]
+    const step = first && second ? second.offsetLeft - first.offsetLeft : el.clientWidth
     el.scrollBy({ left: dir * step, behavior: 'smooth' })
   }
 
@@ -157,7 +159,7 @@ function ReelCarousel() {
         {REELS.map((url) => (
           <div
             key={url}
-            className="reel-slide w-full shrink-0 snap-start pr-7 sm:w-1/2 lg:w-1/3 lg:pr-8"
+            className="reel-slide w-full shrink-0 snap-start pr-5 sm:w-1/2 sm:pr-6 lg:w-1/3 lg:pr-8"
           >
             <ReelCard url={url} />
           </div>
@@ -169,7 +171,7 @@ function ReelCarousel() {
           type="button"
           onClick={() => scrollByPage(-1)}
           aria-label="Previous reels"
-          className="absolute left-4 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-charcoal/10 bg-ivory/95 text-charcoal shadow-card backdrop-blur-sm transition-colors duration-300 hover:border-brand hover:text-brand"
+          className="absolute left-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-charcoal/10 bg-ivory/95 text-charcoal shadow-card backdrop-blur-sm transition-colors duration-300 hover:border-brand hover:text-brand sm:grid"
         >
           <ChevronLeft className="h-5 w-5" aria-hidden="true" />
         </button>
@@ -179,7 +181,7 @@ function ReelCarousel() {
           type="button"
           onClick={() => scrollByPage(1)}
           aria-label="Next reels"
-          className="absolute right-4 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-charcoal/10 bg-ivory/95 text-charcoal shadow-card backdrop-blur-sm transition-colors duration-300 hover:border-brand hover:text-brand"
+          className="absolute right-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-charcoal/10 bg-ivory/95 text-charcoal shadow-card backdrop-blur-sm transition-colors duration-300 hover:border-brand hover:text-brand sm:grid"
         >
           <ChevronRight className="h-5 w-5" aria-hidden="true" />
         </button>
@@ -193,16 +195,14 @@ export default function InstagramReels() {
 
   return (
     <section className="bg-ivory">
-      <div className="mx-auto max-w-none py-16 sm:py-20 lg:py-24">
-        <div className="px-5 sm:px-6 lg:px-8">
-          <SectionHeading
-            align="center"
-            eyebrow="Instagram Reels"
-            title="See It. Feel It. Love It."
-            text="Discover our latest spaces, designs and interior inspirations."
-            className="max-w-2xl"
-          />
-        </div>
+      <div className="mx-auto max-w-none px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+        <SectionHeading
+          align="center"
+          eyebrow="Instagram Reels"
+          title="See It. Feel It. Love It."
+          text="Discover our latest spaces, designs and interior inspirations."
+          className="max-w-2xl"
+        />
         <Reveal className="mt-10">
           <ReelCarousel />
         </Reveal>
