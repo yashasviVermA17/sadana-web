@@ -29,7 +29,7 @@ function Hero() {
         <img
           src={imgHero}
           alt="Premium interior design by Sadana Decor"
-          className="absolute inset-0 block h-full w-full object-cover object-center"
+          className="absolute inset-x-0 top-[-9%] block h-[125%] w-full object-cover object-center md:top-0 md:h-full md:object-center"
         />
         <div
           className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/15 to-charcoal/50 lg:bg-gradient-to-t lg:from-charcoal/90 lg:via-charcoal/45 lg:to-charcoal/15"
