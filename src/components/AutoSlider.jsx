@@ -39,7 +39,6 @@ export default function AutoSlider({
   const count = items.length
   const viewportRef = useRef(null)
   const indexRef = useRef(0)
-  const touchX = useRef(null)
   const resumeTimer = useRef(null)
   const [index, setIndex] = useState(0)
   const [cardWidth, setCardWidth] = useState(() => {
@@ -50,6 +49,7 @@ export default function AutoSlider({
   const [noAnim, setNoAnim] = useState(false)
   const [paused, setPaused] = useState(false)
   const [resetKey, setResetKey] = useState(0)
+  const [dragOffset, setDragOffset] = useState(0)
 
   useEffect(() => {
     const measure = () => {
@@ -128,19 +128,69 @@ export default function AutoSlider({
     return () => clearInterval(id)
   }, [autoplay, paused, step, resetKey])
 
-  const onTouchStart = (e) => {
-    touchX.current = e.touches[0].clientX
+  const dragState = useRef({ active: false, startX: 0, moved: 0 })
+
+  const onDragStart = (e) => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return
+    pauseForTap()
+    dragState.current.active = true
+    dragState.current.startX = e.clientX
+    dragState.current.moved = 0
+    setDragOffset(0)
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId)
+    } catch {
+      /* ignore */
+    }
   }
 
-  const onTouchEnd = (e) => {
-    if (touchX.current === null) return
-    const dx = touchX.current - e.changedTouches[0].clientX
-    touchX.current = null
+  const onDragMove = (e) => {
+    const d = dragState.current
+    if (!d.active) return
+    const dx = e.clientX - d.startX
+    d.moved = Math.max(d.moved, Math.abs(dx))
+    setDragOffset(dx)
+  }
+
+  const onDragEnd = (e) => {
+    const d = dragState.current
+    if (!d.active) return
+    d.active = false
+    const dx = d.startX - e.clientX
+    setDragOffset(0)
+    if (d.moved < 8) return
     if (Math.abs(dx) > 40) {
       if (dx > 0) goNext()
       else goPrev()
     }
   }
+
+  const wheelAcc = useRef(0)
+  const wheelTimer = useRef(null)
+  const viewportWrapRef = useRef(null)
+
+  const handleWheel = (e) => {
+    const deltaX = Math.abs(e.deltaX)
+    const deltaY = Math.abs(e.deltaY)
+    const horizontal = e.shiftKey || deltaX > deltaY
+    if (!horizontal) return
+    e.preventDefault()
+    pauseForTap()
+    clearTimeout(wheelTimer.current)
+    wheelAcc.current += e.deltaX || e.deltaY
+    wheelTimer.current = setTimeout(() => {
+      if (wheelAcc.current > 24) goNext()
+      else if (wheelAcc.current < -24) goPrev()
+      wheelAcc.current = 0
+    }, 90)
+  }
+
+  useEffect(() => {
+    const el = viewportWrapRef.current
+    if (!el) return undefined
+    el.addEventListener('wheel', handleWheel, { passive: false })
+    return () => el.removeEventListener('wheel', handleWheel)
+  }, [])
 
   const maxVisible = Math.ceil(
     Math.max(visible.base, visible.sm, visible.lg, visible.xl),
@@ -153,24 +203,28 @@ export default function AutoSlider({
 
   return (
     <>
-      <div className="relative">
+      <div className="relative" ref={viewportWrapRef}>
         <div
           ref={viewportRef}
-          className={`overflow-hidden ${className}`}
+          className={`overflow-hidden select-none ${className}`}
           onMouseEnter={() => {
             if (canHover()) setPaused(true)
           }}
           onMouseLeave={() => setPaused(false)}
-          onPointerDown={pauseForTap}
-          onTouchStart={onTouchStart}
-          onTouchEnd={onTouchEnd}
+          onPointerDown={onDragStart}
+          onPointerMove={onDragMove}
+          onPointerUp={onDragEnd}
+          onPointerCancel={onDragEnd}
         >
           <div
             className="flex will-change-transform"
             style={{
               gap: `${GAP}px`,
-              transform: `translateX(-${offset}px)`,
-              transition: noAnim ? 'none' : `transform ${SLIDE_MS}ms ${EASE}`,
+              transform: `translateX(${dragOffset - offset}px)`,
+              transition:
+                dragState.current.active || noAnim
+                  ? 'none'
+                  : `transform ${SLIDE_MS}ms ${EASE}`,
             }}
           >
             {loopItems.map((item, i) => (

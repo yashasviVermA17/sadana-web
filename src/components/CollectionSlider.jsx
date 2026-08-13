@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Reveal from './Reveal'
@@ -69,6 +69,11 @@ function MarqueeRow({ items, reverse = false, duration = 42, showNav = false }) 
   const onPointerDown = (e) => {
     if (e.pointerType === 'mouse' && e.button !== 0) return
     clearTimeout(resumeTimer.current)
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId)
+    } catch {
+      /* ignore */
+    }
     const el = trackRef.current
     if (el) el.style.animationPlayState = 'paused'
     setPaused(true)
@@ -93,8 +98,9 @@ function MarqueeRow({ items, reverse = false, duration = 42, showNav = false }) 
     const dx = e.clientX - d.startX
     d.moved = Math.max(d.moved, Math.abs(dx))
     const min = d.frozen - d.span
+    const max = d.frozen + d.span
     let eff = d.frozen + dx
-    eff = Math.min(d.frozen, Math.max(min, eff))
+    eff = Math.min(max, Math.max(min, eff))
     applyOffset(eff - d.frozen)
   }
 
@@ -104,20 +110,19 @@ function MarqueeRow({ items, reverse = false, duration = 42, showNav = false }) 
     d.active = false
     const dx = e.clientX - d.startX
     const min = d.frozen - d.span
+    const max = d.frozen + d.span
     let eff = d.frozen + dx
-    eff = Math.min(d.frozen, Math.max(min, eff))
+    eff = Math.min(max, Math.max(min, eff))
     if (d.moved < 8) {
       applyOffset(0)
     } else {
       let target = Math.round(eff / d.step) * d.step
-      target = Math.min(d.frozen, Math.max(min, target))
+      target = Math.min(max, Math.max(min, target))
       dragRef.current.style.transition = 'transform 380ms cubic-bezier(0.22,1,0.36,1)'
       applyOffset(target - d.frozen)
       resumeTimer.current = setTimeout(clearTransition, 400)
     }
-    if (e.pointerType !== 'mouse') {
-      resumeTimer.current = setTimeout(resume, 4000)
-    }
+    resumeTimer.current = setTimeout(resume, 3000)
   }
 
   const nudge = (dir) => {
@@ -146,10 +151,67 @@ function MarqueeRow({ items, reverse = false, duration = 42, showNav = false }) 
     resumeTimer.current = setTimeout(resume, 4000)
   }
 
+  const wheelRef = useRef(0)
+  const wheelTimer = useRef(null)
+  const marqueeRef = useRef(null)
+
+  const handleWheel = (e) => {
+    const deltaX = Math.abs(e.deltaX)
+    const deltaY = Math.abs(e.deltaY)
+    const horizontal = e.shiftKey || deltaX > deltaY
+    if (!horizontal) return
+    e.preventDefault()
+    clearTimeout(wheelTimer.current)
+    clearTimeout(resumeTimer.current)
+    const el = trackRef.current
+    if (el) el.style.animationPlayState = 'paused'
+    setPaused(true)
+    const d = drag.current
+    if (!d.active) {
+      d.active = true
+      d.moved = 0
+      d.frozen = getTranslateX(el)
+      const setEl = dragRef.current?.querySelector('.marquee-set')
+      d.span = setEl ? setEl.offsetWidth : 0
+      const first = setEl?.firstElementChild
+      const second = setEl?.children[1]
+      d.step =
+        first && second
+          ? second.offsetLeft - first.offsetLeft
+          : (first?.offsetWidth || 340) + 20
+    }
+    wheelRef.current += e.deltaX || e.deltaY
+    const min = d.frozen - d.span
+    const max = d.frozen + d.span
+    let eff = d.frozen + wheelRef.current
+    eff = Math.min(max, Math.max(min, eff))
+    dragRef.current.style.transition = 'none'
+    applyOffset(eff - d.frozen)
+    wheelTimer.current = setTimeout(() => {
+      d.active = false
+      let target = Math.round(eff / d.step) * d.step
+      target = Math.min(max, Math.max(min, target))
+      dragRef.current.style.transition = 'transform 380ms cubic-bezier(0.22,1,0.36,1)'
+      applyOffset(target - d.frozen)
+      resumeTimer.current = setTimeout(() => {
+        clearTransition()
+        resumeTimer.current = setTimeout(resume, 2500)
+      }, 400)
+    }, 120)
+  }
+
+  useEffect(() => {
+    const el = marqueeRef.current
+    if (!el) return undefined
+    el.addEventListener('wheel', handleWheel, { passive: false })
+    return () => el.removeEventListener('wheel', handleWheel)
+  }, [])
+
   return (
     <div className="relative">
       <div
-        className="marquee"
+        ref={marqueeRef}
+        className="marquee select-none"
         onMouseEnter={pause}
         onMouseLeave={resume}
         onPointerDown={onPointerDown}
@@ -178,6 +240,7 @@ function MarqueeRow({ items, reverse = false, duration = 42, showNav = false }) 
                 <Link
                   key={`${dup}-${product.id}`}
                   to={shopSlug ? `/products/${shopSlug}` : '/products'}
+                  draggable={false}
                   className="group w-[280px] shrink-0 overflow-hidden rounded-card border border-charcoal/10 bg-ivory transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-card sm:w-[340px]"
                 >
                   <div className="relative img-zoom aspect-[4/3] overflow-hidden">
@@ -185,6 +248,7 @@ function MarqueeRow({ items, reverse = false, duration = 42, showNav = false }) 
                       src={product.image}
                       alt={product.name}
                       loading="lazy"
+                      draggable={false}
                       className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                     />
                     <span className="absolute left-3 top-3 rounded-full bg-ivory/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-charcoal backdrop-blur-sm">

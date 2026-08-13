@@ -111,7 +111,6 @@ function ReelEmbed({ url, html }) {
     </div>
   )
 }
-
 function ReelCard({ url, active }) {
   const [embedHtml, setEmbedHtml] = useState(null)
 
