@@ -25,28 +25,28 @@ const featuredIds = [
 function Hero() {
   return (
     <section data-hero>
-      <div className="relative aspect-[1672/941] min-h-[200px] w-full overflow-hidden lg:aspect-auto lg:h-[92vh] lg:min-h-[560px]">
+      <div className="relative min-h-[max(680px,100svh)] w-full overflow-hidden lg:aspect-auto lg:h-[92vh] lg:min-h-[560px]">
         <img
           src={imgHero}
           alt="Premium interior design by Sadana Decor"
-          className="block h-full w-full object-cover object-center"
+          className="absolute inset-0 block h-full w-full object-cover object-center"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/25 to-charcoal/10 lg:from-charcoal/90 lg:via-charcoal/45 lg:to-charcoal/15"
+          className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/15 to-charcoal/50 lg:bg-gradient-to-t lg:from-charcoal/90 lg:via-charcoal/45 lg:to-charcoal/15"
           aria-hidden="true"
         />
 
-        <div className="absolute inset-0 mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-5 pb-5 sm:px-6 sm:pb-12 lg:px-8 lg:pb-20">
-          <h1 className="max-w-4xl text-3xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
-            SADANA DECOR &amp; INTERIOR
+        <div className="absolute inset-0 mx-auto flex h-full w-full max-w-none flex-col items-start justify-start px-6 pb-10 pt-[150px] sm:px-8 sm:pt-[170px] lg:justify-end lg:px-8 lg:pb-20 lg:pt-0">
+          <h1 className="max-w-4xl text-[clamp(38px,10vw,46px)] font-bold leading-[1.1] text-white lg:text-6xl lg:leading-tight">
+            Welcome to SADANA DECOR &amp; INTERIOR
           </h1>
 
-          <p className="mt-3 max-w-xl text-base leading-relaxed text-cream/85 sm:text-lg">
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-cream/85 sm:text-lg lg:mt-3">
             All Types Of Interior &amp; Exterior Products Under One Roof
           </p>
 
-          <div className="mt-4 flex flex-wrap items-center gap-3.5 sm:mt-8">
-            <Button to="/products" size="lg">
+          <div className="mt-6 flex flex-wrap items-center gap-3.5 sm:mt-8">
+            <Button to="/products" size="lg" className="max-w-full">
               Explore Collection
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" aria-hidden="true" />
             </Button>

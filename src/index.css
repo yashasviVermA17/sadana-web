@@ -642,6 +642,7 @@ img {
 
 .instagram-media {
   min-width: 0 !important;
+  min-height: 0 !important;
   max-width: 100% !important;
   width: 100% !important;
   margin: 0 !important;

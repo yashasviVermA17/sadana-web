@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Reveal from './Reveal'
 import SectionHeading from './SectionHeading'
 import { products } from '../data/products'
@@ -23,7 +24,7 @@ function getTranslateX(el) {
   return values.length >= 13 ? parseFloat(values[12]) || 0 : parseFloat(values[4]) || 0
 }
 
-function MarqueeRow({ items, reverse = false, duration = 42 }) {
+function MarqueeRow({ items, reverse = false, duration = 42, showNav = false }) {
   const set = repeatForMarquee(items)
   const [paused, setPaused] = useState(false)
   const trackRef = useRef(null)
@@ -119,23 +120,50 @@ function MarqueeRow({ items, reverse = false, duration = 42 }) {
     }
   }
 
+  const nudge = (dir) => {
+    clearTimeout(resumeTimer.current)
+    const el = trackRef.current
+    if (el) el.style.animationPlayState = 'paused'
+    setPaused(true)
+    const d = drag.current
+    d.active = false
+    d.frozen = getTranslateX(el)
+    const setEl = dragRef.current?.querySelector('.marquee-set')
+    d.span = setEl ? setEl.offsetWidth : 0
+    const first = setEl?.firstElementChild
+    const second = setEl?.children[1]
+    d.step =
+      first && second
+        ? second.offsetLeft - first.offsetLeft
+        : (first?.offsetWidth || 340) + 20
+    const min = d.frozen - d.span
+    const max = d.frozen + d.span
+    let target = d.frozen + dir * d.step
+    target = Math.min(max, Math.max(min, target))
+    dragRef.current.style.transition = 'transform 380ms cubic-bezier(0.22,1,0.36,1)'
+    applyOffset(target - d.frozen)
+    resumeTimer.current = setTimeout(clearTransition, 400)
+    resumeTimer.current = setTimeout(resume, 4000)
+  }
+
   return (
-    <div
-      className="marquee"
-      onMouseEnter={pause}
-      onMouseLeave={resume}
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={onPointerUp}
-      onPointerCancel={onPointerUp}
-      onClickCapture={(e) => {
-        if (drag.current.moved > 8) {
-          e.preventDefault()
-          e.stopPropagation()
-          drag.current.moved = 0
-        }
-      }}
-    >
+    <div className="relative">
+      <div
+        className="marquee"
+        onMouseEnter={pause}
+        onMouseLeave={resume}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+        onClickCapture={(e) => {
+          if (drag.current.moved > 8) {
+            e.preventDefault()
+            e.stopPropagation()
+            drag.current.moved = 0
+          }
+        }}
+      >
       <div ref={dragRef} className="marquee-drag">
         <div
           ref={trackRef}
@@ -176,6 +204,28 @@ function MarqueeRow({ items, reverse = false, duration = 42 }) {
         </div>
       </div>
     </div>
+
+      {showNav && (
+        <>
+          <button
+            type="button"
+            onClick={() => nudge(1)}
+            aria-label="Previous products"
+            className="absolute left-3 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-charcoal/10 bg-ivory/95 text-charcoal shadow-card backdrop-blur-sm transition-colors duration-300 hover:border-brand hover:text-brand sm:grid"
+          >
+            <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            onClick={() => nudge(-1)}
+            aria-label="Next products"
+            className="absolute right-3 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-charcoal/10 bg-ivory/95 text-charcoal shadow-card backdrop-blur-sm transition-colors duration-300 hover:border-brand hover:text-brand sm:grid"
+          >
+            <ChevronRight className="h-5 w-5" aria-hidden="true" />
+          </button>
+        </>
+      )}
+    </div>
   )
 }
 
@@ -186,6 +236,7 @@ export default function CollectionSlider() {
       cats: ['Wall Finishes'],
       reverse: false,
       duration: 38,
+      showNav: true,
     },
     {
       label: 'Ceilings & Flooring',
@@ -229,6 +280,7 @@ export default function CollectionSlider() {
                   items={items}
                   reverse={row.reverse}
                   duration={row.duration}
+                  showNav={row.showNav}
                 />
               </Reveal>
             )

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight, Play } from 'lucide-react'
 import Reveal from './Reveal'
 import SectionHeading from './SectionHeading'
@@ -58,55 +58,83 @@ function ReelSkeleton() {
   )
 }
 
-function processWhenReady() {
-  if (window.instgrm && window.instgrm.Embeds) {
-    window.instgrm.Embeds.process()
-    return true
-  }
-  return false
-}
-
-function ReelCard({ url }) {
-  const ref = useRef(null)
-  const [active, setActive] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return undefined
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(true)
-            observer.disconnect()
-          }
-        })
-      },
-      { rootMargin: '500px 0px' },
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    if (!active) return undefined
-    if (processWhenReady()) return undefined
-    const interval = window.setInterval(() => {
-      if (processWhenReady()) clearInterval(interval)
-    }, 200)
-    return () => clearInterval(interval)
-  }, [active])
-
+const StaticEmbed = memo(function StaticEmbed({ html }) {
   return (
     <div
-      ref={ref}
-      className="reel-card h-full w-full overflow-hidden rounded-[1.25rem] border border-charcoal/10 bg-white p-2 shadow-card"
-    >
-      {active ? (
-        <div
-          className="reel-embed aspect-[9/11] w-full"
-          dangerouslySetInnerHTML={{ __html: buildEmbedHtml(url) }}
-        />
+      className="reel-embed aspect-[9/11] w-full"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  )
+})
+
+function ReelEmbed({ url, html }) {
+  const rootRef = useRef(null)
+  const [stalled, setStalled] = useState(false)
+
+  useEffect(() => {
+    const root = rootRef.current
+    const started = Date.now()
+    let timer
+    const tick = () => {
+      if (!root) return
+      if (root.querySelector('iframe')) {
+        setStalled(false)
+        return
+      }
+      setStalled(Date.now() - started > 12000)
+      timer = window.setTimeout(tick, 1000)
+    }
+    timer = window.setTimeout(tick, 1500)
+    return () => window.clearTimeout(timer)
+  }, [html])
+
+  return (
+    <div className="relative">
+      <div ref={rootRef}>
+        <StaticEmbed html={html} />
+      </div>
+      {stalled && (
+        <button
+          type="button"
+          onClick={() => window.open(permalink(url), '_blank', 'noopener')}
+          aria-label="View reel on Instagram"
+          className="absolute inset-0 z-10 grid place-items-center bg-charcoal/45 transition-colors duration-300 hover:bg-charcoal/55"
+        >
+          <span className="grid h-14 w-14 place-items-center rounded-full bg-white/90 text-brand shadow-card backdrop-blur-sm">
+            <Play className="h-6 w-6" aria-hidden="true" />
+          </span>
+          <span className="mt-3 text-sm font-medium tracking-wide text-white">
+            View on Instagram
+          </span>
+        </button>
+      )}
+    </div>
+  )
+}
+
+function ReelCard({ url, active }) {
+  const [embedHtml, setEmbedHtml] = useState(null)
+
+  useEffect(() => {
+    if (!active || embedHtml) return undefined
+    const tryInject = () => {
+      if (window.instgrm && window.instgrm.Embeds) {
+        setEmbedHtml(buildEmbedHtml(url))
+        return true
+      }
+      return false
+    }
+    if (tryInject()) return undefined
+    const interval = window.setInterval(() => {
+      if (tryInject()) clearInterval(interval)
+    }, 150)
+    return () => clearInterval(interval)
+  }, [active, embedHtml, url])
+
+  return (
+    <div className="reel-card relative h-full w-full overflow-hidden rounded-[1.25rem] border border-charcoal/10 bg-white p-2 shadow-card">
+      {embedHtml ? (
+        <ReelEmbed url={url} html={embedHtml} />
       ) : (
         <div className="aspect-[9/16] w-full">
           <ReelSkeleton />
@@ -117,9 +145,54 @@ function ReelCard({ url }) {
 }
 
 function ReelCarousel() {
+  const sectionRef = useRef(null)
   const trackRef = useRef(null)
+  const [ready, setReady] = useState(false)
   const [canPrev, setCanPrev] = useState(false)
   const [canNext, setCanNext] = useState(true)
+
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return undefined
+    if (typeof IntersectionObserver === 'undefined') {
+      setReady(true)
+      return undefined
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setReady(true)
+            observer.disconnect()
+          }
+        })
+      },
+      { rootMargin: '1200px 0px' },
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!ready) return undefined
+    let tries = 0
+    const interval = window.setInterval(() => {
+      tries += 1
+      if (window.instgrm && window.instgrm.Embeds) {
+        window.clearInterval(interval)
+        window.setTimeout(() => {
+          try {
+            window.instgrm.Embeds.process()
+          } catch {
+            /* ignore */
+          }
+        }, 80)
+        return
+      }
+      if (tries > 200) window.clearInterval(interval)
+    }, 100)
+    return () => window.clearInterval(interval)
+  }, [ready])
 
   const updateArrows = () => {
     const el = trackRef.current
@@ -151,17 +224,17 @@ function ReelCarousel() {
   }
 
   return (
-    <div className="relative">
+    <div ref={sectionRef} className="relative">
       <div
         ref={trackRef}
-        className="reel-scroll -mx-5 flex snap-x snap-mandatory overflow-x-auto px-5 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
+        className="reel-scroll -mx-5 flex items-start snap-x snap-mandatory overflow-x-auto px-5 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
       >
         {REELS.map((url) => (
           <div
             key={url}
             className="reel-slide w-full shrink-0 snap-start pr-5 sm:w-1/2 sm:pr-6 lg:w-1/3 lg:pr-8"
           >
-            <ReelCard url={url} />
+            <ReelCard url={url} active={ready} />
           </div>
         ))}
       </div>
