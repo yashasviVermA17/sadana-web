@@ -1,5 +1,5 @@
 import { memo, useEffect, useRef, useState } from 'react'
-import { ChevronLeft, ChevronRight, Play } from 'lucide-react'
+import { Play } from 'lucide-react'
 import Reveal from './Reveal'
 import SectionHeading from './SectionHeading'
 
@@ -148,8 +148,6 @@ function ReelCarousel() {
   const sectionRef = useRef(null)
   const trackRef = useRef(null)
   const [ready, setReady] = useState(false)
-  const [canPrev, setCanPrev] = useState(false)
-  const [canNext, setCanNext] = useState(true)
 
   useEffect(() => {
     const el = sectionRef.current
@@ -194,50 +192,18 @@ function ReelCarousel() {
     return () => window.clearInterval(interval)
   }, [ready])
 
-  const updateArrows = () => {
-    const el = trackRef.current
-    if (!el) return
-    setCanPrev(el.scrollLeft > 8)
-    setCanNext(el.scrollLeft < el.scrollWidth - el.clientWidth - 8)
-  }
-
-  useEffect(() => {
-    const el = trackRef.current
-    if (!el) return undefined
-    updateArrows()
-    el.addEventListener('scroll', updateArrows, { passive: true })
-    window.addEventListener('resize', updateArrows)
-    return () => {
-      el.removeEventListener('scroll', updateArrows)
-      window.removeEventListener('resize', updateArrows)
-    }
-  }, [])
-
-  const scrollByPage = (dir) => {
-    const el = trackRef.current
-    if (!el) return
-    const slides = el.querySelectorAll('.reel-slide')
-    const first = slides[0]
-    const second = slides[1]
-    const step = first && second ? second.offsetLeft - first.offsetLeft : el.clientWidth
-    el.scrollBy({ left: dir * step, behavior: 'smooth' })
-  }
-
-  const drag = useRef({ active: false, startX: 0, scrollLeft: 0, moved: 0 })
+  const drag = useRef({ active: false, dragging: false, startX: 0, startY: 0, scrollLeft: 0 })
+  const [dragging, setDragging] = useState(false)
 
   const onPointerDown = (e) => {
     if (e.pointerType === 'mouse' && e.button !== 0) return
     const el = trackRef.current
     if (!el) return
     drag.current.active = true
+    drag.current.dragging = false
     drag.current.startX = e.clientX
+    drag.current.startY = e.clientY
     drag.current.scrollLeft = el.scrollLeft
-    drag.current.moved = 0
-    try {
-      e.currentTarget.setPointerCapture(e.pointerId)
-    } catch {
-      /* ignore */
-    }
   }
 
   const onPointerMove = (e) => {
@@ -245,12 +211,27 @@ function ReelCarousel() {
     const el = trackRef.current
     if (!d.active || !el) return
     const dx = e.clientX - d.startX
-    d.moved = Math.max(d.moved, Math.abs(dx))
+    const dy = e.clientY - d.startY
+    if (!d.dragging) {
+      if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return
+      d.dragging = true
+      setDragging(true)
+      try {
+        el.setPointerCapture(e.pointerId)
+      } catch {
+        /* ignore */
+      }
+    }
     el.scrollLeft = d.scrollLeft - dx
   }
 
-  const onPointerUp = () => {
+  const endDrag = () => {
+    if (!drag.current.active) return
     drag.current.active = false
+    if (drag.current.dragging) {
+      drag.current.dragging = false
+      setDragging(false)
+    }
   }
 
   return (
@@ -259,9 +240,9 @@ function ReelCarousel() {
         ref={trackRef}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
-        onPointerUp={onPointerUp}
-        onPointerCancel={onPointerUp}
-        className="reel-scroll -mx-5 flex cursor-grab select-none items-start snap-x snap-mandatory overflow-x-auto px-5 active:cursor-grabbing sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
+        className={`reel-scroll -mx-5 flex cursor-grab select-none items-start overflow-x-auto px-5 active:cursor-grabbing sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8${dragging ? '' : ' snap-x snap-mandatory'}`}
       >
         {REELS.map((url) => (
           <div
@@ -272,27 +253,6 @@ function ReelCarousel() {
           </div>
         ))}
       </div>
-
-      {canPrev && (
-        <button
-          type="button"
-          onClick={() => scrollByPage(-1)}
-          aria-label="Previous reels"
-          className="absolute left-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-charcoal/10 bg-ivory/95 text-charcoal shadow-card backdrop-blur-sm transition-colors duration-300 hover:border-brand hover:text-brand sm:grid"
-        >
-          <ChevronLeft className="h-5 w-5" aria-hidden="true" />
-        </button>
-      )}
-      {canNext && (
-        <button
-          type="button"
-          onClick={() => scrollByPage(1)}
-          aria-label="Next reels"
-          className="absolute right-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-charcoal/10 bg-ivory/95 text-charcoal shadow-card backdrop-blur-sm transition-colors duration-300 hover:border-brand hover:text-brand sm:grid"
-        >
-          <ChevronRight className="h-5 w-5" aria-hidden="true" />
-        </button>
-      )}
     </div>
   )
 }
