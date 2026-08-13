@@ -662,28 +662,22 @@ img {
   position: relative;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  background-color: var(--color-linen);
+  background: transparent;
 }
 
-/* Show only the reel video inside Instagram's embed iframe.
-   The embed renders: [54px header] [4:5 video] [profile/actions/footer chrome].
-   Translate the iframe up by the 54px header and clip at the 4:5 video box. */
+/* Instagram's embed renders the 9:16 reel inside a wider/taller fixed iframe
+   with black bars on both sides. Scale the iframe up so the reel video covers
+   the full 4:5 container (object-fit: cover equivalent) at every screen size.
+   Scaling about the iframe's centre keeps the subject centred while the
+   embed header and action footer stay cropped outside the container. */
 .reel-embed iframe,
 .reel-embed .instagram-media {
   display: block;
   width: 100% !important;
-  transform: translateY(-54px);
-}
-
-/* Mobile: Instagram's embed centers the narrow 9:16 video inside the iframe
-   with black bars on both sides. Zoom the iframe so the video fills the whole
-   4:5 container (cover behaviour), centering the crop on the subject. */
-@media (max-width: 767.98px) {
-  .reel-embed iframe,
-  .reel-embed .instagram-media {
-    transform-origin: top left;
-    transform: translate(-19.9%, -158px) scale(1.4);
-  }
+  margin: 0 !important;
+  border: 0 !important;
+  transform-origin: center center;
+  transform: scale(1.4);
 }
 
 .reel-scroll {

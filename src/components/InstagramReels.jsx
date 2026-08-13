@@ -61,7 +61,7 @@ function ReelSkeleton() {
 const StaticEmbed = memo(function StaticEmbed({ html }) {
   return (
     <div
-      className="reel-embed aspect-[9/11] w-full"
+      className="reel-embed w-full"
       dangerouslySetInnerHTML={{ __html: html }}
     />
   )
@@ -223,11 +223,45 @@ function ReelCarousel() {
     el.scrollBy({ left: dir * step, behavior: 'smooth' })
   }
 
+  const drag = useRef({ active: false, startX: 0, scrollLeft: 0, moved: 0 })
+
+  const onPointerDown = (e) => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return
+    const el = trackRef.current
+    if (!el) return
+    drag.current.active = true
+    drag.current.startX = e.clientX
+    drag.current.scrollLeft = el.scrollLeft
+    drag.current.moved = 0
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId)
+    } catch {
+      /* ignore */
+    }
+  }
+
+  const onPointerMove = (e) => {
+    const d = drag.current
+    const el = trackRef.current
+    if (!d.active || !el) return
+    const dx = e.clientX - d.startX
+    d.moved = Math.max(d.moved, Math.abs(dx))
+    el.scrollLeft = d.scrollLeft - dx
+  }
+
+  const onPointerUp = () => {
+    drag.current.active = false
+  }
+
   return (
     <div ref={sectionRef} className="relative">
       <div
         ref={trackRef}
-        className="reel-scroll -mx-5 flex items-start snap-x snap-mandatory overflow-x-auto px-5 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+        className="reel-scroll -mx-5 flex cursor-grab select-none items-start snap-x snap-mandatory overflow-x-auto px-5 active:cursor-grabbing sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
       >
         {REELS.map((url) => (
           <div
