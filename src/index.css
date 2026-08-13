@@ -657,6 +657,10 @@ img {
   margin: 0 !important;
 }
 
+.reel-embed {
+  overflow: hidden;
+}
+
 .reel-scroll {
   scrollbar-width: none;
   -ms-overflow-style: none;

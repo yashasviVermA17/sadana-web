@@ -104,7 +104,7 @@ function ReelCard({ url }) {
     >
       {active ? (
         <div
-          className="reel-embed aspect-[9/16] w-full"
+          className="reel-embed aspect-[9/11] w-full"
           dangerouslySetInnerHTML={{ __html: buildEmbedHtml(url) }}
         />
       ) : (
