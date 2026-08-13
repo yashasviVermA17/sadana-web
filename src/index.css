@@ -675,6 +675,17 @@ img {
   transform: translateY(-54px);
 }
 
+/* Mobile: Instagram's embed centers the narrow 9:16 video inside the iframe
+   with black bars on both sides. Zoom the iframe so the video fills the whole
+   4:5 container (cover behaviour), centering the crop on the subject. */
+@media (max-width: 767.98px) {
+  .reel-embed iframe,
+  .reel-embed .instagram-media {
+    transform-origin: top left;
+    transform: translate(-19.9%, -158px) scale(1.4);
+  }
+}
+
 .reel-scroll {
   scrollbar-width: none;
   -ms-overflow-style: none;
