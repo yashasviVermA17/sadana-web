@@ -136,7 +136,7 @@ function ReelCard({ url, active }) {
       {embedHtml ? (
         <ReelEmbed url={url} html={embedHtml} />
       ) : (
-        <div className="aspect-[9/16] w-full">
+        <div className="aspect-[4/5] w-full">
           <ReelSkeleton />
         </div>
       )}

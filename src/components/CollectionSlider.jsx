@@ -211,7 +211,7 @@ function MarqueeRow({ items, reverse = false, duration = 42, showNav = false }) 
             type="button"
             onClick={() => nudge(1)}
             aria-label="Previous products"
-            className="absolute left-3 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-charcoal/10 bg-ivory/95 text-charcoal shadow-card backdrop-blur-sm transition-colors duration-300 hover:border-brand hover:text-brand sm:grid"
+            className="absolute left-3 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-charcoal/10 bg-ivory/95 text-charcoal shadow-card backdrop-blur-sm transition-colors duration-300 hover:border-brand hover:text-brand"
           >
             <ChevronLeft className="h-5 w-5" aria-hidden="true" />
           </button>
@@ -219,7 +219,7 @@ function MarqueeRow({ items, reverse = false, duration = 42, showNav = false }) 
             type="button"
             onClick={() => nudge(-1)}
             aria-label="Next products"
-            className="absolute right-3 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-charcoal/10 bg-ivory/95 text-charcoal shadow-card backdrop-blur-sm transition-colors duration-300 hover:border-brand hover:text-brand sm:grid"
+            className="absolute right-3 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-charcoal/10 bg-ivory/95 text-charcoal shadow-card backdrop-blur-sm transition-colors duration-300 hover:border-brand hover:text-brand"
           >
             <ChevronRight className="h-5 w-5" aria-hidden="true" />
           </button>
@@ -243,12 +243,14 @@ export default function CollectionSlider() {
       cats: ['Ceilings', 'Flooring'],
       reverse: true,
       duration: 46,
+      showNav: true,
     },
     {
       label: 'Doors, Furnishings & Outdoor',
       cats: ['Doors & Panels', 'Soft Furnishings', 'Exterior & Outdoor'],
       reverse: false,
       duration: 54,
+      showNav: true,
     },
   ]
 

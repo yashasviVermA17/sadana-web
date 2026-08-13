@@ -659,7 +659,20 @@ img {
 }
 
 .reel-embed {
+  position: relative;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
+  background-color: var(--color-linen);
+}
+
+/* Show only the reel video inside Instagram's embed iframe.
+   The embed renders: [54px header] [4:5 video] [profile/actions/footer chrome].
+   Translate the iframe up by the 54px header and clip at the 4:5 video box. */
+.reel-embed iframe,
+.reel-embed .instagram-media {
+  display: block;
+  width: 100% !important;
+  transform: translateY(-54px);
 }
 
 .reel-scroll {

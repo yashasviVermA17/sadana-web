@@ -36,7 +36,7 @@ function Hero() {
           aria-hidden="true"
         />
 
-        <div className="absolute inset-0 mx-auto flex h-full w-full max-w-none flex-col items-start justify-start px-6 pb-10 pt-[150px] sm:px-8 sm:pt-[170px] lg:justify-end lg:px-8 lg:pb-20 lg:pt-0">
+        <div className="absolute inset-0 mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-6 pb-[70px] sm:px-8 md:justify-start md:pb-10 md:pt-[170px] lg:justify-end lg:px-8 lg:pb-20 lg:pt-0">
           <h1 className="max-w-4xl text-[clamp(38px,10vw,46px)] font-bold leading-[1.1] text-white lg:text-6xl lg:leading-tight">
             Welcome to SADANA DECOR &amp; INTERIOR
           </h1>
