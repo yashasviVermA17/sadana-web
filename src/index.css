@@ -639,3 +639,29 @@ img {
     animation: none;
   }
 }
+
+.instagram-media {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #fff !important;
+  border: 0 !important;
+  border-radius: 18px !important;
+  box-shadow: none !important;
+}
+
+.instagram-media-rendered {
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.reel-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.reel-scroll::-webkit-scrollbar {
+  display: none;
+}

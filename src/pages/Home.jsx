@@ -3,12 +3,11 @@ import Button from '../components/Button'
 import Reveal from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
 import ProductGrid from '../components/ProductGrid'
-import ProjectGrid from '../components/ProjectGrid'
 import StatsSection from '../components/StatsSection'
 import Testimonials from '../components/Testimonials'
 import CollectionSlider from '../components/CollectionSlider'
+import InstagramReels from '../components/InstagramReels'
 import { products } from '../data/products'
-import { projects } from '../data/projects'
 import imgHero from '../assets/home page hero image.png'
 
 const featuredIds = [
@@ -84,41 +83,13 @@ function FeaturedCollection() {
   )
 }
 
-function RecentProjects() {
-  const recent = projects.slice(0, 6)
-
-  return (
-    <section className="bg-mist">
-      <div className="mx-auto max-w-none px-5 py-20 sm:px-6 lg:px-8 lg:py-28">
-        <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-          <SectionHeading
-            eyebrow="Recent Projects"
-            title="Spaces we recently completed"
-            text="Residences, workspaces and hospitality interiors delivered turnkey."
-          />
-          <Reveal delay={150}>
-            <Button to="/projects" variant="outline">
-              View All Projects
-              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-            </Button>
-          </Reveal>
-        </div>
-
-        <Reveal className="mt-12">
-          <ProjectGrid items={recent} />
-        </Reveal>
-      </div>
-    </section>
-  )
-}
-
 export default function Home() {
   return (
     <>
       <Hero />
       <FeaturedCollection />
       <StatsSection dark className="bg-charcoal" />
-      <RecentProjects />
+      <InstagramReels />
       <CollectionSlider />
       <Testimonials />
     </>
