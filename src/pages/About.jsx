@@ -13,7 +13,6 @@ import { values } from '../data/site'
 import imgStory from '../assets/about inside image.jpg'
 import imgCtaBg from '../assets/Parametric wall panel.jpg'
 import imgHero from '../assets/about hero 3.png'
-import imgHeroMobile from '../assets/about-hero-3-mobile.png'
 
 function MissionVision() {
   const cards = [
@@ -92,14 +91,13 @@ export default function About() {
     <>
       <PageHero
         image={imgHero}
-        mobileImage={imgHeroMobile}
         breadcrumb={[{ label: 'About' }]}
         eyebrow="About Us"
         title="Welcome to SADANA Decor & Interior"
         subtitle="At SADANA DECOR & INTERIOR, we believe every space has a story — and we are here to help you design it with perfection."
         overlay="bg-gradient-to-t from-charcoal/80 via-charcoal/40 to-charcoal/25"
         imageClassName="object-top"
-        className="!aspect-[1107/680] !h-auto !min-h-[320px] lg:!aspect-auto lg:!h-[100svh] lg:!min-h-[560px]"
+        className="!aspect-[1107/800] !h-auto !min-h-[320px] lg:!aspect-auto lg:!h-[100svh] lg:!min-h-[560px]"
       />
 
       <section className="mx-auto max-w-none px-5 py-14 sm:px-6 lg:px-8 lg:py-20">
