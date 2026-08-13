@@ -93,7 +93,6 @@ export default function About() {
         image={imgHero}
         breadcrumb={[{ label: 'About' }]}
         eyebrow="About Us"
-        title="Welcome to SADANA Decor & Interior"
         subtitle="At SADANA DECOR & INTERIOR, we believe every space has a story — and we are here to help you design it with perfection."
         overlay="bg-gradient-to-t from-charcoal/80 via-charcoal/40 to-charcoal/25"
         imageClassName="object-top"

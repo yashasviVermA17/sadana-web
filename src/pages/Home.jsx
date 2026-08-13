@@ -37,11 +37,7 @@ function Hero() {
         />
 
         <div className="absolute inset-0 mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-5 pb-5 sm:px-6 sm:pb-12 lg:px-8 lg:pb-20">
-          <h1 className="max-w-3xl font-serif text-[1.5rem] leading-[1.12] text-cream sm:text-5xl lg:text-[4.25rem]">
-            Welcome to SADANA DECOR &amp; INTERIOR
-          </h1>
-
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-cream/85 sm:mt-5 sm:text-lg">
+          <p className="max-w-xl text-base leading-relaxed text-cream/85 sm:text-lg">
             All Types Of Interior &amp; Exterior Products Under One Roof
           </p>
 

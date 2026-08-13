@@ -30,11 +30,13 @@ export default function PageHero({ image, breadcrumb, eyebrow, title, subtitle, 
               </span>
             </Reveal>
           )}
-          <Reveal delay={160}>
-            <h1 className="mt-3 max-w-3xl font-serif text-[2.1rem] leading-[1.12] text-cream sm:mt-4 sm:text-5xl">
-              {title}
-            </h1>
-          </Reveal>
+          {title && (
+            <Reveal delay={160}>
+              <h1 className="mt-3 max-w-3xl font-serif text-[2.1rem] leading-[1.12] text-cream sm:mt-4 sm:text-5xl">
+                {title}
+              </h1>
+            </Reveal>
+          )}
           {subtitle && (
             <Reveal delay={220}>
               <p className="mt-4 max-w-xl text-sm leading-relaxed text-cream/80 sm:mt-5 sm:text-lg">
