@@ -196,14 +196,9 @@ function ReelCarousel() {
   const [canPrev, setCanPrev] = useState(false)
   const [canNext, setCanNext] = useState(true)
   const maxRef = useRef(0)
-  const wheelState = useRef({ target: 0, raf: 0 })
-
-  const currentX = () => {
-    const t = trackRef.current
-    if (!t) return 0
-    const m = getComputedStyle(t).transform.match(/[-+]?[\d.]+/g)
-    return m && m.length >= 6 ? -(parseFloat(m[4]) || 0) : 0
-  }
+  const wheelState = useRef({ target: 0 })
+  const wheelAcc = useRef(0)
+  const wheelTimer = useRef(null)
 
   const slideStep = () => {
     const t = trackRef.current
@@ -225,39 +220,46 @@ function ReelCarousel() {
     return () => window.removeEventListener('resize', syncBounds)
   }, [ready])
 
-  const startSmooth = () => {
-    const s = wheelState.current
-    if (s.raf) return
-    const step = () => {
-      const t = trackRef.current
-      if (!t) {
-        s.raf = 0
-        return
-      }
-      const cur = currentX()
-      const diff = s.target - cur
-      if (Math.abs(diff) < 0.5) {
-        s.raf = 0
-        t.style.transform = `translate3d(${-s.target}px,0,0)`
-        setCanPrev(s.target > 0.5)
-        setCanNext(s.target < maxRef.current - 0.5)
-        return
-      }
-      t.style.transform = `translate3d(${-(cur + diff * 0.25)}px,0,0)`
-      s.raf = window.requestAnimationFrame(step)
-    }
-    s.raf = window.requestAnimationFrame(step)
+  const apply = (target) => {
+    const t = trackRef.current
+    if (!t) return
+    wheelState.current.target = target
+    t.style.transform = `translate3d(${-target}px,0,0)`
+    setCanPrev(target > 0.5)
+    setCanNext(target < maxRef.current - 0.5)
+  }
+
+  const animateTo = (target) => {
+    const t = trackRef.current
+    if (!t) return
+    t.style.transition = 'transform 420ms cubic-bezier(0.22,1,0.36,1)'
+    apply(target)
+  }
+
+  const goBy = (dir) => {
+    const step = slideStep()
+    if (!step) return
+    const next = Math.max(0, Math.min(maxRef.current, wheelState.current.target + dir * step))
+    animateTo(next)
   }
 
   const handleWheel = (e) => {
     if (drag.current.active) return
     const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
-    const s = wheelState.current
-    const next = Math.max(0, Math.min(maxRef.current, s.target + delta))
-    if (next === s.target) return
+    if (Math.abs(delta) < 8) return
+    clearTimeout(wheelTimer.current)
+    wheelTimer.current = setTimeout(() => {
+      wheelAcc.current = 0
+    }, 220)
+    const atStart = wheelState.current.target <= 0.5 && delta < 0
+    const atEnd = wheelState.current.target >= maxRef.current - 0.5 && delta > 0
+    if (atStart || atEnd) return
     e.preventDefault()
-    s.target = next
-    startSmooth()
+    wheelAcc.current += delta
+    const dir = wheelAcc.current >= 60 ? 1 : wheelAcc.current <= -60 ? -1 : 0
+    if (!dir) return
+    wheelAcc.current = 0
+    goBy(dir)
   }
 
   useEffect(() => {
@@ -266,28 +268,19 @@ function ReelCarousel() {
     el.addEventListener('wheel', handleWheel, { passive: false })
     return () => {
       el.removeEventListener('wheel', handleWheel)
-      if (wheelState.current.raf) window.cancelAnimationFrame(wheelState.current.raf)
+      clearTimeout(wheelTimer.current)
     }
   }, [])
-
-  const goBy = (dir) => {
-    const s = wheelState.current
-    const step = slideStep()
-    if (!step) return
-    s.target = Math.max(0, Math.min(maxRef.current, s.target + dir * step))
-    startSmooth()
-  }
 
   const onPointerDown = (e) => {
     if (e.pointerType === 'touch') return
     if (e.pointerType === 'mouse' && e.button !== 0) return
-    const s = wheelState.current
-    if (s.raf) window.cancelAnimationFrame(s.raf)
-    s.raf = 0
+    const t = trackRef.current
+    if (t) t.style.transition = 'none'
     drag.current.active = true
     drag.current.moved = 0
     drag.current.startX = e.clientX
-    drag.current.startOffset = s.target
+    drag.current.startOffset = wheelState.current.target
   }
 
   const onPointerMove = (e) => {
@@ -296,9 +289,8 @@ function ReelCarousel() {
     const dx = e.clientX - d.startX
     d.moved = Math.max(d.moved, Math.abs(dx))
     if (d.moved < 8) return
-    const s = wheelState.current
-    s.target = Math.max(0, Math.min(maxRef.current, d.startOffset - dx))
-    startSmooth()
+    const next = Math.max(0, Math.min(maxRef.current, d.startOffset - dx))
+    apply(next)
   }
 
   const endDrag = () => {
@@ -307,19 +299,14 @@ function ReelCarousel() {
     d.active = false
     const step = slideStep()
     if (!step) return
-    const s = wheelState.current
-    s.target = Math.max(0, Math.min(maxRef.current, Math.round(s.target / step) * step))
-    startSmooth()
-  }
-
-  const openReel = (url) => {
-    if (drag.current.moved > 8) return
-    window.open(permalink(url), '_blank', 'noopener')
+    const target = wheelState.current.target
+    const snapped = Math.max(0, Math.min(maxRef.current, Math.round(target / step) * step))
+    animateTo(snapped)
   }
 
   return (
     <div ref={sectionRef} className="relative">
-      <div ref={viewportRef} className="overflow-hidden">
+      <div ref={viewportRef} className="relative overflow-hidden">
         <div
           ref={trackRef}
           onPointerDown={onPointerDown}
@@ -332,13 +319,14 @@ function ReelCarousel() {
           {REELS.map((url) => (
             <div
               key={url}
-              onClick={() => openReel(url)}
-              className="reel-slide w-full shrink-0 cursor-pointer pr-5 sm:w-1/2 sm:pr-6 lg:w-1/3 lg:pr-8"
+              className="reel-slide w-full shrink-0 pr-5 sm:w-1/2 sm:pr-6 lg:w-1/3 lg:pr-8"
             >
               <ReelCard url={url} active={ready} />
             </div>
           ))}
         </div>
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 z-10 h-12" />
+        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 z-10 h-12" />
       </div>
       <div className="mt-6 flex items-center justify-center gap-3">
         <button

@@ -678,7 +678,6 @@ img {
   border: 0 !important;
   transform-origin: center center;
   transform: scale(1.4);
-  pointer-events: none;
   touch-action: pan-y;
 }
 
