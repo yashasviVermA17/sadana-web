@@ -68,7 +68,9 @@ function MarqueeRow({ items, reverse = false, duration = 42, showNav = false }) 
 
   const onPointerDown = (e) => {
     if (e.pointerType === 'mouse' && e.button !== 0) return
+    clearTimeout(wheelTimer.current)
     clearTimeout(resumeTimer.current)
+    wheelRef.current = 0
     try {
       e.currentTarget.setPointerCapture(e.pointerId)
     } catch {
@@ -156,6 +158,7 @@ function MarqueeRow({ items, reverse = false, duration = 42, showNav = false }) 
   const marqueeRef = useRef(null)
 
   const handleWheel = (e) => {
+    if (drag.current.active) return
     e.preventDefault()
     clearTimeout(wheelTimer.current)
     clearTimeout(resumeTimer.current)

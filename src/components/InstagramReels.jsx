@@ -197,7 +197,7 @@ function ReelCarousel() {
 
   const handleWheel = (e) => {
     const el = trackRef.current
-    if (!el) return
+    if (!el || drag.current.active) return
     e.preventDefault()
     const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
     const s = wheelState.current
@@ -232,6 +232,10 @@ function ReelCarousel() {
     if (e.pointerType === 'mouse' && e.button !== 0) return
     const el = trackRef.current
     if (!el) return
+    const s = wheelState.current
+    if (s.raf) window.cancelAnimationFrame(s.raf)
+    s.raf = 0
+    s.target = el.scrollLeft
     drag.current.active = true
     drag.current.dragging = false
     drag.current.startX = e.clientX
