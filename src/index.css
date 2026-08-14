@@ -678,7 +678,8 @@ img {
   border: 0 !important;
   transform-origin: center center;
   transform: scale(1.4);
-  touch-action: pan-x;
+  pointer-events: none;
+  touch-action: pan-y;
 }
 
 .reel-scroll {

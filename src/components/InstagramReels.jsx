@@ -1,5 +1,5 @@
 import { memo, useEffect, useRef, useState } from 'react'
-import { Play } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Play } from 'lucide-react'
 import Reveal from './Reveal'
 import SectionHeading from './SectionHeading'
 
@@ -191,35 +191,75 @@ function ReelCarousel() {
     return () => window.clearInterval(interval)
   }, [ready])
 
-  const drag = useRef({ active: false, dragging: false, startX: 0, startY: 0, scrollLeft: 0 })
-  const [dragging, setDragging] = useState(false)
+  const viewportRef = useRef(null)
+  const drag = useRef({ active: false, moved: 0, startX: 0, startOffset: 0 })
+  const [canPrev, setCanPrev] = useState(false)
+  const [canNext, setCanNext] = useState(true)
+  const maxRef = useRef(0)
   const wheelState = useRef({ target: 0, raf: 0 })
 
-  const handleWheel = (e) => {
-    const el = trackRef.current
-    if (!el || drag.current.active) return
-    e.preventDefault()
-    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
-    const s = wheelState.current
-    s.target += delta
-    if (!s.raf) {
-      const step = () => {
-        const t = trackRef.current
-        if (!t) return
-        const diff = s.target - t.scrollLeft
-        if (Math.abs(diff) < 0.5) {
-          s.raf = 0
-          return
-        }
-        t.scrollLeft += diff * 0.25
-        s.raf = window.requestAnimationFrame(step)
-      }
-      s.raf = window.requestAnimationFrame(step)
-    }
+  const currentX = () => {
+    const t = trackRef.current
+    if (!t) return 0
+    const m = getComputedStyle(t).transform.match(/[-+]?[\d.]+/g)
+    return m && m.length >= 6 ? parseFloat(m[4]) || 0 : 0
+  }
+
+  const slideStep = () => {
+    const t = trackRef.current
+    const first = t?.querySelector('.reel-slide')
+    return first ? first.offsetWidth : (viewportRef.current?.clientWidth || 0)
+  }
+
+  const syncBounds = () => {
+    const t = trackRef.current
+    const vp = viewportRef.current
+    if (!t || !vp) return
+    maxRef.current = Math.max(0, t.scrollWidth - vp.clientWidth)
+    wheelState.current.target = Math.max(0, Math.min(wheelState.current.target, maxRef.current))
   }
 
   useEffect(() => {
-    const el = trackRef.current
+    syncBounds()
+    window.addEventListener('resize', syncBounds)
+    return () => window.removeEventListener('resize', syncBounds)
+  }, [ready])
+
+  const startSmooth = () => {
+    const s = wheelState.current
+    if (s.raf) return
+    const step = () => {
+      const t = trackRef.current
+      if (!t) {
+        s.raf = 0
+        return
+      }
+      const cur = currentX()
+      const diff = s.target - cur
+      if (Math.abs(diff) < 0.5) {
+        s.raf = 0
+        t.style.transform = `translate3d(${s.target}px,0,0)`
+        setCanPrev(s.target > 0.5)
+        setCanNext(s.target < maxRef.current - 0.5)
+        return
+      }
+      t.style.transform = `translate3d(${cur + diff * 0.25}px,0,0)`
+      s.raf = window.requestAnimationFrame(step)
+    }
+    s.raf = window.requestAnimationFrame(step)
+  }
+
+  const handleWheel = (e) => {
+    if (drag.current.active) return
+    e.preventDefault()
+    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
+    const s = wheelState.current
+    s.target = Math.max(0, Math.min(maxRef.current, s.target + delta))
+    startSmooth()
+  }
+
+  useEffect(() => {
+    const el = viewportRef.current
     if (!el) return undefined
     el.addEventListener('wheel', handleWheel, { passive: false })
     return () => {
@@ -228,68 +268,95 @@ function ReelCarousel() {
     }
   }, [])
 
+  const goBy = (dir) => {
+    const s = wheelState.current
+    const step = slideStep()
+    if (!step) return
+    s.target = Math.max(0, Math.min(maxRef.current, s.target + dir * step))
+    startSmooth()
+  }
+
   const onPointerDown = (e) => {
     if (e.pointerType === 'touch') return
     if (e.pointerType === 'mouse' && e.button !== 0) return
-    const el = trackRef.current
-    if (!el) return
     const s = wheelState.current
     if (s.raf) window.cancelAnimationFrame(s.raf)
     s.raf = 0
-    s.target = el.scrollLeft
     drag.current.active = true
-    drag.current.dragging = false
+    drag.current.moved = 0
     drag.current.startX = e.clientX
-    drag.current.startY = e.clientY
-    drag.current.scrollLeft = el.scrollLeft
+    drag.current.startOffset = s.target
   }
 
   const onPointerMove = (e) => {
     const d = drag.current
-    const el = trackRef.current
-    if (!d.active || !el) return
+    if (!d.active) return
     const dx = e.clientX - d.startX
-    const dy = e.clientY - d.startY
-    if (!d.dragging) {
-      if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return
-      d.dragging = true
-      setDragging(true)
-      try {
-        el.setPointerCapture(e.pointerId)
-      } catch {
-        /* ignore */
-      }
-    }
-    el.scrollLeft = d.scrollLeft - dx
+    d.moved = Math.max(d.moved, Math.abs(dx))
+    if (d.moved < 8) return
+    const s = wheelState.current
+    s.target = Math.max(0, Math.min(maxRef.current, d.startOffset - dx))
+    startSmooth()
   }
 
   const endDrag = () => {
-    if (!drag.current.active) return
-    drag.current.active = false
-    if (drag.current.dragging) {
-      drag.current.dragging = false
-      setDragging(false)
-    }
+    const d = drag.current
+    if (!d.active) return
+    d.active = false
+    const step = slideStep()
+    if (!step) return
+    const s = wheelState.current
+    s.target = Math.max(0, Math.min(maxRef.current, Math.round(s.target / step) * step))
+    startSmooth()
+  }
+
+  const openReel = (url) => {
+    if (drag.current.moved > 8) return
+    window.open(permalink(url), '_blank', 'noopener')
   }
 
   return (
     <div ref={sectionRef} className="relative">
-      <div
-        ref={trackRef}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={endDrag}
-        onPointerCancel={endDrag}
-        className={`reel-scroll -mx-5 flex cursor-grab select-none items-start overflow-x-auto px-5 active:cursor-grabbing sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8${dragging ? '' : ' snap-x snap-mandatory'}`}
-      >
-        {REELS.map((url) => (
-          <div
-            key={url}
-            className="reel-slide w-full shrink-0 snap-start pr-5 sm:w-1/2 sm:pr-6 lg:w-1/3 lg:pr-8"
-          >
-            <ReelCard url={url} active={ready} />
-          </div>
-        ))}
+      <div ref={viewportRef} className="overflow-hidden">
+        <div
+          ref={trackRef}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+          style={{ transform: 'translate3d(0,0,0)', willChange: 'transform' }}
+          className="flex cursor-grab select-none items-start active:cursor-grabbing"
+        >
+          {REELS.map((url) => (
+            <div
+              key={url}
+              onClick={() => openReel(url)}
+              className="reel-slide w-full shrink-0 cursor-pointer pr-5 sm:w-1/2 sm:pr-6 lg:w-1/3 lg:pr-8"
+            >
+              <ReelCard url={url} active={ready} />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="mt-6 flex items-center justify-center gap-3">
+        <button
+          type="button"
+          onClick={() => goBy(-1)}
+          disabled={!canPrev}
+          aria-label="Previous reels"
+          className="grid h-11 w-11 place-items-center rounded-full border border-charcoal/10 bg-ivory text-charcoal shadow-card transition-colors duration-300 hover:border-brand hover:text-brand disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+        </button>
+        <button
+          type="button"
+          onClick={() => goBy(1)}
+          disabled={!canNext}
+          aria-label="Next reels"
+          className="grid h-11 w-11 place-items-center rounded-full border border-charcoal/10 bg-ivory text-charcoal shadow-card transition-colors duration-300 hover:border-brand hover:text-brand disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          <ChevronRight className="h-5 w-5" aria-hidden="true" />
+        </button>
       </div>
     </div>
   )
