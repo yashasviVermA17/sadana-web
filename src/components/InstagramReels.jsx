@@ -202,7 +202,7 @@ function ReelCarousel() {
     const t = trackRef.current
     if (!t) return 0
     const m = getComputedStyle(t).transform.match(/[-+]?[\d.]+/g)
-    return m && m.length >= 6 ? parseFloat(m[4]) || 0 : 0
+    return m && m.length >= 6 ? -(parseFloat(m[4]) || 0) : 0
   }
 
   const slideStep = () => {
@@ -238,12 +238,12 @@ function ReelCarousel() {
       const diff = s.target - cur
       if (Math.abs(diff) < 0.5) {
         s.raf = 0
-        t.style.transform = `translate3d(${s.target}px,0,0)`
+        t.style.transform = `translate3d(${-s.target}px,0,0)`
         setCanPrev(s.target > 0.5)
         setCanNext(s.target < maxRef.current - 0.5)
         return
       }
-      t.style.transform = `translate3d(${cur + diff * 0.25}px,0,0)`
+      t.style.transform = `translate3d(${-(cur + diff * 0.25)}px,0,0)`
       s.raf = window.requestAnimationFrame(step)
     }
     s.raf = window.requestAnimationFrame(step)
@@ -253,7 +253,7 @@ function ReelCarousel() {
     if (drag.current.active) return
     const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
     const s = wheelState.current
-    const next = Math.max(0, Math.min(maxRef.current, s.target - delta))
+    const next = Math.max(0, Math.min(maxRef.current, s.target + delta))
     if (next === s.target) return
     e.preventDefault()
     s.target = next
