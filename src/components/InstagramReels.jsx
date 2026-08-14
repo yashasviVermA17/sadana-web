@@ -200,7 +200,6 @@ function ReelCarousel() {
   const wheelAcc = useRef(0)
   const lastStep = useRef(0)
   const hoverRef = useRef(false)
-  const [hovering, setHovering] = useState(false)
 
   const slideStep = () => {
     const t = trackRef.current
@@ -309,11 +308,9 @@ function ReelCarousel() {
         ref={viewportRef}
         onMouseEnter={() => {
           hoverRef.current = true
-          setHovering(true)
         }}
         onMouseLeave={() => {
           hoverRef.current = false
-          setHovering(false)
         }}
         className="relative overflow-hidden"
       >
@@ -339,13 +336,6 @@ function ReelCarousel() {
         <div aria-hidden="true" className="absolute inset-x-0 bottom-0 z-10 h-16" />
         <div aria-hidden="true" className="absolute inset-y-0 left-0 z-10 w-10" />
         <div aria-hidden="true" className="absolute inset-y-0 right-0 z-10 w-10" />
-        {hovering && (
-          <div className="pointer-events-none absolute inset-x-0 top-20 z-20 flex justify-center">
-            <span className="rounded-full bg-charcoal/80 px-3 py-1 text-xs font-medium tracking-wide text-white shadow-soft">
-              Scroll = browse reels · Click = play video
-            </span>
-          </div>
-        )}
       </div>
       <div className="mt-6 flex items-center justify-center gap-3">
         <button
