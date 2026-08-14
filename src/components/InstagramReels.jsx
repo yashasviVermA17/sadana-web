@@ -229,6 +229,7 @@ function ReelCarousel() {
   }, [])
 
   const onPointerDown = (e) => {
+    if (e.pointerType === 'touch') return
     if (e.pointerType === 'mouse' && e.button !== 0) return
     const el = trackRef.current
     if (!el) return
