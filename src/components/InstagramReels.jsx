@@ -197,8 +197,7 @@ function ReelCarousel() {
   const [canNext, setCanNext] = useState(true)
   const maxRef = useRef(0)
   const wheelState = useRef({ target: 0 })
-  const wheelAcc = useRef(0)
-  const wheelTimer = useRef(null)
+  const lastStep = useRef(0)
 
   const slideStep = () => {
     const t = trackRef.current
@@ -245,31 +244,25 @@ function ReelCarousel() {
 
   const handleWheel = (e) => {
     if (drag.current.active) return
-    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
-    if (Math.abs(delta) < 8) return
-    clearTimeout(wheelTimer.current)
-    wheelTimer.current = setTimeout(() => {
-      wheelAcc.current = 0
-    }, 220)
-    const atStart = wheelState.current.target <= 0.5 && delta < 0
-    const atEnd = wheelState.current.target >= maxRef.current - 0.5 && delta > 0
+    if (Date.now() - lastStep.current < 450) return
+    const raw = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
+    let px = raw
+    if (e.deltaMode === 1) px *= 16
+    else if (e.deltaMode === 2) px *= (viewportRef.current?.clientHeight || 800)
+    if (Math.abs(px) < 40) return
+    const atStart = wheelState.current.target <= 0.5 && px < 0
+    const atEnd = wheelState.current.target >= maxRef.current - 0.5 && px > 0
     if (atStart || atEnd) return
     e.preventDefault()
-    wheelAcc.current += delta
-    const dir = wheelAcc.current >= 60 ? 1 : wheelAcc.current <= -60 ? -1 : 0
-    if (!dir) return
-    wheelAcc.current = 0
-    goBy(dir)
+    lastStep.current = Date.now()
+    goBy(px > 0 ? 1 : -1)
   }
 
   useEffect(() => {
     const el = viewportRef.current
     if (!el) return undefined
     el.addEventListener('wheel', handleWheel, { passive: false })
-    return () => {
-      el.removeEventListener('wheel', handleWheel)
-      clearTimeout(wheelTimer.current)
-    }
+    return () => el.removeEventListener('wheel', handleWheel)
   }, [])
 
   const onPointerDown = (e) => {
