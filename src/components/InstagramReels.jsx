@@ -197,7 +197,10 @@ function ReelCarousel() {
   const [canNext, setCanNext] = useState(true)
   const maxRef = useRef(0)
   const wheelState = useRef({ target: 0 })
+  const wheelAcc = useRef(0)
   const lastStep = useRef(0)
+  const hoverRef = useRef(false)
+  const [hovering, setHovering] = useState(false)
 
   const slideStep = () => {
     const t = trackRef.current
@@ -243,17 +246,20 @@ function ReelCarousel() {
   }
 
   const handleWheel = (e) => {
-    if (drag.current.active) return
-    if (Date.now() - lastStep.current < 450) return
+    if (drag.current.active || !hoverRef.current) return
     const raw = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
     let px = raw
     if (e.deltaMode === 1) px *= 16
     else if (e.deltaMode === 2) px *= (viewportRef.current?.clientHeight || 800)
-    if (Math.abs(px) < 40) return
+    if (Math.abs(px) < 8) return
     const atStart = wheelState.current.target <= 0.5 && px < 0
     const atEnd = wheelState.current.target >= maxRef.current - 0.5 && px > 0
     if (atStart || atEnd) return
     e.preventDefault()
+    if (Date.now() - lastStep.current < 500) return
+    wheelAcc.current += px
+    if (Math.abs(wheelAcc.current) < 60) return
+    wheelAcc.current = 0
     lastStep.current = Date.now()
     goBy(px > 0 ? 1 : -1)
   }
@@ -299,7 +305,18 @@ function ReelCarousel() {
 
   return (
     <div ref={sectionRef} className="relative">
-      <div ref={viewportRef} className="relative overflow-hidden">
+      <div
+        ref={viewportRef}
+        onMouseEnter={() => {
+          hoverRef.current = true
+          setHovering(true)
+        }}
+        onMouseLeave={() => {
+          hoverRef.current = false
+          setHovering(false)
+        }}
+        className="relative overflow-hidden"
+      >
         <div
           ref={trackRef}
           onPointerDown={onPointerDown}
@@ -318,8 +335,17 @@ function ReelCarousel() {
             </div>
           ))}
         </div>
-        <div aria-hidden="true" className="absolute inset-x-0 top-0 z-10 h-12" />
-        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 z-10 h-12" />
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 z-10 h-16" />
+        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 z-10 h-16" />
+        <div aria-hidden="true" className="absolute inset-y-0 left-0 z-10 w-10" />
+        <div aria-hidden="true" className="absolute inset-y-0 right-0 z-10 w-10" />
+        {hovering && (
+          <div className="pointer-events-none absolute inset-x-0 top-20 z-20 flex justify-center">
+            <span className="rounded-full bg-charcoal/80 px-3 py-1 text-xs font-medium tracking-wide text-white shadow-soft">
+              Scroll = browse reels · Click = play video
+            </span>
+          </div>
+        )}
       </div>
       <div className="mt-6 flex items-center justify-center gap-3">
         <button
