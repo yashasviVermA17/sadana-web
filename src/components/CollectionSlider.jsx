@@ -156,10 +156,6 @@ function MarqueeRow({ items, reverse = false, duration = 42, showNav = false }) 
   const marqueeRef = useRef(null)
 
   const handleWheel = (e) => {
-    const deltaX = Math.abs(e.deltaX)
-    const deltaY = Math.abs(e.deltaY)
-    const horizontal = e.shiftKey || deltaX > deltaY
-    if (!horizontal) return
     e.preventDefault()
     clearTimeout(wheelTimer.current)
     clearTimeout(resumeTimer.current)
@@ -180,7 +176,7 @@ function MarqueeRow({ items, reverse = false, duration = 42, showNav = false }) 
           ? second.offsetLeft - first.offsetLeft
           : (first?.offsetWidth || 340) + 20
     }
-    wheelRef.current += e.deltaX || e.deltaY
+    wheelRef.current += Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
     const min = d.frozen - d.span
     const max = d.frozen + d.span
     let eff = d.frozen + wheelRef.current

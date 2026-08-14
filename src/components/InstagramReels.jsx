@@ -193,6 +193,40 @@ function ReelCarousel() {
 
   const drag = useRef({ active: false, dragging: false, startX: 0, startY: 0, scrollLeft: 0 })
   const [dragging, setDragging] = useState(false)
+  const wheelState = useRef({ target: 0, raf: 0 })
+
+  const handleWheel = (e) => {
+    const el = trackRef.current
+    if (!el) return
+    e.preventDefault()
+    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
+    const s = wheelState.current
+    s.target += delta
+    if (!s.raf) {
+      const step = () => {
+        const t = trackRef.current
+        if (!t) return
+        const diff = s.target - t.scrollLeft
+        if (Math.abs(diff) < 0.5) {
+          s.raf = 0
+          return
+        }
+        t.scrollLeft += diff * 0.25
+        s.raf = window.requestAnimationFrame(step)
+      }
+      s.raf = window.requestAnimationFrame(step)
+    }
+  }
+
+  useEffect(() => {
+    const el = trackRef.current
+    if (!el) return undefined
+    el.addEventListener('wheel', handleWheel, { passive: false })
+    return () => {
+      el.removeEventListener('wheel', handleWheel)
+      if (wheelState.current.raf) window.cancelAnimationFrame(wheelState.current.raf)
+    }
+  }, [])
 
   const onPointerDown = (e) => {
     if (e.pointerType === 'mouse' && e.button !== 0) return
