@@ -251,10 +251,12 @@ function ReelCarousel() {
 
   const handleWheel = (e) => {
     if (drag.current.active) return
-    e.preventDefault()
     const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
     const s = wheelState.current
-    s.target = Math.max(0, Math.min(maxRef.current, s.target - delta))
+    const next = Math.max(0, Math.min(maxRef.current, s.target - delta))
+    if (next === s.target) return
+    e.preventDefault()
+    s.target = next
     startSmooth()
   }
 
@@ -344,18 +346,18 @@ function ReelCarousel() {
           onClick={() => goBy(-1)}
           disabled={!canPrev}
           aria-label="Previous reels"
-          className="grid h-11 w-11 place-items-center rounded-full border border-charcoal/10 bg-ivory text-charcoal shadow-card transition-colors duration-300 hover:border-brand hover:text-brand disabled:cursor-not-allowed disabled:opacity-40"
+          className="grid h-12 w-12 place-items-center rounded-full border-2 border-charcoal/20 bg-white text-charcoal shadow-md transition-colors duration-300 hover:border-brand hover:text-brand disabled:cursor-not-allowed disabled:border-charcoal/10 disabled:text-charcoal/30"
         >
-          <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+          <ChevronLeft className="h-6 w-6" aria-hidden="true" />
         </button>
         <button
           type="button"
           onClick={() => goBy(1)}
           disabled={!canNext}
           aria-label="Next reels"
-          className="grid h-11 w-11 place-items-center rounded-full border border-charcoal/10 bg-ivory text-charcoal shadow-card transition-colors duration-300 hover:border-brand hover:text-brand disabled:cursor-not-allowed disabled:opacity-40"
+          className="grid h-12 w-12 place-items-center rounded-full border-2 border-charcoal/20 bg-white text-charcoal shadow-md transition-colors duration-300 hover:border-brand hover:text-brand disabled:cursor-not-allowed disabled:border-charcoal/10 disabled:text-charcoal/30"
         >
-          <ChevronRight className="h-5 w-5" aria-hidden="true" />
+          <ChevronRight className="h-6 w-6" aria-hidden="true" />
         </button>
       </div>
     </div>
