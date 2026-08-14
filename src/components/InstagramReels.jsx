@@ -254,7 +254,7 @@ function ReelCarousel() {
     e.preventDefault()
     const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
     const s = wheelState.current
-    s.target = Math.max(0, Math.min(maxRef.current, s.target + delta))
+    s.target = Math.max(0, Math.min(maxRef.current, s.target - delta))
     startSmooth()
   }
 
