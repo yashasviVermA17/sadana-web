@@ -7,6 +7,12 @@ export default function Reveal({ children, className = '', delay = 0, as: Tag = 
   useEffect(() => {
     const el = ref.current
     if (!el) return undefined
+
+    if (typeof IntersectionObserver === 'undefined') {
+      setVisible(true)
+      return undefined
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -19,7 +25,22 @@ export default function Reveal({ children, className = '', delay = 0, as: Tag = 
       { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
     )
     observer.observe(el)
-    return () => observer.disconnect()
+
+    // Failsafe: element viewport mein hai par observer ne fire nahi kiya to bhi dikhe
+    const failsafe = setInterval(() => {
+      if (!ref.current) return
+      const rect = ref.current.getBoundingClientRect()
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        setVisible(true)
+        observer.disconnect()
+        clearInterval(failsafe)
+      }
+    }, 700)
+
+    return () => {
+      observer.disconnect()
+      clearInterval(failsafe)
+    }
   }, [])
 
   return (
