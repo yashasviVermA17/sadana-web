@@ -1,4 +1,4 @@
-const allText = (p) =>
+﻿const allText = (p) =>
   [
     p.name,
     p.category,
@@ -64,8 +64,8 @@ export const PRODUCT_SHOP_SLUGS = {
   'customized-doors': 'doors',
   plywood: 'plywood',
   laminates: 'laminates',
-  'acrylic-sheets': 'acrylic-sheets',
-  'veneer-sheets': 'veneer-sheets',
+  'acrylic-sheets': 'sheets',
+  'veneer-sheets': 'sheets',
   curtains: 'curtains',
   blinds: 'blinds',
   'wooden-blinds': 'blinds',
@@ -96,8 +96,6 @@ export const FILTER_GROUPS = [
       { label: 'Doors', slug: 'doors', test: byShopSlug('doors') },
       { label: 'Plywood', slug: 'plywood', test: byShopSlug('plywood') },
       { label: 'Laminates', slug: 'laminates', test: byShopSlug('laminates') },
-      { label: 'Acrylic Sheets', slug: 'acrylic-sheets', test: byShopSlug('acrylic-sheets') },
-      { label: 'Veneer Sheets', slug: 'veneer-sheets', test: byShopSlug('veneer-sheets') },
       { label: 'Curtains', slug: 'curtains', test: byShopSlug('curtains') },
       { label: 'Blinds', slug: 'blinds', test: byShopSlug('blinds') },
       { label: 'Sofa & Mattress', slug: 'sofa-mattress', test: byShopSlug('sofa-mattress') },

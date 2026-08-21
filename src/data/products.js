@@ -43,7 +43,6 @@ import imgVeneerSheets from '../assets/Veneer sheets.jpg'
 import imgVoxSoffit from '../assets/Vox soffit ceiling.jpg'
 import imgVoxSoffit2 from '../assets/Vox soffit celling.jpg'
 import imgWoodenBlinds from '../assets/Wooden blinds.jpg'
-import { PRODUCT_SHOP_SLUGS } from './filters'
 import imgCharcoalSheets from '../assets/Charcoal sheets.jpeg'
 import imgCharcoalHighlighter from '../assets/Charcoal highlighter sheet.jpeg'
 import imgCncWork from '../assets/C.n.c work.jpeg'
@@ -80,6 +79,8 @@ import imgDoorJpeg from '../assets/Designer door.jpeg'
 import imgHdhmrJpeg from '../assets/HDHMR 3d wall panel.jpeg'
 import imgExteriorLouversJpeg from '../assets/Exterior lowers.jpeg'
 import imgWoodenFlooringJpeg from '../assets/Wooden flooring.jpeg'
+import imgGymFlooringJpeg from '../assets/Gym rubber flooring.jpeg'
+import imgGrass2 from '../assets/Grass.jpeg'
 
 export const categories = [
   'Wall Finishes',
@@ -666,7 +667,7 @@ export const products = [
     name: 'Blinds',
     category: 'Soft Furnishings',
     image: imgBlinds,
-    gallery: [imgBlinds],    short: 'Roller, zebra and vertical blinds for clean, modern window control.',
+    gallery: [imgBlinds, imgWoodenBlinds],    short: 'Roller, zebra and vertical blinds for clean, modern window control.',
     description: 'Window blinds in roller, zebra, vertical and roman styles — precise light control with a clean, minimal look for homes and offices. Made to measure with smooth operating systems.',
     features: ['Roller, zebra & vertical styles', 'Made to measure', 'Smooth chain & motorised options', 'Blackout & sunscreen fabrics'],
     material: 'Polyester and sunscreen blind fabrics with aluminium bottom bars and quality mechanisms.',
@@ -745,13 +746,10 @@ export const getProduct = (id) => products.find((p) => p.id === id)
 export const productsByCategory = (category) =>
   category === 'All' ? products : products.filter((p) => p.category === category)
 
-export const relatedProducts = (product, count = 3) => {
-  const slug = PRODUCT_SHOP_SLUGS[product.id]
-  if (!slug) return []
-  return products
-    .filter((p) => p.id !== product.id && PRODUCT_SHOP_SLUGS[p.id] === slug)
+export const relatedProducts = (product, count = 3) =>
+  products
+    .filter((p) => p.id !== product.id && p.category === product.category)
     .slice(0, count)
-}
 
 export const productProjects = {
   wallpapers: ['the-charcoal-loft', 'the-terracotta-boutique', 'the-lumiere-showroom'],
