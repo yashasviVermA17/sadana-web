@@ -1,23 +1,62 @@
-import imgCharcoalLouvers from '../assets/Charcoal lowers.jpg'
-import imgUvMarble from '../assets/Uv marble sheet.jpg'
-import imgVerticalGarden from '../assets/Vertical garden.jpg'
-import imgRattan from '../assets/Rattan cane.jpg'
-import imgPuStone from '../assets/Pu stone wall panel.jpg'
-import imgBaffle from '../assets/Baffle ceiling.jpg'
-import imgHdhmr from '../assets/HDHMR 3d wall panel.jpg'
-import imgAlabasterSheet from '../assets/living room 2 image.png'
-import imgRipple from '../assets/Ripple sheet.jpg'
-import imgWoodenFlooring from '../assets/Wooden flooring.jpg'
-import imgWallpaper from '../assets/Wallpaper.jpg'
-import img3DPanel from '../assets/3 D panel.jpg'
-import imgMosaic from '../assets/Mosaic tiles.jpg'
-import imgCurtain from '../assets/Curtain.jpg'
-import imgCarpet from '../assets/Carpet.jpg'
-import imgWoodenBlinds from '../assets/Wooden blinds.jpg'
-import imgParametric from '../assets/Parametric wall panel.jpg'
-import imgStretchFiber from '../assets/Stretch fiber ceiling.jpg'
-import imgExteriorCladding from '../assets/Outdoor deck tile.jpg'
-import imgSpcFlooring from '../assets/S.p.c flooring.jpg'
+import imgCharcoalLouvers from '../assets/projects/Charcoal louvers.jpeg'
+import imgCharcoalLouvers1 from '../assets/projects/Charcoal louvers1.jpeg'
+import imgCharcoalLouvers2 from '../assets/projects/Charcoal louvers2.jpeg'
+import imgCharcoalSheetLouvers from '../assets/projects/Charcoal sheet with louvers.jpeg'
+import imgWallPanelLouvers from '../assets/projects/Wall paneel with louvers.jpeg'
+import imgWallPanelLouvers1 from '../assets/projects/Wall paneel with louvers1.jpeg'
+import imgWallPanelLouvers2 from '../assets/projects/Wall paneel with louvers2.jpeg'
+import imgWoodenFlooring from '../assets/projects/Wooden flooring.jpeg'
+import imgWoodenFlooring1 from '../assets/projects/Wooden flooring1.jpeg'
+import imgWoodenFlooring2 from '../assets/projects/Wooden flooring2.jpeg'
+import imgWoodenFlooring3 from '../assets/projects/Wooden flooring3.jpeg'
+import imgWallpaper2 from '../assets/projects/Wallpaper2.jpeg'
+import imgWallpaper5 from '../assets/projects/Wallpaper5.jpeg'
+import imgWallpaper6 from '../assets/projects/Wallpaper6.jpeg'
+import imgWallpaper7 from '../assets/projects/Wallpaper7.jpeg'
+import imgWallpaperLower7 from '../assets/projects/wallpaper 7.jpeg'
+import imgWallpaper1 from '../assets/projects/Wallpaper1.jpeg'
+import imgWallpaper3 from '../assets/projects/Wallpaper3.jpeg'
+import imgMosaicLouvers from '../assets/projects/Mosaic tiles with louvers.jpeg'
+import imgMosaicLouvers1 from '../assets/projects/Mosaic tiles with louvers1.jpeg'
+import imgMosaic2 from '../assets/projects/Mosaic tiles2.jpeg'
+import imgCurtains from '../assets/projects/Curtains.jpeg'
+import imgCurtains1 from '../assets/projects/Curtains1.jpeg'
+import imgCurtains3 from '../assets/projects/Curtains3.jpeg'
+import imgRollerBlind from '../assets/projects/Roller blind.jpeg'
+import imgIndustrialBlind from '../assets/projects/Industrial blind.jpeg'
+import imgVinylFlooring from '../assets/projects/Vinyl flooring.jpeg'
+import imgVinylFlooring1 from '../assets/projects/Vinyl flooring1.jpeg'
+import imgVinylFlooring2 from '../assets/projects/Vinyl flooring2.jpeg'
+import imgArtificialGrass from '../assets/projects/Artificial grass.jpeg'
+import imgArtificialGrass1 from '../assets/projects/Artificial grass1.jpeg'
+import imgWpcExteriorLouver from '../assets/projects/Wpc exterior grade louver.jpeg'
+import imgWpcExteriorLouvers from '../assets/projects/Wpc exterior grade louvers.jpeg'
+import imgExteriorFlooring1 from '../assets/projects/Exterior grade flooring1.jpeg'
+import imgExteriorFlooring2 from '../assets/projects/Exterior grade flooring2.jpeg'
+import imgCanopy from '../assets/projects/Canopy.jpeg'
+import imgCarpet from '../assets/projects/Carpet.jpeg'
+import imgCarpet1 from '../assets/projects/Carpet1.jpeg'
+import imgHdpcPaneel from '../assets/projects/Hdpc paneel.jpeg'
+import imgHdpc from '../assets/projects/Hdpc.jpeg'
+import imgCncWork from '../assets/projects/Cnc work.jpeg'
+import imgCncWork1 from '../assets/projects/Cnc work1.jpeg'
+import imgCncWork3 from '../assets/projects/Cnc work3.jpeg'
+import imgCncWork4 from '../assets/projects/Cnc work4.jpeg'
+import imgCncWork6 from '../assets/projects/Cnc work6.jpeg'
+import imgCncWork7 from '../assets/projects/Cnc work7.jpeg'
+import imgCncWork8 from '../assets/projects/Cnc work8.jpeg'
+import imgCncWork9 from '../assets/projects/Cnc work9.jpeg'
+import imgWpcCelling from '../assets/projects/Wpc celling.jpeg'
+import imgWpcCellingLouvers from '../assets/projects/Wpc celling louvers.jpeg'
+import imgStretchFiberCelling from '../assets/projects/Strech fiber celling.jpeg'
+import imgGymFlooring from '../assets/projects/Gym flooring.jpeg'
+import imgWpcLouvers1 from '../assets/projects/Wpc louvers1.jpeg'
+import imgWpcLouvers2 from '../assets/projects/Wpc louvers2.jpeg'
+import imgWpcLouvers3 from '../assets/projects/Wpc louvers3.jpeg'
+import imgWpcLouvers4 from '../assets/projects/Wpc louvers4.jpeg'
+import imgWpcLouvers6 from '../assets/projects/Wpc louvers6.jpeg'
+import imgSix from '../assets/projects/6.jpeg'
+import imgEight from '../assets/projects/8.jpeg'
 
 export const projectCategories = ['All', 'Residential', 'Hospitality', 'Office', 'Retail']
 
@@ -31,7 +70,15 @@ export const projects = [
     scope: '3 BHK Residence · 2,150 sq ft',
     short: 'A moody, contemporary residence wrapped in charcoal louvers and warm wood tones.',
     cover: imgCharcoalLouvers,
-    gallery: [imgCharcoalLouvers, imgWoodenFlooring, imgSpcFlooring, imgWallpaper],
+    gallery: [
+      imgCharcoalLouvers,
+      imgCharcoalLouvers1,
+      imgCharcoalLouvers2,
+      imgCharcoalSheetLouvers,
+      imgWallPanelLouvers,
+      imgWoodenFlooring,
+      imgWallpaper2,
+    ],
   },
   {
     id: 'golden-hour-penthouse',
@@ -41,8 +88,16 @@ export const projects = [
     year: 2025,
     scope: '4 BHK Penthouse · 3,400 sq ft',
     short: 'A sun-drenched penthouse that leans into warm neutrals, stone and soft light.',
-    cover: imgUvMarble,
-    gallery: [imgUvMarble, img3DPanel, imgCurtain, imgWoodenBlinds],
+    cover: imgMosaicLouvers,
+    gallery: [
+      imgMosaicLouvers,
+      imgMosaicLouvers1,
+      imgCurtains,
+      imgRollerBlind,
+      imgVinylFlooring,
+      imgWallpaper5,
+      imgWoodenFlooring1,
+    ],
   },
   {
     id: 'verde-villa',
@@ -62,8 +117,16 @@ export const projects = [
       'Designer door sets throughout the villa',
     ],
     materials: ['Vertical Garden', 'PU Stones', 'Wooden Flooring', 'WPC Cladding', 'Customized Doors', 'Exterior Cladding'],
-    cover: imgVerticalGarden,
-    gallery: [imgVerticalGarden, imgExteriorCladding, imgPuStone, imgWoodenFlooring],
+    cover: imgArtificialGrass,
+    gallery: [
+      imgArtificialGrass,
+      imgArtificialGrass1,
+      imgWpcExteriorLouver,
+      imgWpcExteriorLouvers,
+      imgExteriorFlooring1,
+      imgExteriorFlooring2,
+      imgCanopy,
+    ],
   },
   {
     id: 'the-terracotta-boutique',
@@ -83,8 +146,16 @@ export const projects = [
       'Sliding display doors in clear glass and frame',
     ],
     materials: ['Rattan Cane', 'Highlight Sheets', 'Laminates', 'Marble Sheets', 'Customized Doors', 'Wallpapers'],
-    cover: imgRattan,
-    gallery: [imgRattan, imgMosaic, imgWallpaper, imgRipple],
+    cover: imgMosaic2,
+    gallery: [
+      imgMosaic2,
+      imgWallpaper1,
+      imgWallpaper3,
+      imgWallpaperLower7,
+      imgCarpet,
+      imgHdpcPaneel,
+      imgCurtains3,
+    ],
   },
   {
     id: 'cafe-terracotta',
@@ -94,8 +165,16 @@ export const projects = [
     year: 2024,
     scope: 'Specialty Café · 1,400 sq ft',
     short: 'A specialty café built for warmth — from terracotta texture walls to rattan seating.',
-    cover: imgPuStone,
-    gallery: [imgPuStone, imgBaffle, imgRattan, imgWoodenFlooring],
+    cover: imgCncWork,
+    gallery: [
+      imgCncWork,
+      imgCncWork1,
+      imgWoodenFlooring2,
+      imgWpcCelling,
+      imgHdpc,
+      imgWallpaper6,
+      imgCurtains1,
+    ],
   },
   {
     id: 'fintech-workspace',
@@ -115,8 +194,16 @@ export const projects = [
       'ACP sheet branding wall at the office entry',
     ],
     materials: ['Parametric Panel', 'Baffle Ceiling', 'Stretch Fiber Ceiling', 'Rugs & Carpets', 'ACP & HPL Sheets', 'Glass Films'],
-    cover: imgBaffle,
-    gallery: [imgBaffle, imgParametric, imgStretchFiber, imgCarpet],
+    cover: imgStretchFiberCelling,
+    gallery: [
+      imgStretchFiberCelling,
+      imgCarpet1,
+      imgGymFlooring,
+      imgIndustrialBlind,
+      imgWpcCellingLouvers,
+      imgWpcLouvers2,
+      imgVinylFlooring1,
+    ],
   },
   {
     id: 'studio-forty-two',
@@ -136,8 +223,16 @@ export const projects = [
       'Custom designed doors for private cabins',
     ],
     materials: ['HDHMR 3D Wall Panels', 'French Mouldings', 'Customized Wall Panelings', 'Wooden Flooring', 'Customized Doors', 'Cork Sheets'],
-    cover: imgHdhmr,
-    gallery: [imgHdhmr, img3DPanel, imgWallpaper, imgWoodenFlooring],
+    cover: imgCncWork3,
+    gallery: [
+      imgCncWork3,
+      imgCncWork4,
+      imgCncWork6,
+      imgCncWork7,
+      imgCncWork8,
+      imgCncWork9,
+      imgWoodenFlooring3,
+    ],
   },
   {
     id: 'the-lumiere-showroom',
@@ -157,8 +252,16 @@ export const projects = [
       'Custom display counters in high-gloss laminate',
     ],
     materials: ['Alabaster Sheets', 'Stretch Fiber Ceiling', 'UV Marble Sheets', 'Highlight Sheets', 'Acrylic Sheets', 'Wallpapers'],
-    cover: imgAlabasterSheet,
-    gallery: [imgAlabasterSheet, imgStretchFiber, imgUvMarble, imgRipple],
+    cover: imgWallPanelLouvers1,
+    gallery: [
+      imgWallPanelLouvers1,
+      imgWallpaper7,
+      imgVinylFlooring2,
+      imgSix,
+      imgEight,
+      imgWpcLouvers3,
+      imgWpcLouvers4,
+    ],
   },
   {
     id: 'amber-courtyard',
@@ -178,8 +281,16 @@ export const projects = [
       'Marble-look surfaces on the service counter',
     ],
     materials: ['Highlight Sheets', 'Vertical Garden', 'Baffle Ceiling', 'Wooden Flooring', 'Rattan Cane', 'Wooden Blinds'],
-    cover: imgRipple,
-    gallery: [imgRipple, imgVerticalGarden, imgBaffle, imgWoodenBlinds],
+    cover: imgWallPanelLouvers2,
+    gallery: [
+      imgWallPanelLouvers2,
+      imgWpcLouvers1,
+      imgWpcLouvers6,
+      imgArtificialGrass,
+      imgWoodenFlooring,
+      imgCurtains,
+      imgWallpaper2,
+    ],
   },
 ]
 

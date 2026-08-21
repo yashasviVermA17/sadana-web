@@ -1,4 +1,5 @@
 import ProductCard from './ProductCard'
+import Reveal from './Reveal'
 
 export default function ProductGrid({
   items,
@@ -10,8 +11,10 @@ export default function ProductGrid({
     <div
       className={`grid gap-5 ${columns} sm:gap-6 ${className}`}
     >
-      {items.map((product) => (
-        <ProductCard key={product.id} product={product} categoryFirst={categoryFirst} />
+      {items.map((product, i) => (
+        <Reveal key={product.id} delay={(i % 3) * 90} className="h-full">
+          <ProductCard product={product} categoryFirst={categoryFirst} />
+        </Reveal>
       ))}
     </div>
   )

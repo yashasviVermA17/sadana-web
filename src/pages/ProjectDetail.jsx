@@ -173,6 +173,20 @@ export default function ProjectDetail() {
         </div>
       </section>
 
+      <section className="bg-mist">
+        <div className="mx-auto max-w-none px-5 py-16 sm:px-6 lg:px-8 lg:py-20">
+          <SectionHeading eyebrow="Related Projects" title="More like this" />
+          <Reveal className="mt-10">
+            <AutoSlider
+              items={related}
+              itemClassName="h-full"
+              visible={{ base: 1.1, sm: 2.2, lg: 3, xl: 3 }}
+              renderItem={(project) => <ProjectCard project={project} />}
+            />
+          </Reveal>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-none px-5 py-12 sm:px-6 lg:px-8 lg:py-16">
         <Reveal className="mt-14">
           <SectionHeading eyebrow="Gallery" title="Our Project" />
@@ -207,20 +221,6 @@ export default function ProjectDetail() {
               </Reveal>
             )
           })}
-        </div>
-      </section>
-
-      <section className="bg-mist">
-        <div className="mx-auto max-w-none px-5 py-16 sm:px-6 lg:px-8 lg:py-20">
-          <SectionHeading eyebrow="Related Projects" title="More like this" />
-          <Reveal className="mt-10">
-            <AutoSlider
-              items={related}
-              itemClassName="h-full"
-              visible={{ base: 1.1, sm: 2.2, lg: 3, xl: 3 }}
-              renderItem={(project) => <ProjectCard project={project} />}
-            />
-          </Reveal>
         </div>
       </section>
 

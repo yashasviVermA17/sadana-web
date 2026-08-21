@@ -31,15 +31,9 @@ export default function ProductCard({ product, categoryFirst = true }) {
             className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/20 to-transparent"
             aria-hidden="true"
           />
-          <span className="absolute left-4 top-4 rounded-full bg-ivory/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-charcoal backdrop-blur-sm">
-            {product.category}
-          </span>
           <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-3">
             <div className="min-w-0">
-              <span className="block truncate text-[11px] font-semibold uppercase tracking-wider text-cream/70">
-                {product.category}
-              </span>
-              <h3 className="mt-1.5 truncate font-serif text-xl leading-snug text-cream">
+              <h3 className="truncate font-serif text-xl leading-snug text-cream">
                 {product.name}
               </h3>
             </div>

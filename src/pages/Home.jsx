@@ -5,22 +5,9 @@ import SectionHeading from '../components/SectionHeading'
 import ProductGrid from '../components/ProductGrid'
 import StatsSection from '../components/StatsSection'
 import Testimonials from '../components/Testimonials'
-import CollectionSlider from '../components/CollectionSlider'
 import InstagramReels from '../components/InstagramReels'
 import { products } from '../data/products'
 import imgHero from '../assets/home page hero image.png'
-
-const featuredIds = [
-  'uv-marble-sheets',
-  'pvc-wall-panels',
-  'wallpapers',
-  'alabaster-sheets',
-  'spc-flooring',
-  'wpc-panels',
-  'vertical-garden',
-  'rattan-cane',
-  '3d-panels',
-]
 
 function Hero() {
   return (
@@ -58,8 +45,6 @@ function Hero() {
 }
 
 function FeaturedCollection() {
-  const featured = products.filter((p) => featuredIds.includes(p.id))
-
   return (
     <section className="mx-auto max-w-none px-5 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
@@ -76,9 +61,9 @@ function FeaturedCollection() {
         </Reveal>
       </div>
 
-      <Reveal className="mt-12">
-        <ProductGrid items={featured} categoryFirst />
-      </Reveal>
+      <div className="mt-12">
+        <ProductGrid items={products} categoryFirst />
+      </div>
     </section>
   )
 }
@@ -90,7 +75,6 @@ export default function Home() {
       <FeaturedCollection />
       <StatsSection dark className="bg-charcoal" />
       <InstagramReels />
-      <CollectionSlider />
       <Testimonials />
     </>
   )

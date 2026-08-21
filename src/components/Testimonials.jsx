@@ -10,7 +10,7 @@ export default function Testimonials() {
         <SectionHeading
           align="center"
           eyebrow="Testimonials"
-          title="Words from our clients"
+          title="Happy Clients"
           text="Fifteen years of relationships built one room at a time."
           className="max-w-2xl"
         />

@@ -1,16 +1,29 @@
 import Breadcrumb from './Breadcrumb'
 import Reveal from './Reveal'
 
-export default function PageHero({ image, breadcrumb, eyebrow, title, subtitle, children, fit = 'cover', className = '', overlay, imageClassName = '' }) {
+export default function PageHero({ image, video, breadcrumb, eyebrow, title, subtitle, children, fit = 'cover', className = '', overlay, imageClassName = '', heightClass = 'h-[65vh] min-h-[440px] sm:h-[70vh] lg:h-[78vh]' }) {
   return (
     <section data-hero>
-      <div className={`relative h-[65vh] min-h-[440px] w-full overflow-hidden sm:h-[70vh] lg:h-[78vh] ${className}`}>
-        <img
-          src={image}
-          alt=""
-          aria-hidden="true"
-          className={`img-settle block h-full w-full object-${fit} ${imageClassName}`}
-        />
+      <div className={`relative ${heightClass} w-full overflow-hidden ${className}`}>
+        {video ? (
+          <video
+            src={video}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            aria-hidden="true"
+            className={`img-settle block h-full w-full object-${fit} ${imageClassName}`}
+          />
+        ) : (
+          <img
+            src={image}
+            alt=""
+            aria-hidden="true"
+            className={`img-settle block h-full w-full object-${fit} ${imageClassName}`}
+          />
+        )}
         <div
           className={`absolute inset-0 ${
             overlay || 'bg-gradient-to-t from-charcoal/95 via-charcoal/50 to-charcoal/25'

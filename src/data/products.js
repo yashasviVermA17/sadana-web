@@ -1,7 +1,9 @@
 import imgWallpapers from '../assets/Wallpaper.jpg'
+import imgWallpapers2 from '../assets/Wallpaper.jpeg'
 import imgWallPaneling from '../assets/Victara panel.jpg'
 import img3DPanels from '../assets/3 D panel.jpg'
 import imgParametric from '../assets/Parametric wall panel.jpg'
+import imgParametric1 from '../assets/Parametric wall panel1.jpg'
 import imgPuStone from '../assets/Pu stone wall panel.jpg'
 import imgHighlightSheet from '../assets/Ripple sheet.jpg'
 import imgMouldings from '../assets/Moulding.jpg'
@@ -15,11 +17,11 @@ import imgCarpets from '../assets/Carpet.jpg'
 import imgDoors from '../assets/Designer door.jpg'
 import imgPlywood from '../assets/Plywood.jpg'
 import imgWpcPanels from '../assets/W.p.c panel.jpg'
-import imgLaminates from '../assets/Acrylic sheet.jpg'
+import imgLaminates from '../assets/Laminate sheet.jpeg'
 import imgAcpHpl from '../assets/Acp sheet.jpg'
 import imgCurtains from '../assets/Curtain.jpg'
 import imgUpholstery from '../assets/Sofa.jpg'
-import imgMattress from '../assets/Cusion.jpg'
+import imgMattress from '../assets/Mattress.jpeg'
 import imgExteriorCladding from '../assets/Outdoor deck tile.jpg'
 import imgCharcoalLouvers from '../assets/Charcoal lowers.jpg'
 import imgExteriorLouvers from '../assets/Exterior lowers.jpg'
@@ -41,6 +43,45 @@ import imgVeneerSheets from '../assets/Veneer sheets.jpg'
 import imgVoxSoffit from '../assets/Vox soffit ceiling.jpg'
 import imgVoxSoffit2 from '../assets/Vox soffit celling.jpg'
 import imgWoodenBlinds from '../assets/Wooden blinds.jpg'
+import { PRODUCT_SHOP_SLUGS } from './filters'
+import imgCharcoalSheets from '../assets/Charcoal sheets.jpeg'
+import imgCharcoalHighlighter from '../assets/Charcoal highlighter sheet.jpeg'
+import imgCncWork from '../assets/C.n.c work.jpeg'
+import imgBlinds from '../assets/Blinds.jpeg'
+import imgWallCladding from '../assets/Wall cladding.jpeg'
+import imgExteriorVoxPanel from '../assets/Exterior vox panel.jpeg'
+import imgHdpcLouvers from '../assets/HDPC lowers.jpeg'
+import imgVinylFlooring from '../assets/Vinyl flooring.jpeg'
+import imgRoofingThatch from '../assets/Roofing Thatch.jpeg'
+import imgHighlighterSheet2 from '../assets/Highlighter sheet.jpeg'
+import imgLaminateSheet from '../assets/Laminate sheet.jpeg'
+import imgRugs from '../assets/Rugs.jpeg'
+import imgGrass2 from '../assets/Grass.jpeg'
+import imgVoxSoffitPanel from '../assets/Vox soffit panel.jpeg'
+import imgAlabasterSheetJpg from '../assets/Alabaster sheet.jpeg'
+import img3dWallPanelJpg from '../assets/3d wall panel.jpeg'
+import imgDoorJpeg from '../assets/Designer door.jpeg'
+import imgPlywoodJpeg from '../assets/Plywood.jpeg'
+import imgVeneerJpeg from '../assets/Veneer sheets.jpeg'
+import imgAcrylicSheetOld from '../assets/Acrylic sheet.jpg'
+import imgCusion from '../assets/Cusion.jpg'
+import imgAcpHplJpeg from '../assets/Acp sheet.jpeg'
+import imgAlabasterSheetOld from '../assets/Alabaster sheet.jpg'
+import imgBaffleJpeg from '../assets/Baffle ceiling.jpeg'
+import imgCusionJpeg from '../assets/Cusion.jpeg'
+import imgExteriorLouversJpeg from '../assets/Exterior lowers.jpeg'
+import imgGlassFilmJpeg from '../assets/Glass film.jpeg'
+import imgGymFlooringJpeg from '../assets/Gym rubber flooring.jpeg'
+import imgHdhmrJpeg from '../assets/HDHMR 3d wall panel.jpeg'
+import imgExteriorCladdingJpeg from '../assets/Outdoor deck tile.jpeg'
+import imgParametricJpeg from '../assets/Parametric wall panel.jpeg'
+import imgPuStoneJpeg from '../assets/Pu stone wall panel.jpeg'
+import imgPvcCeilingJpeg from '../assets/Pvc ceiling.jpeg'
+import imgPvcWallPanelJpeg from '../assets/Pvc wall panel.jpeg'
+import imgHighlightSheetJpeg from '../assets/Ripple sheet.jpeg'
+import imgSpcFlooringJpeg from '../assets/Spc flooring.jpeg'
+import imgStretchFiberJpeg from '../assets/Stretch fiber ceiling.jpeg'
+import imgUvMarbleJpeg from '../assets/Uv marble sheet.jpeg'
 
 export const categories = [
   'Wall Finishes',
@@ -59,7 +100,7 @@ export const products = [
     name: 'Wallpapers',
     category: 'Wall Finishes',
     image: imgWallpapers,
-    gallery: [imgWallpapers, imgWallPaneling, imgPuStone],
+    gallery: [imgWallpapers, imgWallpapers2, imgWallPaneling, imgMouldings],
     short: 'Elegant wallpapers in every texture, pattern and finish to transform any room.',
     description: 'A wide selection of wallpapers for residential, commercial and office spaces — from subtle textures to bold patterns, with printed and vinyl options that are easy to install and simple to maintain.',
     features: ['Huge range of patterns & textures', 'Durable, washable finishes', 'Easy, clean installation', 'For homes, offices & retail'],
@@ -72,7 +113,7 @@ export const products = [
     name: 'Customized Wall Panelings',
     category: 'Wall Finishes',
     image: imgWallPaneling,
-    gallery: [imgWallPaneling, img3DPanels, imgParametric],
+    gallery: [imgWallPaneling, imgCncWork, imgHdhmr],
     short: 'Bespoke wall panelling made to your design, finished and installed on site.',
     description: 'Customized wall panelings fabricated to your exact design and measurements. Choose the profile, material and finish — our team manufactures, finishes and installs the panelling for a seamless, premium wall.',
     features: ['Made to your design & size', 'Multiple materials & profiles', 'Factory finish, site install', 'Fire-rated options available'],
@@ -85,7 +126,7 @@ export const products = [
     name: '3D Panels',
     category: 'Wall Finishes',
     image: img3DPanels,
-    gallery: [img3DPanels, imgParametric, imgPuStone],
+    gallery: [img3DPanels, img3dWallPanelJpg, imgParametric],
     short: 'Sculptural 3D panels that add depth, texture and character to any wall.',
     description: 'Modern 3D panels bring dimension and drama to plain walls. Lightweight, easy to install and available in a range of sculpted patterns, they suit feature walls, ceilings and commercial interiors alike.',
     features: ['Lightweight & durable', 'Wide range of sculpted patterns', 'Easy to cut & install', 'Great for feature walls'],
@@ -98,7 +139,7 @@ export const products = [
     name: 'Parametric Panel',
     category: 'Wall Finishes',
     image: imgParametric,
-    gallery: [imgParametric, img3DPanels, imgWallPaneling],
+    gallery: [imgParametric, imgParametric1, imgParametricJpeg, img3DPanels],
     short: 'Geometric parametric panels with a striking, contemporary architectural look.',
     description: 'Parametric panels offer a precise, geometric grid that reads as modern architecture on the wall. Ideal for lobbies, reception areas and statement walls where the design needs to lead.',
     features: ['Geometric parametric design', 'Precision-cut, uniform modules', 'Quick modular installation', 'Modern architectural appeal'],
@@ -111,7 +152,7 @@ export const products = [
     name: 'PU Stones',
     category: 'Wall Finishes',
     image: imgPuStone,
-    gallery: [imgPuStone, imgExteriorCladding, imgWallPaneling],
+    gallery: [imgPuStone, imgPuStoneJpeg, imgUvMarble, imgMarbleSheets],
     short: 'Lightweight stone-textured panels that bring the natural stone look without the weight.',
     description: 'PU stone panels replicate the texture and look of natural stone at a fraction of the weight and cost. Easy to install on walls and elevation, they suit both interiors and exteriors.',
     features: ['Realistic stone texture', 'Lightweight, easy to handle', 'Simple adhesive installation', 'Suitable indoor & outdoor'],
@@ -124,7 +165,7 @@ export const products = [
     name: 'Highlight Sheets',
     category: 'Wall Finishes',
     image: imgHighlightSheet,
-    gallery: [imgHighlightSheet, imgAcpHpl, imgAlabaster],
+    gallery: [imgHighlightSheet, imgHighlightSheetJpeg, imgHighlighterSheet2, imgCharcoalHighlighter],
     short: 'Translucent and decorative sheets that add a soft, luminous highlight to designs.',
     description: 'Highlight and ripple sheets add a luminous, dimensional accent to ceilings, partitions and panel details. Available in translucent and decorative finishes that play beautifully with light.',
     features: ['Soft, luminous appearance', 'Decorative ripple & wave patterns', 'Cut to size for your project', 'Great for light panels'],
@@ -137,7 +178,7 @@ export const products = [
     name: 'French Mouldings',
     category: 'Wall Finishes',
     image: imgMouldings,
-    gallery: [imgMouldings, imgWallPaneling, imgWallpapers],
+    gallery: [imgMouldings, imgWallPaneling, imgCncWork],
     short: 'Decorative mouldings for elegant cornices, borders and wall detailing.',
     description: 'French and decorative mouldings add a classic, finished edge to walls, ceilings and panelling. Lightweight and paintable, they give interiors a refined architectural detail.',
     features: ['Elegant decorative profiles', 'Lightweight & paintable', 'Easy to cut & install', 'Ceiling & wall detailing'],
@@ -150,8 +191,7 @@ export const products = [
     name: 'Alabaster Sheets',
     category: 'Ceilings',
     image: imgAlabaster,
-    gallery: [imgAlabaster, imgAlabasterSheet, imgBaffle],
-    short: 'Elegant alabaster ceiling and wall sheets with a soft, glowing finish.',
+    gallery: [imgAlabaster, imgAlabasterSheetJpg, imgAlabasterSheet, imgAlabasterSheetOld],    short: 'Elegant alabaster ceiling and wall sheets with a soft, glowing finish.',
     description: 'Alabaster sheets bring the milky glow of natural stone to ceilings and feature walls. Available in translucent panels and ceiling systems that light up beautifully from behind.',
     features: ['Soft, natural glow', 'Ceiling & wall panels', 'Works with backlighting', 'Modern premium finish'],
     material: 'Translucent alabaster-look panels finished for ceilings, walls and light features.',
@@ -163,7 +203,7 @@ export const products = [
     name: 'Baffle Ceiling',
     category: 'Ceilings',
     image: imgBaffle,
-    gallery: [imgBaffle, imgAlabaster, imgStretchFiber],
+    gallery: [imgBaffle, imgBaffleJpeg, imgStretchFiber, imgVoxSoffit],
     short: 'Linear baffle ceilings that look striking and tame noise at the same time.',
     description: 'Baffle ceilings use vertical or horizontal linear panels to create a modern, open look while absorbing echo. A favourite for retail, offices and commercial spaces that need both style and sound control.',
     features: ['Modern linear design', 'Open grid, airy feel', 'Good sound absorption', 'Fast, clean installation'],
@@ -176,7 +216,7 @@ export const products = [
     name: 'Stretch Fiber Ceiling',
     category: 'Ceilings',
     image: imgStretchFiber,
-    gallery: [imgStretchFiber, imgBaffle, imgAlabaster],
+    gallery: [imgStretchFiber, imgStretchFiberJpeg, imgBaffle, imgPvcCeiling],
     short: 'Sleek, seamless stretch fiber ceilings for a flawless, modern surface.',
     description: 'Stretch fiber ceilings create a smooth, seamless surface that hides wires, ducts and unevenness above. Available in a range of colours and backlit effects, they deliver a clean, high-end ceiling finish.',
     features: ['Flawless seamless finish', 'Hides services above', 'Wide colour range', 'Backlit effects available'],
@@ -189,7 +229,7 @@ export const products = [
     name: 'Wooden Flooring',
     category: 'Flooring',
     image: imgWoodenFlooring,
-    gallery: [imgWoodenFlooring, imgMarbleSheets, imgGymFlooring],
+    gallery: [imgWoodenFlooring, imgSpcFlooring, imgVinylFlooring],
     short: 'Warm, durable wooden flooring in laminates, engineered and deck options.',
     description: 'Premium wooden flooring that brings warmth and value to homes, offices and showrooms. Choose from laminate, engineered wood and deck options with a wide range of shades and grain patterns.',
     features: ['Warm, natural look', 'Scratch & stain resistant', 'Easy maintenance', 'Wide shade range'],
@@ -202,7 +242,7 @@ export const products = [
     name: 'Gym Flooring',
     category: 'Flooring',
     image: imgGymFlooring,
-    gallery: [imgGymFlooring, imgWoodenFlooring, imgCarpets],
+    gallery: [imgGymFlooring, imgGymFlooringJpeg, imgVinylFlooring, imgSpcFlooring],
     short: 'Impact-absorbing rubber and PVC flooring built for gyms and sports floors.',
     description: 'Durable, shock-absorbing flooring for gyms, sports halls, play areas and multipurpose rooms. Protects joints and equipment while resisting heavy foot traffic and impact.',
     features: ['High shock absorption', 'Slip-resistant surface', 'Easy to clean', 'Long service life'],
@@ -215,7 +255,7 @@ export const products = [
     name: 'Marble Sheets',
     category: 'Flooring',
     image: imgMarbleSheets,
-    gallery: [imgMarbleSheets, imgWoodenFlooring, imgCarpets],
+    gallery: [imgMarbleSheets, imgUvMarble, imgPuStone],
     short: 'Elegant marble and stone-look sheets for floors, walls and vanities.',
     description: 'Marble and stone-look sheets give spaces a premium, timeless finish for floors, walls and countertops. Lightweight and easy to install compared to natural stone.',
     features: ['Premium marble look', 'Lightweight & easy to install', 'Floor, wall & counter use', 'Easy to maintain'],
@@ -228,7 +268,7 @@ export const products = [
     name: 'Rugs & Carpets',
     category: 'Flooring',
     image: imgCarpets,
-    gallery: [imgCarpets, imgWoodenFlooring, imgUpholstery],
+    gallery: [imgCarpets, imgRugs, imgWoodenFlooring],
     short: 'Soft rugs and carpets that add comfort, colour and acoustic warmth.',
     description: 'A range of rugs and carpets for homes, hotels, offices and retail — from plush broadloom carpet to decorative area rugs that soften any space.',
     features: ['Soft & comfortable', 'Acoustic warmth', 'Wide range of designs', 'Durable options available'],
@@ -241,7 +281,7 @@ export const products = [
     name: 'Customized Doors',
     category: 'Doors & Panels',
     image: imgDoors,
-    gallery: [imgDoors, imgPlywood, imgWallPaneling],
+    gallery: [imgDoors, imgDoorJpeg, imgVeneerSheets],
     short: 'Designer doors made to order in wood, laminate and modern finishes.',
     description: 'Customized designer doors manufactured to your style, size and finish. From flush doors to panel and designer patterns, each door is built for a clean, premium fit.',
     features: ['Made to your size & design', 'Wide range of finishes', 'Sturdy, durable construction', 'Modern designer styles'],
@@ -254,7 +294,7 @@ export const products = [
     name: 'Plywood',
     category: 'Doors & Panels',
     image: imgPlywood,
-    gallery: [imgPlywood, imgDoors, imgLaminates],
+    gallery: [imgPlywood, imgPlywoodJpeg, imgVeneerSheets],
     short: 'Quality plywood for furniture, panelling and construction — in all thicknesses.',
     description: 'Reliable, well-graded plywood for furniture, doors, panelling and general construction. Available in marine, exterior and interior grades with smooth, uniform surfaces.',
     features: ['Marine & exterior grades', 'Smooth uniform surface', 'All standard thicknesses', 'Strength-tested boards'],
@@ -267,7 +307,7 @@ export const products = [
     name: 'WPC Panels',
     category: 'Doors & Panels',
     image: imgWpcPanels,
-    gallery: [imgWpcPanels, imgAcpHpl, imgWallPaneling],
+    gallery: [imgWpcPanels, imgPvcWallPanel, imgHdhmr],
     short: 'Waterproof, termite-proof WPC panels for doors, walls and outdoor use.',
     description: 'WPC (Wood Plastic Composite) panels combine the look of wood with waterproof, termite-proof durability. Perfect for doors, panelling, wardrobes and outdoor cladding.',
     features: ['100% waterproof', 'Termite & insect resistant', 'Wood-like finish', 'Indoor & outdoor use'],
@@ -280,7 +320,7 @@ export const products = [
     name: 'Laminates',
     category: 'Doors & Panels',
     image: imgLaminates,
-    gallery: [imgLaminates, imgWallPaneling, imgDoors],
+    gallery: [imgLaminates, imgAcrylicSheetOld, imgVeneerSheets],
     short: 'Decorative laminates in a huge range of colours, textures and finishes.',
     description: 'Decorative laminates for furniture, wardrobes, doors and surfaces. Available in glossy, matte, textured and wood-grain finishes to suit every interior style.',
     features: ['Huge colour range', 'Gloss, matte & textured', 'Scratch resistant', 'Easy to clean'],
@@ -293,7 +333,7 @@ export const products = [
     name: 'ACP & HPL Sheets',
     category: 'Doors & Panels',
     image: imgAcpHpl,
-    gallery: [imgAcpHpl, imgExteriorCladding, imgHighlightSheet],
+    gallery: [imgAcpHpl, imgAcpHplJpeg, imgCharcoalSheets, imgHighlighterSheet2],
     short: 'Aluminium composite and HPL panels for facades, cladding and signage.',
     description: 'ACP (Aluminium Composite Panels) and HPL (High Pressure Laminate) sheets for facades, cladding, signage and furniture. Strong, weather-resistant and available in vivid colours and finishes.',
     features: ['Weather-resistant', 'Vivid colour range', 'Lightweight & strong', 'For facade & interiors'],
@@ -306,7 +346,7 @@ export const products = [
     name: 'Curtains',
     category: 'Soft Furnishings',
     image: imgCurtains,
-    gallery: [imgCurtains, imgUpholstery, imgMattress],
+    gallery: [imgCurtains, imgWoodenBlinds, imgBlinds],
     short: 'Elegant curtains and drapes in every fabric, colour and style.',
     description: 'Curtains, drapes and blinds in a wide range of fabrics and styles — sheer, blackout, printed and plain — made to measure for windows of every size.',
     features: ['Made to measure', 'Sheer, blackout & printed', 'Wide fabric range', 'Clean, tailored finish'],
@@ -319,7 +359,7 @@ export const products = [
     name: 'Upholstery',
     category: 'Soft Furnishings',
     image: imgUpholstery,
-    gallery: [imgUpholstery, imgCurtains, imgCarpets],
+    gallery: [imgUpholstery, imgMattress, imgCusion, imgCusionJpeg],
     short: 'Quality upholstery fabrics and re-upholstery for sofas, chairs and headboards.',
     description: 'Upholstery fabrics and re-upholstery services for sofas, chairs, headboards and seating. A wide range of fabrics, leather-look options and colours for homes and commercial spaces.',
     features: ['Wide fabric range', 'Re-upholstery service', 'Durable & stain-resistant', 'Custom colours'],
@@ -332,7 +372,7 @@ export const products = [
     name: 'Mattress',
     category: 'Soft Furnishings',
     image: imgMattress,
-    gallery: [imgMattress, imgUpholstery, imgCarpets],
+    gallery: [imgMattress, imgUpholstery, imgCusion, imgCusionJpeg],
     short: 'Comfortable, supportive mattresses in foam, spring and orthopedic options.',
     description: 'Mattresses designed for comfort and support in foam, spring, coir and orthopedic variants. Available in all standard sizes with soft, medium and firm comfort levels.',
     features: ['Foam, spring & orthopedic', 'All standard sizes', 'Soft, medium & firm', 'Breathable covers'],
@@ -345,7 +385,7 @@ export const products = [
     name: 'Exterior Cladding',
     category: 'Exterior & Outdoor',
     image: imgExteriorCladding,
-    gallery: [imgExteriorCladding, imgPuStone, imgAcpHpl],
+    gallery: [imgExteriorCladding, imgExteriorCladdingJpeg, imgWallCladding, imgWpcPanels],
     short: 'Durable exterior cladding that protects and elevates your building façade.',
     description: 'Exterior cladding systems in stone, tile, ACP and weather-resistant panels that protect the building envelope while giving the elevation a clean, modern finish.',
     features: ['Weather & UV resistant', 'Protects the façade', 'Modern elevation finish', 'Low maintenance'],
@@ -358,7 +398,7 @@ export const products = [
     name: 'WPC Cladding',
     category: 'Exterior & Outdoor',
     image: imgWpcPanels,
-    gallery: [imgWpcPanels, imgExteriorCladding, imgCharcoalLouvers],
+    gallery: [imgWpcPanels, imgExteriorVoxPanel, imgHdpcLouvers],
     short: 'Waterproof WPC cladding for walls, ceilings and outdoor elevation.',
     description: 'WPC cladding delivers a premium wood-like look with zero maintenance. Waterproof and termite-proof, it is ideal for exterior walls, boundary walls and outdoor ceiling areas.',
     features: ['Waterproof & termite-proof', 'Wood-like premium look', 'Zero maintenance', 'Easy click installation'],
@@ -371,7 +411,7 @@ export const products = [
     name: 'Charcoal Louvers',
     category: 'Exterior & Outdoor',
     image: imgCharcoalLouvers,
-    gallery: [imgCharcoalLouvers, imgExteriorLouvers, imgWpcPanels],
+    gallery: [imgCharcoalLouvers, imgExteriorLouvers, imgExteriorLouversJpeg, imgHdpcLouvers],
     short: 'Sleek charcoal louver systems for façade, privacy and sun control.',
     description: 'Charcoal and coloured louver systems add a sleek architectural line to façades while controlling sun and privacy. Lightweight, easy to fix and available in many colours.',
     features: ['Modern architectural look', 'Sun & privacy control', 'Lightweight aluminium', 'Many colours available'],
@@ -384,7 +424,7 @@ export const products = [
     name: 'Vertical Garden',
     category: 'Exterior & Outdoor',
     image: imgVerticalGarden,
-    gallery: [imgVerticalGarden, imgExteriorCladding, imgCharcoalLouvers],
+    gallery: [imgVerticalGarden, imgRoofingThatch, imgArtificialGrass],
     short: 'Living green walls with artificial and natural planting systems.',
     description: 'Vertical gardens bring greenery to walls and façades with artificial or natural planting systems. Low-maintenance, modular panels that transform bare walls into living feature.',
     features: ['Natural & artificial options', 'Modular panel system', 'Low maintenance', 'Great for elevation'],
@@ -397,8 +437,7 @@ export const products = [
     name: 'Rattan Cane',
     category: 'Exterior & Outdoor',
     image: imgRattan,
-    gallery: [imgRattan, imgUpholstery, imgCurtains],
-    short: 'Natural and synthetic rattan for furniture, décor and outdoor spaces.',
+    gallery: [imgRattan, imgUpholstery, imgCurtains],    short: 'Natural and synthetic rattan for furniture, décor and outdoor spaces.',
     description: 'Rattan and cane materials for furniture, wall décor and outdoor spaces. Natural and synthetic options with a warm, handcrafted look.',
     features: ['Natural & synthetic options', 'Warm handcrafted look', 'Indoor & outdoor use', 'Durable weaves'],
     material: 'Natural rattan cane and weather-resistant synthetic rattan.',
@@ -410,8 +449,7 @@ export const products = [
     name: 'PVC Wall Panels',
     category: 'Wall Finishes',
     image: imgPvcWallPanel,
-    gallery: [imgPvcWallPanel, imgWpcPanels, img3DPanels],
-    short: 'Waterproof, easy-to-install PVC wall panels in wood and solid finishes.',
+    gallery: [imgPvcWallPanel, imgPvcWallPanelJpeg, imgWpcPanels, img3DPanels],    short: 'Waterproof, easy-to-install PVC wall panels in wood and solid finishes.',
     description: 'PVC wall panels give walls a clean, premium finish that is fully waterproof and simple to maintain. Available in wood-grain, marble and solid colour options for homes, offices and bathrooms.',
     features: ['100% waterproof', 'Easy, adhesive installation', 'Wood-grain & solid finishes', 'Low maintenance'],
     material: 'High-quality PVC wall panels in wood-grain, marble and solid finishes.',
@@ -423,7 +461,7 @@ export const products = [
     name: 'Cork Sheets',
     category: 'Wall Finishes',
     image: imgCorkSheet,
-    gallery: [imgCorkSheet, imgWallPaneling, imgWallpapers],
+    gallery: [imgCorkSheet, imgCharcoalSheets, imgHighlightSheet],
     short: 'Natural cork sheets that add warmth, texture and acoustic comfort.',
     description: 'Cork sheets bring a natural, sustainable texture to walls, pin boards and feature panels. Soft to the touch with excellent sound-dampening qualities.',
     features: ['Natural sustainable material', 'Soft, warm texture', 'Good sound absorption', 'Easy to cut & install'],
@@ -436,7 +474,7 @@ export const products = [
     name: 'Glass Films',
     category: 'Wall Finishes',
     image: imgGlassFilm,
-    gallery: [imgGlassFilm, imgCurtains, imgHighlightSheet],
+    gallery: [imgGlassFilm, imgGlassFilmJpeg, imgHighlightSheet, imgHighlighterSheet2],
     short: 'Decorative and sun-control films that upgrade any glass surface.',
     description: 'Glass films add privacy, sun control and a decorative finish to windows, partitions and doors — a quick, clean upgrade over bare glass.',
     features: ['Sun & UV control', 'Privacy without darkness', 'Decorative patterns', 'Easy application'],
@@ -449,7 +487,7 @@ export const products = [
     name: 'HDHMR 3D Wall Panels',
     category: 'Wall Finishes',
     image: imgHdhmr,
-    gallery: [imgHdhmr, img3DPanels, imgParametric],
+    gallery: [imgHdhmr, imgHdhmrJpeg, img3DPanels, imgWallPaneling],
     short: 'Durable HDHMR-based 3D panels for crisp, moisture-resistant feature walls.',
     description: 'HDHMR 3D wall panels combine the sculptural look of 3D panelling with the moisture resistance of HDHMR board. A dependable choice for feature walls that need to stay crisp in Indian climate.',
     features: ['Moisture-resistant HDHMR base', 'Sculpted 3D relief', 'Crisp, clean edges', 'Paint-ready finish'],
@@ -462,7 +500,7 @@ export const products = [
     name: 'Acrylic Sheets',
     category: 'Doors & Panels',
     image: imgAcrylicSheet1,
-    gallery: [imgAcrylicSheet1, imgLaminates, imgHighlightSheet],
+    gallery: [imgAcrylicSheet1, imgAcrylicSheetOld, imgLaminates],
     short: 'Glossy acrylic sheets that give cabinets and panels a premium, reflective finish.',
     description: 'Acrylic sheets deliver a deep, glossy, mirror-like finish for wardrobe shutters, kitchen cabinets and panel accents. Scratch-resistant and easy to keep clean.',
     features: ['High-gloss premium finish', 'Scratch resistant', 'Rich colour depth', 'Easy to clean'],
@@ -475,7 +513,7 @@ export const products = [
     name: 'Veneer Sheets',
     category: 'Doors & Panels',
     image: imgVeneerSheets,
-    gallery: [imgVeneerSheets, imgPlywood, imgWallPaneling],
+    gallery: [imgVeneerSheets, imgVeneerJpeg, imgPlywood],
     short: 'Natural wood veneers that bring authentic grain to doors and panelling.',
     description: 'Natural and reconstituted wood veneers in a wide range of grains and tones, ideal for doors, furniture and wall panelling with a genuine timber look.',
     features: ['Authentic natural grain', 'Wide species range', 'For doors & panelling', 'Premium timber look'],
@@ -488,7 +526,7 @@ export const products = [
     name: 'PVC Ceiling',
     category: 'Ceilings',
     image: imgPvcCeiling,
-    gallery: [imgPvcCeiling, imgBaffle, imgStretchFiber],
+    gallery: [imgPvcCeiling, imgPvcCeilingJpeg, imgVoxSoffit, imgStretchFiber],
     short: 'Affordable, waterproof PVC ceiling panels for clean, modern soffits.',
     description: 'PVC ceiling panels deliver a clean, modern ceiling at a budget-friendly price. Fully waterproof and termite-proof, they are ideal for bathrooms, kitchens, balconies and commercial spaces.',
     features: ['Waterproof & termite-proof', 'Lightweight panels', 'Quick installation', 'Budget-friendly'],
@@ -501,7 +539,7 @@ export const products = [
     name: 'Vox Soffit Ceiling',
     category: 'Ceilings',
     image: imgVoxSoffit,
-    gallery: [imgVoxSoffit, imgVoxSoffit2, imgBaffle],
+    gallery: [imgVoxSoffit, imgVoxSoffit2, imgVoxSoffitPanel],
     short: 'Sleek vox soffit systems that make ceilings look custom and refined.',
     description: 'Vox soffit ceilings use slim, open-cell profiles to create a refined, layered ceiling look. Perfect for retail, offices and modern homes where the ceiling should feel considered.',
     features: ['Slim, modern profiles', 'Open-cell design', 'Conceals services above', 'Fast installation'],
@@ -514,7 +552,7 @@ export const products = [
     name: 'SPC Flooring',
     category: 'Flooring',
     image: imgSpcFlooring,
-    gallery: [imgSpcFlooring, imgWoodenFlooring, imgMarbleSheets],
+    gallery: [imgSpcFlooring, imgSpcFlooringJpeg, imgWoodenFlooring, imgVinylFlooring],
     short: 'Stone-plastic composite flooring that is tough, waterproof and realistic.',
     description: 'SPC flooring brings a realistic wood or stone look with a completely waterproof, dimensionally stable core. Perfect for high-traffic homes and commercial spaces.',
     features: ['100% waterproof', 'Scratch resistant', 'Realistic wood & stone looks', 'Quiet underfoot'],
@@ -527,7 +565,7 @@ export const products = [
     name: 'UV Marble Sheets',
     category: 'Flooring',
     image: imgUvMarble,
-    gallery: [imgUvMarble, imgMarbleSheets, imgPvcWallPanel],
+    gallery: [imgUvMarble, imgUvMarbleJpeg, imgMarbleSheets, imgPuStone],
     short: 'Glossy UV-finished marble sheets for floors, walls and vanities.',
     description: 'UV marble sheets offer a brilliant, glossy marble look for floors, feature walls and vanity tops. The UV coating adds depth, shine and easy wipe-clean maintenance.',
     features: ['High-gloss marble look', 'Deep, reflective shine', 'Easy to maintain', 'Wall, floor & counter use'],
@@ -540,7 +578,7 @@ export const products = [
     name: 'Wooden Blinds',
     category: 'Soft Furnishings',
     image: imgWoodenBlinds,
-    gallery: [imgWoodenBlinds, imgCurtains, imgRattan],
+    gallery: [imgWoodenBlinds, imgBlinds, imgCurtains],
     short: 'Warm wooden blinds that bring natural texture and precise light control.',
     description: 'Wooden blinds add warmth and a natural grain to windows while giving you precise control over light and privacy. Available in a range of wood tones and finishes.',
     features: ['Natural wood warmth', 'Precise light control', 'Durable slats', 'Easy to operate'],
@@ -553,7 +591,7 @@ export const products = [
     name: 'Artificial Grass',
     category: 'Exterior & Outdoor',
     image: imgArtificialGrass,
-    gallery: [imgArtificialGrass, imgArtificialGrass1, imgVerticalGarden],
+    gallery: [imgArtificialGrass, imgArtificialGrass1, imgGrass2],
     short: 'Low-maintenance artificial grass that stays green all year round.',
     description: 'Artificial grass gives lawns, terraces and balconies a lush green look without watering or mowing. Soft underfoot and built to last in sun and rain.',
     features: ['Always-green look', 'Zero watering or mowing', 'Soft, realistic feel', 'Indoor & outdoor use'],
@@ -562,17 +600,145 @@ export const products = [
     finishes: ['Realistic Green', 'Multi-tone Green', 'Indoor', 'Sports'],
   }),
   make({
+    id: 'grass-tiles',
+    name: 'Grass Tiles',
+    category: 'Exterior & Outdoor',
+    image: imgGrass2,
+    gallery: [imgGrass2, imgArtificialGrass1, imgArtificialGrass],
+    short: 'Interlocking grass tiles that turn balconies and terraces green in minutes.',
+    description: 'Grass tiles snap together over any flat surface to create an instant lush green floor. Perfect for balconies, terraces and event spaces, they are quick to install, easy to replace and simple to maintain.',
+    features: ['Click-lock interlocking design', 'Installs in minutes, no glue', 'Drainage-ready base', 'Replace individual tiles easily'],
+    material: 'UV-stabilised synthetic grass mounted on interlocking plastic base tiles.',
+    applications: ['Balcony floors', 'Terrace decks', 'Poolside surrounds', 'Event & exhibition floors'],
+    finishes: ['Natural Green', 'Multi-tone Green', 'Dark Green', 'Mixed Paver'],
+  }),
+  make({
     id: 'ladder-rungs',
     name: 'Ladders & Rungs',
     category: 'Exterior & Outdoor',
     image: imgRungs,
-    gallery: [imgRungs, imgWpcPanels, imgCharcoalLouvers],
+    gallery: [imgRungs, imgHdpcLouvers, imgCharcoalLouvers],
     short: 'Sturdy ladders, rungs and step systems for access, lofts and mezzanines.',
     description: 'Quality ladders, rungs and step systems for lofts, mezzanines, storerooms and exterior access points. Built to be strong, stable and easy to install.',
     features: ['Strong, stable construction', 'Indoor & outdoor use', 'Easy installation', 'Wide size range'],
     material: 'Metal and WPC ladder and rung systems in durable finishes.',
     applications: ['Lofts & mezzanines', 'Storerooms', 'Exterior access', 'Play & activity areas'],
     finishes: ['Powder Coated', 'Wood Finish', 'Galvanised', 'Matte Black'],
+  }),
+  make({
+    id: 'charcoal-sheets',
+    name: 'Charcoal Sheets',
+    category: 'Wall Finishes',
+    image: imgCharcoalSheets,
+    gallery: [imgCharcoalSheets, imgCharcoalHighlighter, imgCorkSheet],
+    short: 'Textured charcoal sheets that give walls a bold, premium designer finish.',
+    description: 'Charcoal sheets bring a rich, textured, stone-like character to feature walls and furniture surfaces. Lightweight and easy to install, they create a high-end designer look at a fraction of the cost of natural materials.',
+    features: ['Bold textured finish', 'Lightweight panels', 'Easy adhesive installation', 'Low maintenance surface'],
+    material: 'Decorative charcoal-textured PVC / composite sheets with a soft-touch surface.',
+    applications: ['TV feature walls', 'Bedroom headboards', 'Reception backdrops', 'Café & retail walls'],
+    finishes: ['Charcoal', 'Graphite', 'Stone Texture', 'Wood Texture'],
+  }),
+  make({
+    id: 'charcoal-highlighter-sheet',
+    name: 'Charcoal Highlighter Sheet',
+    category: 'Wall Finishes',
+    image: imgCharcoalHighlighter,
+    gallery: [imgCharcoalHighlighter, imgCharcoalSheets, imgHighlightSheet],    short: 'Designer highlighter sheets with charcoal tones for striking wall accents.',
+    description: 'Charcoal highlighter sheets add depth and drama to accent walls, pillars and panel inserts. The layered texture catches light beautifully, making every wall look crafted and premium.',
+    features: ['Rich layered texture', 'Perfect for accent walls', 'Cut to size available', 'Durable & washable'],
+    material: 'Charcoal-finish decorative highlighter sheets for wall cladding and accents.',
+    applications: ['Accent walls', 'Pillar cladding', 'Lobby & reception walls', 'Panel inserts'],
+    finishes: ['Charcoal Black', 'Grey Wash', 'Metallic', 'Textured'],
+  }),
+  make({
+    id: 'cnc-work',
+    name: 'CNC Work',
+    category: 'Wall Finishes',
+    image: imgCncWork,
+    gallery: [imgCncWork, imgParametric, img3DPanels],
+    short: 'Precision CNC-cut jali panels and patterns made to your design.',
+    description: 'Custom CNC cutting on MDF, WPC, acrylic and metal — intricate jalis, jaali partitions, wall art and ceiling patterns manufactured exactly to your design and size. Precision-cut edges with a flawless finish.',
+    features: ['Made to your design & size', 'MDF, WPC, acrylic & metal', 'Intricate precision cuts', 'Paint & finish options'],
+    material: 'CNC-cut jali and pattern panels in MDF, WPC, acrylic and metal sheets.',
+    applications: ['Room partitions & jalis', 'Temple & pooja backdrops', 'Ceiling patterns', 'Wall art & murals'],
+    finishes: ['Natural MDF', 'Painted', 'Wood Finish', 'Metallic'],
+  }),
+  make({
+    id: 'blinds',
+    name: 'Blinds',
+    category: 'Soft Furnishings',
+    image: imgBlinds,
+    gallery: [imgBlinds, imgWoodenBlinds, imgCurtains],    short: 'Roller, zebra and vertical blinds for clean, modern window control.',
+    description: 'Window blinds in roller, zebra, vertical and roman styles — precise light control with a clean, minimal look for homes and offices. Made to measure with smooth operating systems.',
+    features: ['Roller, zebra & vertical styles', 'Made to measure', 'Smooth chain & motorised options', 'Blackout & sunscreen fabrics'],
+    material: 'Polyester and sunscreen blind fabrics with aluminium bottom bars and quality mechanisms.',
+    applications: ['Windows & French doors', 'Office cabins & conference rooms', 'Clinics & showrooms', 'Balcony doors'],
+    finishes: ['Blackout', 'Sunscreen', 'Printed', 'Textured'],
+  }),
+  make({
+    id: 'wall-cladding',
+    name: 'Wall Cladding',
+    category: 'Exterior & Outdoor',
+    image: imgWallCladding,
+    gallery: [imgWallCladding, imgExteriorCladding, imgExteriorVoxPanel],
+    short: 'Statement wall cladding in stone, brick and designer profiles.',
+    description: 'Interior and exterior wall cladding in stone-look, brick-look and contemporary profiles. Instantly transforms plain walls into textured, architectural surfaces with lasting durability.',
+    features: ['Stone & brick looks', 'Indoor & outdoor grades', 'Weather resistant options', 'Fast panel installation'],
+    material: 'Cladding panels in PVC, WPC, PU stone and composite materials.',
+    applications: ['Feature walls', 'Building elevation', 'Compound & boundary walls', 'Pillars & columns'],
+    finishes: ['Stone', 'Brick', 'Wood Grain', 'Solid Colour'],
+  }),
+  make({
+    id: 'exterior-vox-panel',
+    name: 'Exterior Vox Panel',
+    category: 'Exterior & Outdoor',
+    image: imgExteriorVoxPanel,
+    gallery: [imgExteriorVoxPanel, imgVoxSoffitPanel, imgHdpcLouvers],
+    short: 'Weatherproof exterior vox panels for premium outdoor façades.',
+    description: 'Exterior-grade vox panels built to withstand sun and rain while giving façades, balconies and outdoor ceilings a refined, finished look. Fade-resistant with a premium wood-like surface.',
+    features: ['UV & weather resistant', 'Fade-proof colours', 'Wood-like premium finish', 'Easy screw-fix installation'],
+    material: 'Exterior-grade polymer vox panels with UV-stabilised surface layers.',
+    applications: ['Outdoor façades', 'Balconies & terraces', 'Outdoor ceilings', 'Garden walls'],
+    finishes: ['Wood Grain', 'Grey', 'Charcoal', 'Solid Colour'],
+  }),
+  make({
+    id: 'hdpc-louvers',
+    name: 'HDPC Louvers',
+    category: 'Exterior & Outdoor',
+    image: imgHdpcLouvers,
+    gallery: [imgHdpcLouvers, imgCharcoalLouvers, imgExteriorLouvers],
+    short: 'High-density HDPC louvers for durable, elegant outdoor shading.',
+    description: 'HDPC (high-density polymer composite) louvers combine the richness of wood with all-weather toughness. Ideal for façade shading, balcony screens and outdoor ceilings that need to last.',
+    features: ['High-density composite core', 'Water & termite proof', 'UV-stable colours', 'Low maintenance'],
+    material: 'High-density polymer composite louver profiles in wood-grain and solid finishes.',
+    applications: ['Façade shading', 'Balcony screens', 'Outdoor ceilings', 'Terrace pergolas'],
+    finishes: ['Teak', 'Walnut', 'Grey Wood', 'Charcoal'],
+  }),
+  make({
+    id: 'vinyl-flooring',
+    name: 'Vinyl Flooring',
+    category: 'Flooring',
+    image: imgVinylFlooring,
+    gallery: [imgVinylFlooring, imgSpcFlooring, imgWoodenFlooring],
+    short: 'Comfortable, quiet vinyl flooring in wood and stone designs.',
+    description: 'Vinyl flooring offers a warm, quiet underfoot feel with realistic wood and stone visuals. Water-resistant, easy to clean and comfortable for homes, clinics, offices and retail spaces.',
+    features: ['Warm, quiet underfoot', 'Water-resistant surface', 'Realistic wood & stone looks', 'Quick click or glue-down install'],
+    material: 'Luxury vinyl planks and tiles with wear-layer protection.',
+    applications: ['Bedrooms & living rooms', 'Clinics & hospitals', 'Offices & retail', 'Play schools'],
+    finishes: ['Oak', 'Walnut', 'Marble', 'Abstract'],
+  }),
+  make({
+    id: 'roofing-thatch',
+    name: 'Roofing Thatch',
+    category: 'Exterior & Outdoor',
+    image: imgRoofingThatch,
+    gallery: [imgRoofingThatch, imgVerticalGarden, imgExteriorVoxPanel],
+    short: 'Synthetic thatch roofing for resorts, gazebos and tropical-style spaces.',
+    description: 'Synthetic roofing thatch recreates the charm of natural straw with none of the upkeep. Weather-proof, fire-retardant and long-lasting — perfect for gazebos, resort roofs, huts and patio covers.',
+    features: ['Natural thatch look', 'Weather & UV proof', 'Fire-retardant options', 'Zero maintenance'],
+    material: 'Synthetic thatch tiles and rolls over treated structural frames.',
+    applications: ['Gazebos & pergolas', 'Resort & farmhouse roofs', 'Poolside huts', 'Café & theme décor'],
+    finishes: ['Natural Straw', 'Golden', 'Dark Thatch', 'Mixed Reed'],
   }),
 ]
 
@@ -581,11 +747,13 @@ export const getProduct = (id) => products.find((p) => p.id === id)
 export const productsByCategory = (category) =>
   category === 'All' ? products : products.filter((p) => p.category === category)
 
-export const relatedProducts = (product, count = 3) =>
-  products
-    .filter((p) => p.category === product.category && p.id !== product.id)
-    .concat(products.filter((p) => p.category !== product.category && p.id !== product.id))
+export const relatedProducts = (product, count = 3) => {
+  const slug = PRODUCT_SHOP_SLUGS[product.id]
+  if (!slug) return []
+  return products
+    .filter((p) => p.id !== product.id && PRODUCT_SHOP_SLUGS[p.id] === slug)
     .slice(0, count)
+}
 
 export const productProjects = {
   wallpapers: ['the-charcoal-loft', 'the-terracotta-boutique', 'the-lumiere-showroom'],

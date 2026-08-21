@@ -1,7 +1,5 @@
-import { Link } from 'react-router-dom'
-import { ArrowUpRight, MapPin, MessageCircle, Phone } from 'lucide-react'
-import { navLinks, contact, whatsappUrl } from '../data/site'
-import { shopCategories } from '../data/filters'
+import { MapPin, MessageCircle, Phone } from 'lucide-react'
+import { contact, whatsappUrl } from '../data/site'
 
 const year = new Date().getFullYear()
 
@@ -9,67 +7,13 @@ export default function Footer() {
   return (
     <footer className="bg-charcoal text-cream">
       <div className="mx-auto max-w-none px-5 py-16 sm:px-6 lg:px-8 lg:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1.2fr]">
           <div className="max-w-sm">
             <p className="text-sm leading-relaxed text-taupe">
               SADANA Decor & Interior — all types of interior & exterior products under
               one roof. Premium, durable and modern solutions for homes, offices and
-              commercial spaces across Indore.
+              commercial spaces across India.
             </p>
-            <div className="mt-6 flex flex-wrap gap-2.5">
-              {['Interior', 'Exterior', 'Under One Roof'].map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-white/12 px-3.5 py-1.5 text-xs text-taupe"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-linen">
-              Explore
-            </h3>
-            <ul className="mt-5 space-y-3">
-              {navLinks.map((link) => (
-                <li key={link.to}>
-                  <Link
-                    to={link.to}
-                    className="group inline-flex items-center gap-1.5 text-sm text-smoke transition-colors duration-300 hover:text-brand"
-                  >
-                    {link.label}
-                    <ArrowUpRight
-                      className="h-3.5 w-3.5 opacity-0 transition-all duration-300 group-hover:opacity-100"
-                      aria-hidden="true"
-                    />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-linen">
-              Products
-            </h3>
-            <ul className="mt-5 space-y-3">
-              {shopCategories.map((cat) => (
-                <li key={cat.slug}>
-                  <Link
-                    to={`/products/${cat.slug}`}
-                    className="group inline-flex items-center gap-1.5 text-sm text-smoke transition-colors duration-300 hover:text-brand"
-                  >
-                    {cat.name}
-                    <ArrowUpRight
-                      className="h-3.5 w-3.5 opacity-0 transition-all duration-300 group-hover:opacity-100"
-                      aria-hidden="true"
-                    />
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
 
           <div>

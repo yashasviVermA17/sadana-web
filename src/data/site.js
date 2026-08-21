@@ -36,10 +36,8 @@ export const mapEmbedUrl =
   'https://www.google.com/maps?q=SADANA%20Decor%20%26%20Interior%20@22.757592,75.884144&hl=en&z=17&output=embed'
 
 export const stats = [
-  { value: '100+', label: 'Projects Delivered' },
-  { value: '500+', label: 'Happy Clients' },
-  { value: '15+', label: 'Years Experience' },
-  { value: '20+', label: 'Expert Designers' },
+  { value: '5000+', label: 'Projects Delivered' },
+  { value: '5000+', label: 'Happy Clients' },
 ]
 
 export const testimonials = [

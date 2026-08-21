@@ -1,29 +1,22 @@
-import { useSearchParams } from 'react-router-dom'
-import CategoryFilter from '../components/CategoryFilter'
 import ProjectGrid from '../components/ProjectGrid'
 import Reveal from '../components/Reveal'
 import Button from '../components/Button'
 import PageHero from '../components/PageHero'
-import { projectCategories, projectsByCategory } from '../data/projects'
+import { projects } from '../data/projects'
 import { useUI } from '../context/UIContext'
-import imgHero from '../assets/project hero image 2.jpg'
+import imgHero from '../assets/projects/Charcoal sheet with louvers.jpeg'
 
 export default function Projects() {
-  const [params, setParams] = useSearchParams()
   const { openQuote } = useUI()
-  const active = params.get('category') || 'All'
-  const items = projectsByCategory(active)
-
-  const setCategory = (category) => {
-    if (category === 'All') setParams({})
-    else setParams({ category })
-  }
+  const items = projects
 
   return (
     <>
       <PageHero
         image={imgHero}
-        fit="contain"
+        fit="cover"
+        heightClass="h-[75vh] min-h-[520px] sm:h-[80vh] lg:h-[92vh]"
+        imageClassName="saturate-[1.15] contrast-[1.08] brightness-[1.04]"
         breadcrumb={[{ label: 'Projects' }]}
         eyebrow="Our Projects"
         title="Spaces we designed, delivered and stand behind"
@@ -31,14 +24,10 @@ export default function Projects() {
       />
 
       <section className="mx-auto max-w-none px-5 py-14 sm:px-6 lg:px-8 lg:py-20">
-        <Reveal className="mb-8">
-          <CategoryFilter categories={projectCategories} active={active} onChange={setCategory} />
-        </Reveal>
-
         <Reveal className="mb-8 flex items-center justify-between gap-4">
           <p className="text-sm text-stone">
             <span className="font-medium text-charcoal">{items.length}</span>{' '}
-            {items.length === 1 ? 'project' : 'projects'} in {active}
+            {items.length === 1 ? 'project' : 'projects'}
           </p>
         </Reveal>
 
@@ -48,10 +37,7 @@ export default function Projects() {
           </Reveal>
         ) : (
           <Reveal className="flex flex-col items-center gap-4 rounded-card border border-dashed border-charcoal/20 py-20 text-center">
-            <p className="text-stone">No projects in this category yet.</p>
-            <Button variant="outline" onClick={() => setParams({})}>
-              View All Projects
-            </Button>
+            <p className="text-stone">No projects yet.</p>
           </Reveal>
         )}
 

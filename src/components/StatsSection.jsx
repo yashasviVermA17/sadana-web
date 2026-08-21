@@ -56,12 +56,12 @@ export default function StatsSection({ dark = false, className = '' }) {
       className={`${dark ? 'bg-charcoal text-cream' : 'bg-mist'} ${className}`}
     >
       <div className="mx-auto max-w-none px-5 py-16 sm:px-6 lg:px-8 lg:py-20">
-        <div className="grid grid-cols-2 gap-8 lg:grid-cols-4 lg:gap-6">
+        <div className="mx-auto grid max-w-xl grid-cols-2 gap-8">
           {stats.map((stat, i) => (
             <Reveal
               key={stat.label}
               delay={i * 90}
-              className="relative flex flex-col items-start gap-1.5 px-2 lg:items-center lg:text-center"
+              className="relative flex flex-col items-center gap-1.5 px-2 text-center"
             >
               <Counter value={stat.value} dark={dark} />
               <span
@@ -73,7 +73,7 @@ export default function StatsSection({ dark = false, className = '' }) {
               </span>
               {i > 0 && (
                 <span
-                  className="absolute left-0 top-2 hidden h-12 w-px bg-charcoal/10 lg:block"
+                  className="absolute left-0 top-2 hidden h-12 w-px bg-charcoal/10 sm:block"
                   aria-hidden="true"
                 />
               )}

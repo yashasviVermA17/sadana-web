@@ -12,71 +12,105 @@ const allText = (p) =>
 
 const match = (re) => (p) => re.test(allText(p))
 
+export const PRODUCT_SHOP_SLUGS = {
+  // Marble & stone
+  'pu-stones': 'marble',
+  'marble-sheets': 'marble',
+  'uv-marble-sheets': 'marble',
+  // PVC & wall panels
+  'pvc-wall-panels': 'pvc-panels',
+  'wpc-panels': 'pvc-panels',
+  'customized-wall-paneling': 'pvc-panels',
+  '3d-panels': 'pvc-panels',
+  'parametric-panel': 'pvc-panels',
+  'hdhmr-3d-panels': 'pvc-panels',
+  // Separate categories
+  'french-mouldings': 'mouldings',
+  'cnc-work': 'cnc-work',
+  'glass-films': 'glass-films',
+  // Wallpapers
+  wallpapers: 'wallpapers',
+  // False ceiling
+  'baffle-ceiling': 'false-ceiling',
+  'stretch-fiber-ceiling': 'false-ceiling',
+  'pvc-ceiling': 'false-ceiling',
+  'vox-soffit-ceiling': 'false-ceiling',
+  // Sheets
+  'alabaster-sheets': 'sheets',
+  'highlight-sheets': 'sheets',
+  'cork-sheets': 'sheets',
+  'charcoal-sheets': 'sheets',
+  'charcoal-highlighter-sheet': 'sheets',
+  'acp-hpl-sheets': 'sheets',
+  // Flooring
+  'wooden-flooring': 'flooring',
+  'gym-flooring': 'flooring',
+  'spc-flooring': 'flooring',
+  'vinyl-flooring': 'flooring',
+  'rugs-carpets': 'carpets',
+  // Exterior & outdoor
+  'exterior-cladding': 'exterior-outdoor',
+  'wpc-cladding': 'exterior-outdoor',
+  'wall-cladding': 'exterior-outdoor',
+  'charcoal-louvers': 'exterior-outdoor',
+  'exterior-vox-panel': 'exterior-outdoor',
+  'hdpc-louvers': 'exterior-outdoor',
+  'roofing-thatch': 'exterior-outdoor',
+  'ladder-rungs': 'rungs',
+  'grass-tiles': 'exterior-outdoor',
+  'vertical-garden': 'exterior-outdoor',
+  // Separate categories
+  'customized-doors': 'doors',
+  plywood: 'plywood',
+  laminates: 'laminates',
+  'acrylic-sheets': 'acrylic-sheets',
+  'veneer-sheets': 'veneer-sheets',
+  curtains: 'curtains',
+  blinds: 'blinds',
+  'wooden-blinds': 'blinds',
+  upholstery: 'sofa-mattress',
+  mattress: 'sofa-mattress',
+  'rattan-cane': 'rattan-cane',
+}
+
+const byShopSlug = (slug) => (p) => PRODUCT_SHOP_SLUGS[p.id] === slug
+
 export const FILTER_GROUPS = [
   {
     key: 'category',
     title: 'Category',
     options: [
-      { label: 'Marble', slug: 'marble', test: match(/marble/) },
-      { label: 'PVC Panels', slug: 'pvc-panels', test: match(/pvc|wood plastic composite/) },
-      { label: 'Wallpapers', slug: 'wallpapers', test: match(/wallpaper/) },
-      { label: 'False Ceiling', slug: 'false-ceiling', category: 'Ceilings', test: (p) => p.category === 'Ceilings' },
+      { label: 'Marble', slug: 'marble', test: byShopSlug('marble') },
+      { label: 'PVC Panels', slug: 'pvc-panels', test: byShopSlug('pvc-panels') },
+      { label: 'Wallpapers', slug: 'wallpapers', test: byShopSlug('wallpapers') },
+      { label: 'False Ceiling', slug: 'false-ceiling', test: byShopSlug('false-ceiling') },
+      { label: 'Sheets', slug: 'sheets', test: byShopSlug('sheets') },
+      { label: 'Flooring', slug: 'flooring', test: byShopSlug('flooring') },
+      { label: 'Carpets', slug: 'carpets', test: byShopSlug('carpets') },
       {
-        label: 'Furniture',
-        slug: 'furniture',
-        test: match(/furniture|wardrobe|kitchen|cabinet|shutter|counter/),
+        label: 'Exterior & Outdoor',
+        slug: 'exterior-outdoor',
+        test: byShopSlug('exterior-outdoor'),
       },
-      { label: 'Flooring', slug: 'flooring', category: 'Flooring', test: (p) => p.category === 'Flooring' },
-    ],
-  },
-  {
-    key: 'material',
-    title: 'Material',
-    options: [
-      { label: 'Natural Marble', test: match(/marble/) },
-      { label: 'WPC / PVC', test: match(/pvc|wood plastic composite/) },
-      { label: 'Non-woven Fabric', test: match(/non-woven|fabric/) },
-      {
-        label: 'Gypsum & POP',
-        test: match(/mouldings|primed for paint|paint-ready|gypsum|\bpop\b/),
-      },
-      { label: 'Engineered Wood', test: match(/engineered|laminat|veneer|plywood|hpl/) },
-      { label: 'Leather & Walnut', test: match(/leather|leatherette|walnut/) },
-    ],
-  },
-  {
-    key: 'application',
-    title: 'Application',
-    options: [
-      { label: 'Flooring', test: (p) => p.category === 'Flooring' || match(/floor/)(p) },
-      {
-        label: 'Wall Cladding',
-        test: match(/cladding|wall panel|panelling|feature wall|elevation|facade|façade|feature panel/),
-      },
-      { label: 'Bedroom Walls', test: match(/bedroom/) },
-      { label: 'Living Room', test: match(/living|dining/) },
-      { label: 'Kitchen Counter', test: match(/kitchen|counter/) },
-      { label: 'Bathroom', test: match(/bathroom/) },
-    ],
-  },
-  {
-    key: 'colour',
-    title: 'Colour',
-    options: [
-      { label: 'White', test: match(/white/) },
-      { label: 'Black', test: match(/\bblack\b/) },
-      { label: 'Beige', test: match(/beige|ivory|honey|travertine/) },
-      { label: 'Wood', test: match(/wood|oak|walnut|teak|grain/) },
-      { label: 'Tan', test: match(/\btan\b|brown|cane|leather|leatherette/) },
+      { label: 'Rungs', slug: 'rungs', test: byShopSlug('rungs') },
+      { label: 'Doors', slug: 'doors', test: byShopSlug('doors') },
+      { label: 'Plywood', slug: 'plywood', test: byShopSlug('plywood') },
+      { label: 'Laminates', slug: 'laminates', test: byShopSlug('laminates') },
+      { label: 'Acrylic Sheets', slug: 'acrylic-sheets', test: byShopSlug('acrylic-sheets') },
+      { label: 'Veneer Sheets', slug: 'veneer-sheets', test: byShopSlug('veneer-sheets') },
+      { label: 'Curtains', slug: 'curtains', test: byShopSlug('curtains') },
+      { label: 'Blinds', slug: 'blinds', test: byShopSlug('blinds') },
+      { label: 'Sofa & Mattress', slug: 'sofa-mattress', test: byShopSlug('sofa-mattress') },
+      { label: 'Rattan Cane', slug: 'rattan-cane', test: byShopSlug('rattan-cane') },
+      { label: 'Mouldings', slug: 'mouldings', test: byShopSlug('mouldings') },
+      { label: 'CNC Work', slug: 'cnc-work', test: byShopSlug('cnc-work') },
+      { label: 'Glass Films', slug: 'glass-films', test: byShopSlug('glass-films') },
     ],
   },
 ]
 
 export const EMPTY_FILTERS = {
   category: [],
-  material: [],
-  application: [],
-  colour: [],
 }
 
 export const toggleFilter = (filters, groupKey, label) => {
@@ -110,17 +144,17 @@ export const searchProducts = (products, query) => {
 export const countActiveFilters = (filters) =>
   Object.values(filters).reduce((total, list) => total + (list?.length || 0), 0)
 
-export const shopCategories = FILTER_GROUPS[0].options.map(({ label, slug, category, test }) => ({
+export const shopCategories = FILTER_GROUPS[0].options.map(({ label, slug, test }) => ({
   name: label,
   slug,
-  category,
   test,
 }))
 
 export const getShopCategoryBySlug = (slug) => shopCategories.find((c) => c.slug === slug)
 
-export const getProductShopCategory = (product) =>
-  shopCategories.find((c) => c.category && c.category === product.category) ||
-  shopCategories.find((c) => c.test(product))
+export const getProductShopSlug = (product) => PRODUCT_SHOP_SLUGS[product.id] || null
 
-export const getProductShopSlug = (product) => getProductShopCategory(product)?.slug
+export const getProductShopCategory = (product) => {
+  const slug = getProductShopSlug(product)
+  return slug ? getShopCategoryBySlug(slug) : undefined
+}

@@ -12,6 +12,7 @@ import {
   countActiveFilters,
   filterProducts,
   getShopCategoryBySlug,
+  getProductShopSlug,
   searchProducts,
   shopCategories,
   toggleFilter,
@@ -30,7 +31,10 @@ export default function Products({ activeCategorySlug }) {
   )
 
   const baseItems = useMemo(
-    () => (activeCategory ? products.filter(activeCategory.test) : products),
+    () =>
+      activeCategory
+        ? products.filter((p) => getProductShopSlug(p) === activeCategory.slug)
+        : products,
     [activeCategory],
   )
 

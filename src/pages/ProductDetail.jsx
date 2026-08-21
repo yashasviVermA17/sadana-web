@@ -9,7 +9,7 @@ import ProjectCard from '../components/ProjectCard'
 import ProductCard from '../components/ProductCard'
 import SectionHeading from '../components/SectionHeading'
 import { getProduct, productProjects, relatedProducts } from '../data/products'
-import { getProject, projects } from '../data/projects'
+import { getProject } from '../data/projects'
 import { getProductShopCategory } from '../data/filters'
 import { useUI } from '../context/UIContext'
 
@@ -45,16 +45,7 @@ export default function ProductDetail({ productId: propProductId }) {
   const shopCategory = getProductShopCategory(product)
   const related = relatedProducts(product)
   const relatedProjectIds = productProjects[product.id] || []
-  const featuredIds = [...relatedProjectIds]
-  const seen = new Set(featuredIds)
-  for (const project of projects) {
-    if (featuredIds.length >= 4) break
-    if (!seen.has(project.id)) {
-      seen.add(project.id)
-      featuredIds.push(project.id)
-    }
-  }
-  const relatedProjects = featuredIds.map((pid) => getProject(pid)).filter(Boolean)
+  const relatedProjects = relatedProjectIds.map((pid) => getProject(pid)).filter(Boolean)
 
   return (
     <>
@@ -196,28 +187,30 @@ export default function ProductDetail({ productId: propProductId }) {
         </section>
       )}
 
-      <section className="bg-mist">
-        <div className="mx-auto max-w-none px-5 py-16 sm:px-6 lg:px-8 lg:py-20">
-          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-            <SectionHeading eyebrow="Related Products" title="You may also like" />
-            <Reveal delay={150}>
-              <Button to="/products" variant="outline">
-                View All Products
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Button>
+      {related.length > 0 && (
+        <section className="bg-mist">
+          <div className="mx-auto max-w-none px-5 py-16 sm:px-6 lg:px-8 lg:py-20">
+            <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
+              <SectionHeading eyebrow="Related Products" title="You may also like" />
+              <Reveal delay={150}>
+                <Button to="/products" variant="outline">
+                  View All Products
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Button>
+              </Reveal>
+            </div>
+            <Reveal className="mt-10">
+              <AutoSlider
+                key={`related-${product.id}`}
+                items={related}
+                itemClassName="h-full"
+                visible={relatedVisible}
+                renderItem={(item) => <ProductCard product={item} />}
+              />
             </Reveal>
           </div>
-          <Reveal className="mt-10">
-            <AutoSlider
-              key={`related-${product.id}`}
-              items={related}
-              itemClassName="h-full"
-              visible={relatedVisible}
-              renderItem={(item) => <ProductCard product={item} />}
-            />
-          </Reveal>
-        </div>
-      </section>
+        </section>
+      )}
     </>
   )
 }
