@@ -7,7 +7,7 @@ import TiltCard from '../components/TiltCard'
 import TiltImage from '../components/TiltImage'
 import { useUI } from '../context/UIContext'
 import { contact, mapEmbedUrl, whatsappUrl } from '../data/site'
-import imgShowroom from '../assets/Victara panel.jpg'
+import imgShowroom from '../assets/products/Victara panel.jpg'
 import imgHero from '../assets/contact us image.png'
 
 export default function Contact() {

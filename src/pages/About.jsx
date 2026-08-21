@@ -11,7 +11,7 @@ import TiltImage from '../components/TiltImage'
 import { useUI } from '../context/UIContext'
 import { values } from '../data/site'
 import imgStory from '../assets/about inside image.jpg'
-import imgCtaBg from '../assets/Parametric wall panel.jpg'
+import imgCtaBg from '../assets/products/Parametric wall panel.jpg'
 import imgHero from '../assets/about hero 3.png'
 
 function MissionVision() {
