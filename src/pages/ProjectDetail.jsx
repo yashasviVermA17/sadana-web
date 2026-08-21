@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useParams } from 'react-router-dom'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
@@ -91,6 +91,16 @@ export default function ProjectDetail() {
   const [lightbox, setLightbox] = useState(null)
   const { openLightbox, closeLightbox } = useUI()
 
+  const gallery = useMemo(() => {
+    if (!project) return []
+    const seen = new Set()
+    return project.gallery.filter((img) => {
+      if (seen.has(img)) return false
+      seen.add(img)
+      return true
+    })
+  }, [project])
+
   const open = (i) => {
     setLightbox(i)
     openLightbox()
@@ -100,12 +110,12 @@ export default function ProjectDetail() {
     closeLightbox()
   }, [closeLightbox])
   const prev = useCallback(
-    () => setLightbox((i) => (project ? (i - 1 + project.gallery.length) % project.gallery.length : 0)),
-    [project],
+    () => setLightbox((i) => (gallery.length ? (i - 1 + gallery.length) % gallery.length : 0)),
+    [gallery],
   )
   const next = useCallback(
-    () => setLightbox((i) => (project ? (i + 1) % project.gallery.length : 0)),
-    [project],
+    () => setLightbox((i) => (gallery.length ? (i + 1) % gallery.length : 0)),
+    [gallery],
   )
 
   if (!project) {
@@ -192,8 +202,8 @@ export default function ProjectDetail() {
           <SectionHeading eyebrow="Gallery" title="Our Project" />
         </Reveal>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-5">
-          {project.gallery.map((img, i) => {
-            const featured = i === 0 || i === project.gallery.length - 1
+          {gallery.map((img, i) => {
+            const featured = i === 0 || i === gallery.length - 1
             return (
               <Reveal
                 key={img}
@@ -225,7 +235,7 @@ export default function ProjectDetail() {
       </section>
 
       <Lightbox
-        images={project.gallery}
+        images={gallery}
         index={lightbox}
         onClose={close}
         onPrev={prev}
