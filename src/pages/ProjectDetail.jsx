@@ -1,89 +1,15 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import { createPortal } from 'react-dom'
+import { useCallback, useMemo, useState } from 'react'
+import { ChevronRight } from 'lucide-react'
 import { useParams } from 'react-router-dom'
-import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import Breadcrumb from '../components/Breadcrumb'
 import Button from '../components/Button'
 import Reveal from '../components/Reveal'
 import AutoSlider from '../components/AutoSlider'
+import Lightbox from '../components/Lightbox'
 import ProjectCard from '../components/ProjectCard'
 import SectionHeading from '../components/SectionHeading'
 import { useUI } from '../context/UIContext'
 import { getProject, relatedProjects } from '../data/projects'
-
-function Lightbox({ images, index, onClose, onPrev, onNext, alt }) {
-  useEffect(() => {
-    if (index === null) return undefined
-    const onKey = (e) => {
-      if (e.key === 'Escape') onClose()
-      if (e.key === 'ArrowLeft') onPrev()
-      if (e.key === 'ArrowRight') onNext()
-    }
-    window.addEventListener('keydown', onKey)
-    document.body.style.overflow = 'hidden'
-    return () => {
-      window.removeEventListener('keydown', onKey)
-      document.body.style.overflow = ''
-    }
-  }, [index, onClose, onPrev, onNext])
-
-  if (index === null) return null
-
-  return createPortal(
-    <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-charcoal/95 backdrop-blur-sm"
-      role="dialog"
-      aria-modal="true"
-      aria-label={`${alt} — fullscreen image viewer`}
-      onClick={onClose}
-    >
-      <button
-        type="button"
-        onClick={onClose}
-        aria-label="Close fullscreen image"
-        className="absolute right-5 top-5 z-10 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-cream transition-colors duration-300 hover:bg-brand hover:text-white"
-      >
-        <X className="h-5 w-5" aria-hidden="true" />
-      </button>
-
-      <button
-        type="button"
-        onClick={(e) => {
-          e.stopPropagation()
-          onPrev()
-        }}
-        aria-label="Previous image"
-        className="absolute left-3 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-cream transition-colors duration-300 hover:bg-ivory hover:text-charcoal sm:left-6"
-      >
-        <ChevronLeft className="h-6 w-6" aria-hidden="true" />
-      </button>
-
-      <img
-        src={images[index]}
-        alt={`${alt} — view ${index + 1}`}
-        onClick={(e) => e.stopPropagation()}
-        className="max-h-[86vh] max-w-[92vw] select-none object-contain"
-      />
-
-      <button
-        type="button"
-        onClick={(e) => {
-          e.stopPropagation()
-          onNext()
-        }}
-        aria-label="Next image"
-        className="absolute right-3 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-cream transition-colors duration-300 hover:bg-ivory hover:text-charcoal sm:right-6"
-      >
-        <ChevronRight className="h-6 w-6" aria-hidden="true" />
-      </button>
-
-      <span className="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-medium text-cream">
-        {index + 1} / {images.length}
-      </span>
-    </div>,
-    document.body,
-  )
-}
 
 export default function ProjectDetail() {
   const { id } = useParams()

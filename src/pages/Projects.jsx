@@ -2,13 +2,18 @@ import ProjectGrid from '../components/ProjectGrid'
 import Reveal from '../components/Reveal'
 import Button from '../components/Button'
 import PageHero from '../components/PageHero'
-import { projects } from '../data/projects'
+import { projectImageGroups } from '../data/imageGroups'
 import { useUI } from '../context/UIContext'
 import imgHero from '../assets/projects/Charcoal sheet with louvers.jpeg'
 
 export default function Projects() {
   const { openQuote } = useUI()
-  const items = projects
+  const items = projectImageGroups.map((group) => ({
+    id: group.id,
+    title: group.title,
+    category: `${group.count} ${group.count === 1 ? 'photo' : 'photos'}`,
+    cover: group.cover,
+  }))
 
   return (
     <>
@@ -27,7 +32,7 @@ export default function Projects() {
         <Reveal className="mb-8 flex items-center justify-between gap-4">
           <p className="text-sm text-stone">
             <span className="font-medium text-charcoal">{items.length}</span>{' '}
-            {items.length === 1 ? 'project' : 'projects'}
+            {items.length === 1 ? 'collection' : 'collections'}
           </p>
         </Reveal>
 

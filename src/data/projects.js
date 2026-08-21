@@ -1,10 +1,8 @@
 import imgCharcoalLouvers from '../assets/projects/Charcoal louvers.jpeg'
 import imgCharcoalLouvers1 from '../assets/projects/Charcoal louvers1.jpeg'
-import imgCharcoalLouvers2 from '../assets/projects/Charcoal louvers2.jpeg'
 import imgCharcoalSheetLouvers from '../assets/projects/Charcoal sheet with louvers.jpeg'
 import imgWallPanelLouvers from '../assets/projects/Wall paneel with louvers.jpeg'
 import imgWallPanelLouvers1 from '../assets/projects/Wall paneel with louvers1.jpeg'
-import imgWallPanelLouvers2 from '../assets/projects/Wall paneel with louvers2.jpeg'
 import imgWoodenFlooring from '../assets/projects/Wooden flooring.jpeg'
 import imgWoodenFlooring1 from '../assets/projects/Wooden flooring1.jpeg'
 import imgWoodenFlooring2 from '../assets/projects/Wooden flooring2.jpeg'
@@ -17,7 +15,6 @@ import imgWallpaperLower7 from '../assets/projects/wallpaper 7.jpeg'
 import imgWallpaper1 from '../assets/projects/Wallpaper1.jpeg'
 import imgWallpaper3 from '../assets/projects/Wallpaper3.jpeg'
 import imgMosaicLouvers from '../assets/projects/Mosaic tiles with louvers.jpeg'
-import imgMosaicLouvers1 from '../assets/projects/Mosaic tiles with louvers1.jpeg'
 import imgMosaic2 from '../assets/projects/Mosaic tiles2.jpeg'
 import imgCurtains from '../assets/projects/Curtains.jpeg'
 import imgCurtains1 from '../assets/projects/Curtains1.jpeg'
@@ -30,7 +27,6 @@ import imgVinylFlooring2 from '../assets/projects/Vinyl flooring2.jpeg'
 import imgArtificialGrass from '../assets/Artificial grass.jpg'
 import imgArtificialGrass1 from '../assets/projects/Artificial grass1.jpeg'
 import imgWpcExteriorLouver from '../assets/projects/Wpc exterior grade louver.jpeg'
-import imgWpcExteriorLouvers from '../assets/projects/Wpc exterior grade louvers.jpeg'
 import imgExteriorFlooring1 from '../assets/projects/Exterior grade flooring1.jpeg'
 import imgExteriorFlooring2 from '../assets/projects/Exterior grade flooring2.jpeg'
 import imgCanopy from '../assets/projects/Canopy.jpeg'
@@ -71,7 +67,6 @@ export const projects = [
     gallery: [
       imgCharcoalLouvers,
       imgCharcoalLouvers1,
-      imgCharcoalLouvers2,
       imgCharcoalSheetLouvers,
       imgWallPanelLouvers,
       imgWoodenFlooring,
@@ -89,7 +84,6 @@ export const projects = [
     cover: imgMosaicLouvers,
     gallery: [
       imgMosaicLouvers,
-      imgMosaicLouvers1,
       imgCurtains,
       imgRollerBlind,
       imgVinylFlooring,
@@ -120,7 +114,6 @@ export const projects = [
       imgArtificialGrass,
       imgArtificialGrass1,
       imgWpcExteriorLouver,
-      imgWpcExteriorLouvers,
       imgExteriorFlooring1,
       imgExteriorFlooring2,
       imgCanopy,
@@ -279,9 +272,9 @@ export const projects = [
       'Marble-look surfaces on the service counter',
     ],
     materials: ['Highlight Sheets', 'Vertical Garden', 'Baffle Ceiling', 'Wooden Flooring', 'Rattan Cane', 'Wooden Blinds'],
-    cover: imgWallPanelLouvers2,
+    cover: imgWallPanelLouvers,
     gallery: [
-      imgWallPanelLouvers2,
+      imgWallPanelLouvers,
       imgWpcLouvers1,
       imgWpcLouvers6,
       imgArtificialGrass,
@@ -297,7 +290,7 @@ export const getProject = (id) => projects.find((p) => p.id === id)
 export const projectsByCategory = (category) =>
   category === 'All' ? projects : projects.filter((p) => p.category === category)
 
-export const relatedProjects = (project, count = 3) =>
+export const relatedProjects = (project, count = 6) =>
   projects
     .filter((p) => p.category === project.category && p.id !== project.id)
     .concat(projects.filter((p) => p.category !== project.category && p.id !== project.id))

@@ -50,18 +50,21 @@ export default function AutoSlider({
   const [paused, setPaused] = useState(false)
   const [resetKey, setResetKey] = useState(0)
   const [dragOffset, setDragOffset] = useState(0)
+  const [scrollable, setScrollable] = useState(true)
 
   useEffect(() => {
     const measure = () => {
       const el = viewportRef.current
       if (!el) return
       const v = getVisible(visible)
-      setCardWidth(Math.max(0, (el.clientWidth - (v - 1) * GAP) / v))
+      const cw = Math.max(0, (el.clientWidth - (v - 1) * GAP) / v)
+      setCardWidth(cw)
+      setScrollable(count * (cw + GAP) - GAP > el.clientWidth + 1)
     }
     measure()
     window.addEventListener('resize', measure)
     return () => window.removeEventListener('resize', measure)
-  }, [visible])
+  }, [visible, count])
 
   useEffect(() => {
     indexRef.current = index
@@ -123,10 +126,10 @@ export default function AutoSlider({
   )
 
   useEffect(() => {
-    if (!autoplay || prefersReducedMotion() || paused) return undefined
+    if (!autoplay || !scrollable || prefersReducedMotion() || paused) return undefined
     const id = setInterval(step, AUTOPLAY_MS)
     return () => clearInterval(id)
-  }, [autoplay, paused, step, resetKey])
+  }, [autoplay, scrollable, paused, step, resetKey])
 
   const dragState = useRef({ active: false, startX: 0, moved: 0 })
 
@@ -195,8 +198,11 @@ export default function AutoSlider({
   const maxVisible = Math.ceil(
     Math.max(visible.base, visible.sm, visible.lg, visible.xl),
   )
-  const repeats = Math.max(1, Math.ceil((count + maxVisible) / count))
-  const loopItems = Array.from({ length: repeats }, () => items).flat()
+  let loopItems = items
+  if (scrollable && count > 0) {
+    const repeats = Math.max(1, Math.ceil((count + maxVisible) / count))
+    loopItems = Array.from({ length: repeats }, () => items).flat()
+  }
 
   const offset = index * (cardWidth + GAP)
   const active = index % count
@@ -217,7 +223,7 @@ export default function AutoSlider({
           onPointerCancel={onDragEnd}
         >
           <div
-            className="flex will-change-transform"
+            className={`flex will-change-transform ${scrollable ? '' : 'justify-center'}`}
             style={{
               gap: `${GAP}px`,
               transform: `translateX(${dragOffset - offset}px)`,
@@ -239,37 +245,43 @@ export default function AutoSlider({
           </div>
         </div>
 
-        <button
-          type="button"
-          onClick={goPrev}
-          aria-label="Previous slide"
-          className="absolute left-2 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-charcoal/10 bg-ivory/95 text-charcoal shadow-card backdrop-blur-sm transition-colors duration-300 hover:border-brand hover:text-brand sm:left-4"
-        >
-          <ChevronLeft className="h-5 w-5" aria-hidden="true" />
-        </button>
-        <button
-          type="button"
-          onClick={goNext}
-          aria-label="Next slide"
-          className="absolute right-2 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-charcoal/10 bg-ivory/95 text-charcoal shadow-card backdrop-blur-sm transition-colors duration-300 hover:border-brand hover:text-brand sm:right-4"
-        >
-          <ChevronRight className="h-5 w-5" aria-hidden="true" />
-        </button>
+        {scrollable && (
+          <>
+            <button
+              type="button"
+              onClick={goPrev}
+              aria-label="Previous slide"
+              className="absolute left-2 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-charcoal/10 bg-ivory/95 text-charcoal shadow-card backdrop-blur-sm transition-colors duration-300 hover:border-brand hover:text-brand sm:left-4"
+            >
+              <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              onClick={goNext}
+              aria-label="Next slide"
+              className="absolute right-2 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-charcoal/10 bg-ivory/95 text-charcoal shadow-card backdrop-blur-sm transition-colors duration-300 hover:border-brand hover:text-brand sm:right-4"
+            >
+              <ChevronRight className="h-5 w-5" aria-hidden="true" />
+            </button>
+          </>
+        )}
       </div>
 
-      <div className="mt-8 flex items-center justify-center gap-2">
-        {items.map((item, i) => (
-          <button
-            key={i}
-            type="button"
-            aria-label={`Go to ${item?.name || `slide ${i + 1}`}`}
-            onClick={() => jumpTo(i)}
-            className={`h-2 rounded-full transition-all duration-500 ${
-              i === active ? 'w-7 bg-brand' : 'w-2 bg-charcoal/20 hover:bg-charcoal/40'
-            }`}
-          />
-        ))}
-      </div>
+      {scrollable && (
+        <div className="mt-8 flex items-center justify-center gap-2">
+          {items.map((item, i) => (
+            <button
+              key={i}
+              type="button"
+              aria-label={`Go to ${item?.name || `slide ${i + 1}`}`}
+              onClick={() => jumpTo(i)}
+              className={`h-2 rounded-full transition-all duration-500 ${
+                i === active ? 'w-7 bg-brand' : 'w-2 bg-charcoal/20 hover:bg-charcoal/40'
+              }`}
+            />
+          ))}
+        </div>
+      )}
     </>
   )
 }

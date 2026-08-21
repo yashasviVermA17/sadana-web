@@ -21,6 +21,8 @@ import { getProduct } from './data/products'
 import { getProductShopSlug, getShopCategoryBySlug } from './data/filters'
 import Projects from './pages/Projects'
 import ProjectDetail from './pages/ProjectDetail'
+import ProjectGroupDetail from './pages/ProjectGroupDetail'
+import { getProjectImageGroup } from './data/imageGroups'
 import About from './pages/About'
 import Contact from './pages/Contact'
 
@@ -56,6 +58,13 @@ function ProductPage() {
 function ProductDetailRoute() {
   const { productId } = useParams()
   return <ProductDetail productId={productId} />
+}
+
+function ProjectDetailRoute() {
+  const { id } = useParams()
+
+  if (getProjectImageGroup(id)) return <ProjectGroupDetail />
+  return <ProjectDetail />
 }
 
 function Layout() {
