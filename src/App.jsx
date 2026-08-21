@@ -39,7 +39,8 @@ function ProductPage() {
 
   if (slug) {
     const category = getShopCategoryBySlug(slug)
-    if (category) return <Products activeCategorySlug={category.slug} />
+    if (category)
+      return <Products key={category.slug} activeCategorySlug={category.slug} />
 
     const product = getProduct(slug)
     if (product) {
@@ -52,7 +53,7 @@ function ProductPage() {
     }
   }
 
-  return <Products activeCategorySlug={null} />
+  return <Products key="all" activeCategorySlug={null} />
 }
 
 function ProductDetailRoute() {
@@ -81,7 +82,7 @@ function Layout() {
           <Route path="/products/:slug" element={<ProductPage />} />
           <Route path="/products/:slug/:productId" element={<ProductDetailRoute />} />
           <Route path="/projects" element={<Projects />} />
-          <Route path="/projects/:id" element={<ProjectDetail />} />
+          <Route path="/projects/:id" element={<ProjectDetailRoute />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<Home />} />

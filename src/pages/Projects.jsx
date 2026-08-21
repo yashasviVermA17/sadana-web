@@ -11,7 +11,6 @@ export default function Projects() {
   const items = projectImageGroups.map((group) => ({
     id: group.id,
     title: group.title,
-    category: `${group.count} ${group.count === 1 ? 'photo' : 'photos'}`,
     cover: group.cover,
   }))
 

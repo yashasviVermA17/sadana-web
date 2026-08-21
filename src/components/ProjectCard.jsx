@@ -21,9 +21,11 @@ export default function ProjectCard({ project }) {
             className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/20 to-transparent"
             aria-hidden="true"
           />
-          <span className="absolute left-4 top-4 rounded-full bg-ivory/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-charcoal backdrop-blur-sm">
-            {project.category}
-          </span>
+          {project.category && (
+            <span className="absolute left-4 top-4 rounded-full bg-ivory/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-charcoal backdrop-blur-sm">
+              {project.category}
+            </span>
+          )}
           <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-3">
             <div className="min-w-0">
               <h3 className="truncate font-serif text-xl leading-snug text-cream">

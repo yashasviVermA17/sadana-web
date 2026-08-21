@@ -5,11 +5,9 @@ import Button from '../components/Button'
 import ImageGallery from '../components/ImageGallery'
 import Reveal from '../components/Reveal'
 import AutoSlider from '../components/AutoSlider'
-import ProjectCard from '../components/ProjectCard'
 import ProductCard from '../components/ProductCard'
 import SectionHeading from '../components/SectionHeading'
-import { getProduct, productProjects, relatedProducts } from '../data/products'
-import { getProject } from '../data/projects'
+import { getProduct, relatedProducts } from '../data/products'
 import { getProductShopCategory } from '../data/filters'
 import { useUI } from '../context/UIContext'
 
@@ -44,8 +42,6 @@ export default function ProductDetail({ productId: propProductId }) {
 
   const shopCategory = getProductShopCategory(product)
   const related = relatedProducts(product)
-  const relatedProjectIds = productProjects[product.id] || []
-  const relatedProjects = relatedProjectIds.map((pid) => getProject(pid)).filter(Boolean)
 
   return (
     <>
@@ -167,25 +163,6 @@ export default function ProductDetail({ productId: propProductId }) {
           </Reveal>
         </div>
       </section>
-
-      {relatedProjects.length > 0 && (
-        <section className="mx-auto max-w-none px-5 py-12 sm:px-6 lg:px-8 lg:py-16">
-          <SectionHeading
-            eyebrow="In Context"
-            title="Featured in our projects"
-            text="See how this material performs in real, delivered spaces."
-          />
-          <Reveal className="mt-10">
-            <AutoSlider
-              key={`projects-${product.id}`}
-              items={relatedProjects}
-              itemClassName="h-full"
-              visible={relatedVisible}
-              renderItem={(project) => <ProjectCard project={project} />}
-            />
-          </Reveal>
-        </section>
-      )}
 
       {related.length > 0 && (
         <section className="bg-mist">

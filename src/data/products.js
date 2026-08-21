@@ -73,6 +73,14 @@ import imgPvcWallPanelJpeg from '../assets/Pvc wall panel.jpeg'
 import imgSpcFlooringJpeg from '../assets/Spc flooring.jpeg'
 import imgStretchFiberJpeg from '../assets/Stretch fiber ceiling.jpeg'
 import imgUvMarbleJpeg from '../assets/Uv marble sheet.jpeg'
+import imgBaffleJpeg from '../assets/Baffle ceiling.jpeg'
+import imgParametricJpeg from '../assets/Parametric wall panel.jpeg'
+import imgHighlightSheetJpeg from '../assets/Ripple sheet.jpeg'
+import imgDoorJpeg from '../assets/Designer door.jpeg'
+import imgHdhmrJpeg from '../assets/HDHMR 3d wall panel.jpeg'
+import imgVeneerJpeg from '../assets/Veneer sheets.jpeg'
+import imgExteriorLouversJpeg from '../assets/Exterior lowers.jpeg'
+import imgWoodenFlooringJpeg from '../assets/Wooden flooring.jpeg'
 
 export const categories = [
   'Wall Finishes',
@@ -143,7 +151,7 @@ export const products = [
     name: 'PU Stones',
     category: 'Wall Finishes',
     image: imgPuStone,
-    gallery: [imgPuStone, imgPuStoneJpeg, imgUvMarble, imgMarbleSheets],
+    gallery: [imgPuStone, imgPuStoneJpeg],
     short: 'Lightweight stone-textured panels that bring the natural stone look without the weight.',
     description: 'PU stone panels replicate the texture and look of natural stone at a fraction of the weight and cost. Easy to install on walls and elevation, they suit both interiors and exteriors.',
     features: ['Realistic stone texture', 'Lightweight, easy to handle', 'Simple adhesive installation', 'Suitable indoor & outdoor'],
