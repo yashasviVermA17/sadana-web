@@ -59,6 +59,7 @@ export const PRODUCT_SHOP_SLUGS = {
   'ladder-rungs': 'rungs',
   'grass-tiles': 'exterior-outdoor',
   'vertical-garden': 'exterior-outdoor',
+  'artificial-grass': 'exterior-outdoor',
   // Separate categories
   'customized-doors': 'doors',
   plywood: 'plywood',
