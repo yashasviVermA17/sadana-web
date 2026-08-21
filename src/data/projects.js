@@ -27,7 +27,7 @@ import imgIndustrialBlind from '../assets/projects/Industrial blind.jpeg'
 import imgVinylFlooring from '../assets/projects/Vinyl flooring.jpeg'
 import imgVinylFlooring1 from '../assets/projects/Vinyl flooring1.jpeg'
 import imgVinylFlooring2 from '../assets/projects/Vinyl flooring2.jpeg'
-import imgArtificialGrass from '../assets/projects/Artificial grass.jpeg'
+import imgArtificialGrass from '../assets/Artificial grass.jpg'
 import imgArtificialGrass1 from '../assets/projects/Artificial grass1.jpeg'
 import imgWpcExteriorLouver from '../assets/projects/Wpc exterior grade louver.jpeg'
 import imgWpcExteriorLouvers from '../assets/projects/Wpc exterior grade louvers.jpeg'
@@ -55,8 +55,6 @@ import imgWpcLouvers2 from '../assets/projects/Wpc louvers2.jpeg'
 import imgWpcLouvers3 from '../assets/projects/Wpc louvers3.jpeg'
 import imgWpcLouvers4 from '../assets/projects/Wpc louvers4.jpeg'
 import imgWpcLouvers6 from '../assets/projects/Wpc louvers6.jpeg'
-import imgSix from '../assets/projects/6.jpeg'
-import imgEight from '../assets/projects/8.jpeg'
 
 export const projectCategories = ['All', 'Residential', 'Hospitality', 'Office', 'Retail']
 
@@ -257,8 +255,8 @@ export const projects = [
       imgWallPanelLouvers1,
       imgWallpaper7,
       imgVinylFlooring2,
-      imgSix,
-      imgEight,
+      imgStretchFiberCelling,
+      imgCarpet1,
       imgWpcLouvers3,
       imgWpcLouvers4,
     ],
