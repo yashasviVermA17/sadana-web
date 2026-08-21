@@ -113,7 +113,7 @@ export default function Contact() {
               <p className="mt-5 text-base leading-relaxed text-stone">
                 Opposite Retina Hospital in Vijay Nagar, with easy access from Scheme
                 No. 54. Walk-ins welcome through the week — call ahead on{' '}
-                {contact.phone.lines[0]} and we’ll have samples ready for you.
+                {contact.phone.lines.join(' / ')} and we’ll have samples ready for you.
               </p>
               <ul className="mt-7 space-y-3 text-sm text-stone">
                 <li className="flex items-start gap-3">
@@ -126,13 +126,28 @@ export default function Contact() {
                     ))}
                   </span>
                 </li>
-                <li className="flex items-center gap-3">
-                  <Phone className="h-4 w-4 text-brand" aria-hidden="true" />
-                  {contact.phone.lines[0]}
+                <li className="flex items-start gap-3">
+                  <Phone className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden="true" />
+                  <span>
+                    {contact.phone.lines.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </span>
                 </li>
-                <li className="flex items-center gap-3">
-                  <MessageCircle className="h-4 w-4 text-brand" aria-hidden="true" />
-                  WhatsApp: {contact.whatsapp.lines[0]}
+                <li className="flex items-start gap-3">
+                  <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden="true" />
+                  <span className="flex items-start gap-1">
+                    WhatsApp:{' '}
+                    <span>
+                      {contact.whatsapp.lines.map((line) => (
+                        <span key={line} className="block">
+                          {line}
+                        </span>
+                      ))}
+                    </span>
+                  </span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail className="h-4 w-4 text-brand" aria-hidden="true" />

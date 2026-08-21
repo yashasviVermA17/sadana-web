@@ -30,6 +30,13 @@ export const PRODUCT_SHOP_SLUGS = {
   'glass-films': 'glass-films',
   // Wallpapers
   wallpapers: 'wallpapers',
+  'designer-wallpapers': 'wallpapers',
+  'wallpapers-textured': 'wallpapers',
+  'wallpapers-floral': 'wallpapers',
+  'wallpapers-geometric': 'wallpapers',
+  'wallpapers-3d': 'wallpapers',
+  'wallpapers-kids': 'wallpapers',
+  'wallpapers-metallic': 'wallpapers',
   // False ceiling
   'baffle-ceiling': 'false-ceiling',
   'stretch-fiber-ceiling': 'false-ceiling',

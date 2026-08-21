@@ -2,8 +2,7 @@ import imgWallpapers from '../assets/products/Wallpaper.jpg'
 import imgWallpapers2 from '../assets/products/Wallpaper.jpeg'
 import imgWallPaneling from '../assets/products/Victara panel.jpg'
 import img3DPanels from '../assets/products/3 D panel.jpg'
-import imgParametric from '../assets/products/Parametric wall panel.jpg'
-import imgParametric1 from '../assets/products/Parametric wall panel1.jpg'
+import imgParametric from '../assets/products/Parametric wall panel.jpeg'
 import imgPuStone from '../assets/products/Pu stone wall panel.jpg'
 import imgHighlightSheet from '../assets/products/Ripple sheet.jpg'
 import imgMouldings from '../assets/products/Moulding.jpg'
@@ -14,11 +13,11 @@ import imgWoodenFlooring from '../assets/products/Wooden flooring.jpg'
 import imgGymFlooring from '../assets/products/Gym rubber flooring.jpg'
 import imgMarbleSheets from '../assets/products/Mosaic tiles.jpg'
 import imgCarpets from '../assets/products/Carpet.jpg'
-import imgDoors from '../assets/products/Designer door.jpg'
+import imgDoors from '../assets/products/Designer door.jpeg'
 import imgPlywood from '../assets/products/Plywood.jpg'
 import imgWpcPanels from '../assets/products/W.p.c panel.jpg'
 import imgLaminates from '../assets/products/Laminate sheet.jpeg'
-import imgAcpHpl from '../assets/products/Acp sheet.jpg'
+import imgAcpHpl from '../assets/products/Acp sheet.jpeg'
 import imgCurtains from '../assets/products/Curtain.jpg'
 import imgUpholstery from '../assets/products/Sofa.jpg'
 import imgMattress from '../assets/products/Mattress.jpeg'
@@ -28,11 +27,10 @@ import imgExteriorLouvers from '../assets/products/Exterior lowers.jpg'
 import imgVerticalGarden from '../assets/products/Vertical garden.jpg'
 import imgRattan from '../assets/products/Rattan cane.jpg'
 import imgAcrylicSheet1 from '../assets/products/Acrylic sheet1.jpg'
-import imgAlabasterSheet from '../assets/products/living room 2 image.png'
 import imgArtificialGrass from '../assets/products/Artificial grass.jpg'
 import imgArtificialGrass1 from '../assets/products/Artificial grass1.jpg'
 import imgCorkSheet from '../assets/products/Cork sheet.jpg'
-import imgGlassFilm from '../assets/products/Glass film.jpg'
+import imgGlassFilm from '../assets/products/Glass film.jpeg'
 import imgHdhmr from '../assets/products/HDHMR 3d wall panel.jpg'
 import imgPvcCeiling from '../assets/products/Pvc ceiling.jpg'
 import imgPvcWallPanel from '../assets/products/Pvc wall panel.jpg'
@@ -53,7 +51,6 @@ import imgHdpcLouvers from '../assets/products/HDPC lowers.jpeg'
 import imgVinylFlooring from '../assets/products/Vinyl flooring.jpeg'
 import imgRoofingThatch from '../assets/products/Roofing Thatch.jpeg'
 import imgHighlighterSheet2 from '../assets/products/Highlighter sheet.jpeg'
-import imgLaminateSheet from '../assets/products/Laminate sheet.jpeg'
 import imgRugs from '../assets/products/Rugs.jpeg'
 import imgVoxSoffitPanel from '../assets/products/Vox soffit panel.jpeg'
 import imgAlabasterSheetJpg from '../assets/products/Alabaster sheet.jpeg'
@@ -61,21 +58,16 @@ import img3dWallPanelJpg from '../assets/products/3d wall panel.jpeg'
 import imgPlywoodJpeg from '../assets/products/Plywood.jpeg'
 import imgAcrylicSheetOld from '../assets/products/Acrylic sheet.jpg'
 import imgCusion from '../assets/products/Cusion.jpg'
-import imgAcpHplJpeg from '../assets/products/Acp sheet.jpeg'
 import imgAlabasterSheetOld from '../assets/products/Alabaster sheet.jpg'
 import imgCusionJpeg from '../assets/products/Cusion.jpeg'
-import imgGlassFilmJpeg from '../assets/products/Glass film.jpeg'
 import imgExteriorCladdingJpeg from '../assets/products/Outdoor deck tile.jpeg'
 import imgPuStoneJpeg from '../assets/products/Pu stone wall panel.jpeg'
 import imgPvcCeilingJpeg from '../assets/products/Pvc ceiling.jpeg'
 import imgPvcWallPanelJpeg from '../assets/products/Pvc wall panel.jpeg'
 import imgSpcFlooringJpeg from '../assets/products/Spc flooring.jpeg'
 import imgStretchFiberJpeg from '../assets/products/Stretch fiber ceiling.jpeg'
-import imgUvMarbleJpeg from '../assets/products/Uv marble sheet.jpeg'
 import imgBaffleJpeg from '../assets/products/Baffle ceiling.jpeg'
-import imgParametricJpeg from '../assets/products/Parametric wall panel.jpeg'
 import imgHighlightSheetJpeg from '../assets/products/Ripple sheet.jpeg'
-import imgDoorJpeg from '../assets/products/Designer door.jpeg'
 import imgHdhmrJpeg from '../assets/products/HDHMR 3d wall panel.jpeg'
 import imgExteriorLouversJpeg from '../assets/products/Exterior lowers.jpeg'
 import imgWoodenFlooringJpeg from '../assets/products/Wooden flooring.jpeg'
@@ -99,13 +91,26 @@ export const products = [
     name: 'Wallpapers',
     category: 'Wall Finishes',
     image: imgWallpapers,
-    gallery: [imgWallpapers, imgWallpapers2, imgAlabasterSheet],
+    gallery: [imgWallpapers],
     short: 'Elegant wallpapers in every texture, pattern and finish to transform any room.',
     description: 'A wide selection of wallpapers for residential, commercial and office spaces — from subtle textures to bold patterns, with printed and vinyl options that are easy to install and simple to maintain.',
     features: ['Huge range of patterns & textures', 'Durable, washable finishes', 'Easy, clean installation', 'For homes, offices & retail'],
     material: 'Premium vinyl, non-woven and paper-backed wallpapers in a range of textures and finishes.',
     applications: ['Living rooms & bedrooms', 'Hotel rooms & suites', 'Office cabins & reception', 'Retail & café walls'],
     finishes: ['Textured', 'Printed', 'Plain', 'Vinyl'],
+  }),
+  make({
+    id: 'designer-wallpapers',
+    name: 'Designer Wallpapers',
+    category: 'Wall Finishes',
+    image: imgWallpapers2,
+    gallery: [imgWallpapers2],
+    short: 'Premium designer wallpapers with exclusive patterns for statement walls.',
+    description: 'Exclusive designer wallpapers curated for premium interiors — bold patterns, elegant textures and rich colours that turn any wall into a statement. Perfect for homes, hotels and offices.',
+    features: ['Exclusive designer patterns', 'Rich, premium finishes', 'Durable & washable', 'Professional installation'],
+    material: 'Premium designer vinyl and non-woven wallpapers with fade-resistant prints.',
+    applications: ['Feature walls', 'Hotel rooms & lobbies', 'Living rooms & bedrooms', 'Office reception'],
+    finishes: ['Textured', 'Printed', 'Metallic', 'Plain'],
   }),
   make({
     id: 'customized-wall-paneling',
@@ -138,7 +143,7 @@ export const products = [
     name: 'Parametric Panel',
     category: 'Wall Finishes',
     image: imgParametric,
-    gallery: [imgParametric, imgParametric1, imgParametricJpeg],
+    gallery: [imgParametric],
     short: 'Geometric parametric panels with a striking, contemporary architectural look.',
     description: 'Parametric panels offer a precise, geometric grid that reads as modern architecture on the wall. Ideal for lobbies, reception areas and statement walls where the design needs to lead.',
     features: ['Geometric parametric design', 'Precision-cut, uniform modules', 'Quick modular installation', 'Modern architectural appeal'],
@@ -267,7 +272,7 @@ export const products = [
     name: 'Rugs & Carpets',
     category: 'Flooring',
     image: imgCarpets,
-    gallery: [imgCarpets, imgRugs],
+    gallery: [imgCarpets],
     short: 'Soft rugs and carpets that add comfort, colour and acoustic warmth.',
     description: 'A range of rugs and carpets for homes, hotels, offices and retail — from plush broadloom carpet to decorative area rugs that soften any space.',
     features: ['Soft & comfortable', 'Acoustic warmth', 'Wide range of designs', 'Durable options available'],
@@ -280,7 +285,7 @@ export const products = [
     name: 'Customized Doors',
     category: 'Doors & Panels',
     image: imgDoors,
-    gallery: [imgDoors, imgDoorJpeg],
+    gallery: [imgDoors],
     short: 'Designer doors made to order in wood, laminate and modern finishes.',
     description: 'Customized designer doors manufactured to your style, size and finish. From flush doors to panel and designer patterns, each door is built for a clean, premium fit.',
     features: ['Made to your size & design', 'Wide range of finishes', 'Sturdy, durable construction', 'Modern designer styles'],
@@ -319,7 +324,7 @@ export const products = [
     name: 'Laminates',
     category: 'Doors & Panels',
     image: imgLaminates,
-    gallery: [imgLaminates, imgLaminateSheet, imgAcrylicSheetOld],
+    gallery: [imgLaminates],
     short: 'Decorative laminates in a huge range of colours, textures and finishes.',
     description: 'Decorative laminates for furniture, wardrobes, doors and surfaces. Available in glossy, matte, textured and wood-grain finishes to suit every interior style.',
     features: ['Huge colour range', 'Gloss, matte & textured', 'Scratch resistant', 'Easy to clean'],
@@ -332,7 +337,7 @@ export const products = [
     name: 'ACP & HPL Sheets',
     category: 'Doors & Panels',
     image: imgAcpHpl,
-    gallery: [imgAcpHpl, imgAcpHplJpeg],
+    gallery: [imgAcpHpl],
     short: 'Aluminium composite and HPL panels for facades, cladding and signage.',
     description: 'ACP (Aluminium Composite Panels) and HPL (High Pressure Laminate) sheets for facades, cladding, signage and furniture. Strong, weather-resistant and available in vivid colours and finishes.',
     features: ['Weather-resistant', 'Vivid colour range', 'Lightweight & strong', 'For facade & interiors'],
@@ -473,7 +478,7 @@ export const products = [
     name: 'Glass Films',
     category: 'Wall Finishes',
     image: imgGlassFilm,
-    gallery: [imgGlassFilm, imgGlassFilmJpeg],
+    gallery: [imgGlassFilm],
     short: 'Decorative and sun-control films that upgrade any glass surface.',
     description: 'Glass films add privacy, sun control and a decorative finish to windows, partitions and doors — a quick, clean upgrade over bare glass.',
     features: ['Sun & UV control', 'Privacy without darkness', 'Decorative patterns', 'Easy application'],
@@ -564,7 +569,7 @@ export const products = [
     name: 'UV Marble Sheets',
     category: 'Flooring',
     image: imgUvMarble,
-    gallery: [imgUvMarble, imgUvMarbleJpeg],
+    gallery: [imgUvMarble],
     short: 'Glossy UV-finished marble sheets for floors, walls and vanities.',
     description: 'UV marble sheets offer a brilliant, glossy marble look for floors, feature walls and vanity tops. The UV coating adds depth, shine and easy wipe-clean maintenance.',
     features: ['High-gloss marble look', 'Deep, reflective shine', 'Easy to maintain', 'Wall, floor & counter use'],
@@ -602,7 +607,7 @@ export const products = [
     id: 'grass-tiles',
     name: 'Grass Tiles',
     category: 'Exterior & Outdoor',
-    image: imgExteriorCladding,
+    image: imgGrass2,
     gallery: [imgGrass2],
     short: 'Interlocking grass tiles that turn balconies and terraces green in minutes.',
     description: 'Grass tiles snap together over any flat surface to create an instant lush green floor. Perfect for balconies, terraces and event spaces, they are quick to install, easy to replace and simple to maintain.',
@@ -616,7 +621,7 @@ export const products = [
     name: 'Ladders & Rungs',
     category: 'Exterior & Outdoor',
     image: imgRungs,
-    gallery: [imgRungs],
+    gallery: [imgRungs, imgRugs],
     short: 'Sturdy ladders, rungs and step systems for access, lofts and mezzanines.',
     description: 'Quality ladders, rungs and step systems for lofts, mezzanines, storerooms and exterior access points. Built to be strong, stable and easy to install.',
     features: ['Strong, stable construction', 'Indoor & outdoor use', 'Easy installation', 'Wide size range'],
@@ -667,7 +672,7 @@ export const products = [
     name: 'Blinds',
     category: 'Soft Furnishings',
     image: imgBlinds,
-    gallery: [imgBlinds, imgWoodenBlinds],    short: 'Roller, zebra and vertical blinds for clean, modern window control.',
+    gallery: [imgBlinds],    short: 'Roller, zebra and vertical blinds for clean, modern window control.',
     description: 'Window blinds in roller, zebra, vertical and roman styles — precise light control with a clean, minimal look for homes and offices. Made to measure with smooth operating systems.',
     features: ['Roller, zebra & vertical styles', 'Made to measure', 'Smooth chain & motorised options', 'Blackout & sunscreen fabrics'],
     material: 'Polyester and sunscreen blind fabrics with aluminium bottom bars and quality mechanisms.',

@@ -13,11 +13,11 @@ export const contact = {
   },
   phone: {
     title: 'Phone',
-    lines: ['91799 79797'],
+    lines: ['91799 79797', '91792 66377'],
   },
   whatsapp: {
     title: 'WhatsApp',
-    lines: ['91799 79797'],
+    lines: ['91799 79797', '91792 66377'],
   },
   email: {
     title: 'Email',

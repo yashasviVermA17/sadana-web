@@ -11,11 +11,18 @@ export default function ProductGrid({
     <div
       className={`grid gap-5 ${columns} sm:gap-6 ${className}`}
     >
-      {items.map((product, i) => (
-        <Reveal key={product.id} delay={(i % 3) * 90} className="h-full">
-          <ProductCard product={product} categoryFirst={categoryFirst} />
-        </Reveal>
-      ))}
+      {items.map((item, i) => {
+        const entry = item && item.product ? item : { key: item.id, product: item, image: undefined }
+        return (
+          <Reveal key={entry.key} delay={(i % 3) * 90} className="h-full">
+            <ProductCard
+              product={entry.product}
+              image={entry.image}
+              categoryFirst={categoryFirst}
+            />
+          </Reveal>
+        )
+      })}
     </div>
   )
 }

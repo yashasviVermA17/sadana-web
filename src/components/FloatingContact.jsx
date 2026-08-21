@@ -1,8 +1,13 @@
+import { useEffect, useRef, useState } from 'react'
 import { Phone } from 'lucide-react'
 
-const WHATSAPP_URL =
-  'https://wa.me/919179979797?text=Hello%20Sadana%20Decor%2C%20I%20am%20interested%20in%20your%20interior%20products.'
-const TEL_HREF = 'tel:+919179979797'
+const WHATSAPP_TEXT =
+  'https://wa.me/{NUMBER}?text=Hello%20Sadana%20Decor%2C%20I%20am%20interested%20in%20your%20interior%20products.'
+
+const NUMBERS = [
+  { display: '91799 79797', tel: '+919179979797', wa: '919179979797' },
+  { display: '91792 66377', tel: '+919179266377', wa: '919179266377' },
+]
 
 function WhatsAppIcon() {
   return (
@@ -13,29 +18,81 @@ function WhatsAppIcon() {
 }
 
 export default function FloatingContact() {
-  return (
-    <div className="floating-contact">
-      <a
-        href={WHATSAPP_URL}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Chat with Sadana Decor on WhatsApp"
-        className="floating-btn floating-whatsapp"
-      >
-        <span className="floating-icon">
-          <WhatsAppIcon />
-        </span>
-      </a>
+  const [openMenu, setOpenMenu] = useState(null)
+  const rootRef = useRef(null)
 
-      <a
-        href={TEL_HREF}
-        aria-label="Call Sadana Decor"
-        className="floating-btn floating-call"
-      >
-        <span className="floating-icon">
-          <Phone className="h-6 w-6" aria-hidden="true" />
-        </span>
-      </a>
+  useEffect(() => {
+    if (!openMenu) return undefined
+    const onPointerDown = (e) => {
+      if (rootRef.current && !rootRef.current.contains(e.target)) setOpenMenu(null)
+    }
+    const onKey = (e) => {
+      if (e.key === 'Escape') setOpenMenu(null)
+    }
+    document.addEventListener('pointerdown', onPointerDown)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [openMenu])
+
+  return (
+    <div className="floating-contact" ref={rootRef}>
+      <div className="floating-wrap">
+        {openMenu === 'whatsapp' && (
+          <div className="floating-menu" role="menu" aria-label="Choose WhatsApp number">
+            {NUMBERS.map((n) => (
+              <a
+                key={n.wa}
+                role="menuitem"
+                href={WHATSAPP_TEXT.replace('{NUMBER}', n.wa)}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => setOpenMenu(null)}
+              >
+                <WhatsAppIcon />
+                <span>{n.display}</span>
+              </a>
+            ))}
+          </div>
+        )}
+        <button
+          type="button"
+          onClick={() => setOpenMenu((v) => (v === 'whatsapp' ? null : 'whatsapp'))}
+          aria-label="Chat with Sadana Decor on WhatsApp"
+          aria-expanded={openMenu === 'whatsapp'}
+          className="floating-btn floating-whatsapp"
+        >
+          <span className="floating-icon">
+            <WhatsAppIcon />
+          </span>
+        </button>
+      </div>
+
+      <div className="floating-wrap">
+        {openMenu === 'call' && (
+          <div className="floating-menu" role="menu" aria-label="Choose number to call">
+            {NUMBERS.map((n) => (
+              <a key={n.tel} role="menuitem" href={`tel:${n.tel}`} onClick={() => setOpenMenu(null)}>
+                <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
+                <span>{n.display}</span>
+              </a>
+            ))}
+          </div>
+        )}
+        <button
+          type="button"
+          onClick={() => setOpenMenu((v) => (v === 'call' ? null : 'call'))}
+          aria-label="Call Sadana Decor"
+          aria-expanded={openMenu === 'call'}
+          className="floating-btn floating-call"
+        >
+          <span className="floating-icon">
+            <Phone className="h-6 w-6" aria-hidden="true" />
+          </span>
+        </button>
+      </div>
     </div>
   )
 }

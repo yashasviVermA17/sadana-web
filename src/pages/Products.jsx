@@ -19,6 +19,19 @@ import {
 } from '../data/filters'
 import imgHero from '../assets/product hera image 2.jpg'
 
+const expandToCards = (items) => {
+  const seen = new Set()
+  const cards = []
+  items.forEach((p) => {
+    const images = p.gallery && p.gallery.length > 0 ? p.gallery : [p.image]
+    const fresh = images.filter((img) => !seen.has(img))
+    fresh.forEach((img) => seen.add(img))
+    const shown = fresh.length > 0 ? fresh : [images[0]]
+    shown.forEach((image, i) => cards.push({ key: `${p.id}-${i}`, product: p, image }))
+  })
+  return cards
+}
+
 export default function Products({ activeCategorySlug }) {
   const navigate = useNavigate()
   const [filters, setFilters] = useState(EMPTY_FILTERS)
@@ -42,6 +55,9 @@ export default function Products({ activeCategorySlug }) {
     const byFilters = filterProducts(baseItems, filters)
     return searchProducts(byFilters, query)
   }, [baseItems, filters, query])
+
+  const baseCards = useMemo(() => expandToCards(baseItems), [baseItems])
+  const filteredCards = useMemo(() => expandToCards(filtered), [filtered])
 
   const activeCount = countActiveFilters(filters)
   const hasActive = activeCount > 0 || Boolean(query.trim()) || Boolean(activeCategory)
@@ -85,8 +101,8 @@ export default function Products({ activeCategorySlug }) {
 
   const countLabel = (
     <p className="text-sm text-stone">
-      Showing <span className="font-medium text-charcoal">{filtered.length}</span> of{' '}
-      <span className="font-medium text-charcoal">{baseItems.length}</span> products
+      Showing <span className="font-medium text-charcoal">{filteredCards.length}</span> of{' '}
+      <span className="font-medium text-charcoal">{baseCards.length}</span> products
     </p>
   )
 
@@ -170,7 +186,7 @@ export default function Products({ activeCategorySlug }) {
 
             {filtered.length > 0 ? (
               <Reveal>
-                <ProductGrid items={filtered} columns="sm:grid-cols-2 xl:grid-cols-3" categoryFirst={false} />
+                <ProductGrid items={filteredCards} columns="sm:grid-cols-2 xl:grid-cols-3" categoryFirst={false} />
               </Reveal>
             ) : (
               <Reveal className="flex flex-col items-center gap-4 rounded-card border border-dashed border-charcoal/20 bg-ivory px-6 py-20 text-center">

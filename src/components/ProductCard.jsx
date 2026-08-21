@@ -4,7 +4,7 @@ import { getProductShopSlug } from '../data/filters'
 import TiltCard from './TiltCard'
 import TiltImage from './TiltImage'
 
-export default function ProductCard({ product, categoryFirst = true }) {
+export default function ProductCard({ product, image, categoryFirst = true }) {
   const shopSlug = getProductShopSlug(product)
   const to = categoryFirst
     ? shopSlug
@@ -22,7 +22,7 @@ export default function ProductCard({ product, categoryFirst = true }) {
       >
         <div className="relative img-zoom aspect-[4/3] overflow-hidden">
           <TiltImage
-            src={product.image}
+            src={image || product.image}
             alt={product.name}
             loading="lazy"
             className="h-full w-full object-cover"
