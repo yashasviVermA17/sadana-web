@@ -1,7 +1,7 @@
 import Breadcrumb from './Breadcrumb'
 import Reveal from './Reveal'
 
-export default function PageHero({ image, video, breadcrumb, eyebrow, title, subtitle, children, fit = 'cover', className = '', overlay, imageClassName = '', heightClass = 'h-[65vh] min-h-[440px] sm:h-[70vh] lg:h-[78vh]' }) {
+export default function PageHero({ image, video, breadcrumb, eyebrow, title, subtitle, children, fit = 'cover', className = '', overlay, imageClassName = '', contentClassName = '', heightClass = 'h-[65vh] min-h-[440px] sm:h-[70vh] lg:h-[78vh]' }) {
   return (
     <section data-hero>
       <div className={`relative ${heightClass} w-full overflow-hidden ${className}`}>
@@ -31,7 +31,7 @@ export default function PageHero({ image, video, breadcrumb, eyebrow, title, sub
           aria-hidden="true"
         />
 
-        <div className="absolute inset-0 mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-5 pb-10 sm:px-6 sm:pb-12 lg:px-8 lg:pb-16">
+        <div className={`absolute inset-0 mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-5 pb-10 sm:px-6 sm:pb-12 lg:px-8 lg:pb-16 ${contentClassName}`}>
           <Reveal>
             <Breadcrumb items={breadcrumb} light />
           </Reveal>
