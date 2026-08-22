@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 const AUTOPLAY_MS = 3000
 
@@ -14,6 +14,11 @@ export default function LogoCarousel({ items, renderItem }) {
   const [perView, setPerView] = useState(getPerView)
   const [page, setPage] = useState(0)
   const [paused, setPaused] = useState(false)
+  const [hoverable] = useState(
+    () => typeof window === 'undefined' || window.matchMedia('(hover: hover)').matches,
+  )
+  const wheelLock = useRef(0)
+  const touchStart = useRef({ x: 0, y: 0 })
 
   const pageCount = Math.max(1, Math.ceil(items.length / perView))
 
@@ -55,12 +60,42 @@ export default function LogoCarousel({ items, renderItem }) {
     }
   }
 
+  const onWheel = (e) => {
+    const now = Date.now()
+    if (now - wheelLock.current < 900) return
+    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
+    if (Math.abs(delta) < 25) return
+    wheelLock.current = now
+    if (delta > 0) setPage((p) => (p + 1) % pageCount)
+    else setPage((p) => (p - 1 + pageCount) % pageCount)
+  }
+
+  const onTouchStart = (e) => {
+    touchStart.current.x = e.touches[0].clientX
+    touchStart.current.y = e.touches[0].clientY
+  }
+
+  const onTouchEnd = (e) => {
+    const dx = e.changedTouches[0].clientX - touchStart.current.x
+    const dy = e.changedTouches[0].clientY - touchStart.current.y
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 0) setPage((p) => (p + 1) % pageCount)
+      else setPage((p) => (p - 1 + pageCount) % pageCount)
+    }
+  }
+
   return (
     <div
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      onMouseEnter={hoverable ? () => setPaused(true) : undefined}
+      onMouseLeave={hoverable ? () => setPaused(false) : undefined}
     >
-      <div className="cursor-pointer overflow-hidden" onClick={onViewportClick}>
+      <div
+        className="cursor-pointer overflow-hidden"
+        onClick={onViewportClick}
+        onWheel={onWheel}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
         <div
           className="flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
           style={{ transform: `translateX(-${page * 100}%)` }}
