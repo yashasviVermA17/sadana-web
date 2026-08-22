@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import { Check, X } from 'lucide-react'
 import { FILTER_GROUPS, countActiveFilters } from '../data/filters'
@@ -174,49 +175,52 @@ export default function FilterSidebar({
         </div>
       </aside>
 
-      <div
-        className={`fixed inset-0 z-40 lg:hidden ${open ? '' : 'pointer-events-none'}`}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Product filters"
-      >
+      {createPortal(
         <div
-          className={`absolute inset-0 bg-charcoal/35 backdrop-blur-[2px] transition-opacity duration-300 ${
-            open ? 'opacity-100' : 'opacity-0'
-          }`}
-          onClick={onClose}
-          aria-hidden="true"
-        />
-        <div
-          className={`absolute inset-y-0 left-0 flex w-[300px] max-w-[85vw] flex-col bg-white shadow-soft transition-transform duration-300 ease-out ${
-            open ? 'translate-x-0' : '-translate-x-full'
-          }`}
+          className={`fixed inset-0 z-[60] lg:hidden ${open ? '' : 'pointer-events-none'}`}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Product filters"
         >
-          <div className="flex shrink-0 items-center justify-between border-b border-charcoal/10 px-5 py-4">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-charcoal">
-              Filters
-            </p>
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="Close filters"
-              className="grid h-9 w-9 place-items-center rounded-full text-stone transition-colors duration-200 hover:bg-mist hover:text-charcoal"
-            >
-              <X className="h-5 w-5" aria-hidden="true" />
-            </button>
+          <div
+            className={`absolute inset-0 bg-charcoal/35 backdrop-blur-[2px] transition-opacity duration-300 ${
+              open ? 'opacity-100' : 'opacity-0'
+            }`}
+            onClick={onClose}
+            aria-hidden="true"
+          />
+          <div
+            className={`absolute inset-y-0 left-0 flex w-[300px] max-w-[85vw] flex-col bg-white shadow-soft transition-transform duration-300 ease-out ${
+              open ? 'translate-x-0' : '-translate-x-full'
+            }`}
+          >
+            <div className="flex shrink-0 items-center justify-between border-b border-charcoal/10 px-5 py-4">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-charcoal">
+                Filters
+              </p>
+              <button
+                type="button"
+                onClick={onClose}
+                aria-label="Close filters"
+                className="grid h-9 w-9 place-items-center rounded-full text-stone transition-colors duration-200 hover:bg-mist hover:text-charcoal"
+              >
+                <X className="h-5 w-5" aria-hidden="true" />
+              </button>
+            </div>
+            <div className="min-h-0 flex-1 overflow-y-auto px-5 py-6">
+              <FilterPanel
+                categories={categories}
+                activeCategorySlug={activeCategorySlug}
+                filters={filters}
+                onToggle={onToggle}
+                onClear={onClear}
+                onClose={onClose}
+              />
+            </div>
           </div>
-          <div className="min-h-0 flex-1 overflow-y-auto px-5 py-6">
-            <FilterPanel
-              categories={categories}
-              activeCategorySlug={activeCategorySlug}
-              filters={filters}
-              onToggle={onToggle}
-              onClear={onClear}
-              onClose={onClose}
-            />
-          </div>
-        </div>
-      </div>
+        </div>,
+        document.body,
+      )}
     </>
   )
 }

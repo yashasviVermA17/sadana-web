@@ -36,7 +36,8 @@ export default function Header() {
       setOverHero(false)
       return
     }
-    setOverHero(hero.getBoundingClientRect().bottom > 88)
+    const rect = hero.getBoundingClientRect()
+    setOverHero(rect.top < 88 && rect.bottom > 88)
   }
 
   useEffect(() => {
