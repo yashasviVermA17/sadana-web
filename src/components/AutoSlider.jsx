@@ -35,6 +35,7 @@ export default function AutoSlider({
   itemClassName = '',
   visible = DEFAULT_VISIBLE,
   autoplay = true,
+  interval = AUTOPLAY_MS,
 }) {
   const count = items.length
   const viewportRef = useRef(null)
@@ -127,9 +128,9 @@ export default function AutoSlider({
 
   useEffect(() => {
     if (!autoplay || !scrollable || prefersReducedMotion() || paused) return undefined
-    const id = setInterval(step, AUTOPLAY_MS)
+    const id = setInterval(step, interval)
     return () => clearInterval(id)
-  }, [autoplay, scrollable, paused, step, resetKey])
+  }, [autoplay, scrollable, paused, step, resetKey, interval])
 
   const dragState = useRef({ active: false, startX: 0, moved: 0 })
   const clickSuppressed = useRef(false)

@@ -40,8 +40,9 @@ export default function Testimonials() {
               items={clientLogos}
               itemClassName="h-full"
               visible={{ base: 1.15, sm: 2.2, lg: 3 }}
+              interval={30000}
               renderItem={(logo) => (
-                <div className="flex h-32 items-center justify-center rounded-2xl border border-charcoal/10 bg-white px-8 shadow-card sm:h-40 sm:px-10">
+                <div className="flex h-44 items-center justify-center rounded-2xl border border-charcoal/10 bg-white px-10 shadow-card sm:h-56 sm:px-14">
                   <img
                     src={logo.src}
                     alt={logo.name}
