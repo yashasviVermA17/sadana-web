@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { ArrowUpRight } from 'lucide-react'
 import { getProductShopSlug } from '../data/filters'
 import TiltCard from './TiltCard'
 import TiltImage from './TiltImage'
@@ -33,9 +32,6 @@ export default function ProductCard({ product, image }) {
                 {product.name}
               </h3>
             </div>
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand text-cream shadow-lg transition-transform duration-300 group-hover:rotate-45">
-              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-            </span>
           </div>
         </div>
       </Link>
