@@ -132,6 +132,7 @@ export default function AutoSlider({
   }, [autoplay, scrollable, paused, step, resetKey])
 
   const dragState = useRef({ active: false, startX: 0, moved: 0 })
+  const clickSuppressed = useRef(false)
 
   const onDragStart = (e) => {
     if (e.pointerType === 'mouse' && e.button !== 0) return
@@ -140,11 +141,6 @@ export default function AutoSlider({
     dragState.current.startX = e.clientX
     dragState.current.moved = 0
     setDragOffset(0)
-    try {
-      e.currentTarget.setPointerCapture(e.pointerId)
-    } catch {
-      /* ignore */
-    }
   }
 
   const onDragMove = (e) => {
@@ -161,6 +157,7 @@ export default function AutoSlider({
     d.active = false
     const dx = d.startX - e.clientX
     setDragOffset(0)
+    clickSuppressed.current = d.moved >= 8
     if (d.moved < 8) return
     if (Math.abs(dx) > 40) {
       if (dx > 0) goNext()
@@ -217,6 +214,13 @@ export default function AutoSlider({
             if (canHover()) setPaused(true)
           }}
           onMouseLeave={() => setPaused(false)}
+          onClickCapture={(e) => {
+            if (clickSuppressed.current) {
+              e.preventDefault()
+              e.stopPropagation()
+              clickSuppressed.current = false
+            }
+          }}
           onPointerDown={onDragStart}
           onPointerMove={onDragMove}
           onPointerUp={onDragEnd}
