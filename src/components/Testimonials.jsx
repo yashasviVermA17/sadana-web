@@ -1,5 +1,6 @@
 import Reveal from './Reveal'
 import SectionHeading from './SectionHeading'
+import AutoSlider from './AutoSlider'
 
 const clientLogoModules = import.meta.glob('../assets/clients/*.png', {
   eager: true,
@@ -34,10 +35,13 @@ export default function Testimonials() {
           <p className="text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-stone">
             Brands & institutions we have served
           </p>
-          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
-            {clientLogos.map((logo) => (
-              <Reveal key={logo.src}>
-                <div className="flex h-20 items-center justify-center rounded-xl border border-charcoal/10 bg-white px-4 py-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand/30 hover:shadow-card sm:h-24">
+          <div className="mt-8">
+            <AutoSlider
+              items={clientLogos}
+              itemClassName="h-full"
+              visible={{ base: 1.15, sm: 2.2, lg: 3 }}
+              renderItem={(logo) => (
+                <div className="flex h-32 items-center justify-center rounded-2xl border border-charcoal/10 bg-white px-8 shadow-card sm:h-40 sm:px-10">
                   <img
                     src={logo.src}
                     alt={logo.name}
@@ -45,8 +49,8 @@ export default function Testimonials() {
                     className="max-h-full w-full object-contain"
                   />
                 </div>
-              </Reveal>
-            ))}
+              )}
+            />
           </div>
         </div>
       </div>
