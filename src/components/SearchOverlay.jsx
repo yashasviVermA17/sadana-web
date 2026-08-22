@@ -6,16 +6,27 @@ import { getProductShopSlug, shopCategories } from '../data/filters'
 import { projects } from '../data/projects'
 import { useUI } from '../context/UIContext'
 
-function ResultRow({ type, title, subtitle, onClick }) {
+function ResultRow({ type, title, subtitle, image, onClick }) {
   return (
     <button
       type="button"
       onClick={onClick}
       className="group flex w-full items-center justify-between gap-4 rounded-xl px-4 py-3 text-left transition-colors duration-200 hover:bg-mist"
     >
-      <span className="min-w-0">
-        <span className="block truncate text-sm font-medium text-charcoal">{title}</span>
-        {subtitle && <span className="block truncate text-xs text-stone">{subtitle}</span>}
+      <span className="flex min-w-0 items-center gap-3">
+        {image && (
+          <img
+            src={image}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            className="h-11 w-11 shrink-0 rounded-lg border border-charcoal/10 object-cover"
+          />
+        )}
+        <span className="min-w-0">
+          <span className="block truncate text-sm font-medium text-charcoal">{title}</span>
+          {subtitle && <span className="block truncate text-xs text-stone">{subtitle}</span>}
+        </span>
       </span>
       <span className="flex shrink-0 items-center gap-2">
         <span className="rounded-full border border-charcoal/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-stone">
@@ -78,6 +89,17 @@ export default function SearchOverlay() {
     }
   }, [query])
 
+  const firstResult = useMemo(() => {
+    if (results.products[0]) {
+      const p = results.products[0]
+      const slug = getProductShopSlug(p)
+      return { to: slug ? `/products/${slug}/${p.id}` : `/products/${p.id}` }
+    }
+    if (results.projects[0]) return { to: `/projects/${results.projects[0].id}` }
+    if (results.categories[0]) return { to: `/products/${results.categories[0].slug}` }
+    return null
+  }, [results])
+
   const go = (to) => {
     closeSearch()
     navigate(to)
@@ -104,6 +126,12 @@ export default function SearchOverlay() {
               ref={inputRef}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && firstResult) {
+                  e.preventDefault()
+                  go(firstResult.to)
+                }
+              }}
               placeholder="Search products, projects, materials..."
               className="w-full bg-transparent text-base text-charcoal outline-none placeholder:text-stone/70"
               type="text"
@@ -144,6 +172,7 @@ export default function SearchOverlay() {
                             type="Product"
                             title={p.name}
                             subtitle={`${p.category} — ${p.short}`}
+                            image={p.image}
                             onClick={() => go(shopSlug ? `/products/${shopSlug}/${p.id}` : `/products/${p.id}`)}
                           />
                         )
