@@ -46,12 +46,21 @@ export default function LogoCarousel({ items, renderItem }) {
     return out
   }, [items, perView])
 
+  const onViewportClick = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    if (e.clientX - rect.left < rect.width / 2) {
+      setPage((p) => (p - 1 + pageCount) % pageCount)
+    } else {
+      setPage((p) => (p + 1) % pageCount)
+    }
+  }
+
   return (
     <div
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="overflow-hidden">
+      <div className="cursor-pointer overflow-hidden" onClick={onViewportClick}>
         <div
           className="flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
           style={{ transform: `translateX(-${page * 100}%)` }}
