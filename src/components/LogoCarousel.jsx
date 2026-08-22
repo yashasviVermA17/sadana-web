@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 
-const AUTOPLAY_MS = 5000
+const AUTOPLAY_MS = 3000
 
 function getPerView() {
   if (typeof window === 'undefined') return 4
