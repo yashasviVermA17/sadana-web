@@ -6,6 +6,7 @@ export default function ProductGrid({
   className = '',
   columns = 'sm:grid-cols-2 lg:grid-cols-3',
   categoryFirst = true,
+  linkToCategory = false,
 }) {
   return (
     <div
@@ -19,6 +20,7 @@ export default function ProductGrid({
               product={entry.product}
               image={entry.image}
               categoryFirst={categoryFirst}
+              linkToCategory={linkToCategory}
             />
           </Reveal>
         )

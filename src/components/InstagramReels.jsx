@@ -17,18 +17,6 @@ const REELS = [
   'https://www.instagram.com/reel/DZmTLGBxgBW/',
   'https://www.instagram.com/reel/DZcKHTzub_l/',
   'https://www.instagram.com/reel/DZNNQxyIuq8/',
-  'https://www.instagram.com/reel/DQ-ymQxkWqi/',
-  'https://www.instagram.com/reel/DO767SZETQw/',
-  'https://www.instagram.com/reel/DOfiZiokams/',
-  'https://www.instagram.com/reel/DOaqxZ_k9ly/',
-  'https://www.instagram.com/reel/DL69rbkRvgn/',
-  'https://www.instagram.com/reel/DJwhovPz5hS/',
-  'https://www.instagram.com/reel/DI0-MliTFRA/',
-  'https://www.instagram.com/reel/DDHQYFzTB9P/',
-  'https://www.instagram.com/reel/DDHRZLhTppS/',
-  'https://www.instagram.com/reel/DDHTBkgzhSP/',
-  'https://www.instagram.com/reel/DDHcudbzOm5/',
-  'https://www.instagram.com/reel/DDJUPlHRKBa/',
 ]
 
 function permalink(url) {

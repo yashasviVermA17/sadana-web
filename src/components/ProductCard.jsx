@@ -3,11 +3,14 @@ import { getProductShopSlug } from '../data/filters'
 import TiltCard from './TiltCard'
 import TiltImage from './TiltImage'
 
-export default function ProductCard({ product, image }) {
+export default function ProductCard({ product, image, linkToCategory = false }) {
   const shopSlug = getProductShopSlug(product)
-  const to = shopSlug
-    ? `/products/${shopSlug}/${product.id}`
-    : `/products/${product.id}`
+  const to =
+    linkToCategory && shopSlug
+      ? `/products/${shopSlug}`
+      : shopSlug
+        ? `/products/${shopSlug}/${product.id}`
+        : `/products/${product.id}`
 
   return (
     <TiltCard className="h-full">
