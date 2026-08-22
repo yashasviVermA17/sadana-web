@@ -67,6 +67,7 @@ import imgPvcWallPanelJpeg from '../assets/products/Pvc wall panel.jpeg'
 import imgSpcFlooringJpeg from '../assets/products/Spc flooring.jpeg'
 import imgStretchFiberJpeg from '../assets/products/Stretch fiber ceiling.jpeg'
 import imgWoodenFlooringJpeg from '../assets/products/Wooden flooring.jpeg'
+import { PRODUCT_SHOP_SLUGS } from './filters'
 
 export const categories = [
   'Wall Finishes',
@@ -745,10 +746,14 @@ export const getProduct = (id) => products.find((p) => p.id === id)
 export const productsByCategory = (category) =>
   category === 'All' ? products : products.filter((p) => p.category === category)
 
-export const relatedProducts = (product, count = 3) =>
-  products
-    .filter((p) => p.id !== product.id && p.category === product.category)
-    .slice(0, count)
+export const relatedProducts = (product) => {
+  const slug = PRODUCT_SHOP_SLUGS[product.id]
+  return products.filter(
+    (p) =>
+      p.id !== product.id &&
+      (slug ? PRODUCT_SHOP_SLUGS[p.id] === slug : p.category === product.category),
+  )
+}
 
 export const productProjects = {
   wallpapers: ['the-charcoal-loft', 'the-terracotta-boutique', 'the-lumiere-showroom'],
