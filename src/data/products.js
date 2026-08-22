@@ -66,13 +66,7 @@ import imgPvcCeilingJpeg from '../assets/products/Pvc ceiling.jpeg'
 import imgPvcWallPanelJpeg from '../assets/products/Pvc wall panel.jpeg'
 import imgSpcFlooringJpeg from '../assets/products/Spc flooring.jpeg'
 import imgStretchFiberJpeg from '../assets/products/Stretch fiber ceiling.jpeg'
-import imgBaffleJpeg from '../assets/products/Baffle ceiling.jpeg'
-import imgHighlightSheetJpeg from '../assets/products/Ripple sheet.jpeg'
-import imgHdhmrJpeg from '../assets/products/HDHMR 3d wall panel.jpeg'
-import imgExteriorLouversJpeg from '../assets/products/Exterior lowers.jpeg'
 import imgWoodenFlooringJpeg from '../assets/products/Wooden flooring.jpeg'
-import imgGymFlooringJpeg from '../assets/products/Gym rubber flooring.jpeg'
-import imgGrass2 from '../assets/products/Grass.jpeg'
 
 export const categories = [
   'Wall Finishes',
@@ -169,7 +163,7 @@ export const products = [
     name: 'Highlight Sheets',
     category: 'Wall Finishes',
     image: imgHighlightSheet,
-    gallery: [imgHighlightSheet, imgHighlightSheetJpeg],
+    gallery: [imgHighlightSheet],
     short: 'Translucent and decorative sheets that add a soft, luminous highlight to designs.',
     description: 'Highlight and ripple sheets add a luminous, dimensional accent to ceilings, partitions and panel details. Available in translucent and decorative finishes that play beautifully with light.',
     features: ['Soft, luminous appearance', 'Decorative ripple & wave patterns', 'Cut to size for your project', 'Great for light panels'],
@@ -207,7 +201,7 @@ export const products = [
     name: 'Baffle Ceiling',
     category: 'Ceilings',
     image: imgBaffle,
-    gallery: [imgBaffle, imgBaffleJpeg],
+    gallery: [imgBaffle],
     short: 'Linear baffle ceilings that look striking and tame noise at the same time.',
     description: 'Baffle ceilings use vertical or horizontal linear panels to create a modern, open look while absorbing echo. A favourite for retail, offices and commercial spaces that need both style and sound control.',
     features: ['Modern linear design', 'Open grid, airy feel', 'Good sound absorption', 'Fast, clean installation'],
@@ -246,7 +240,7 @@ export const products = [
     name: 'Gym Flooring',
     category: 'Flooring',
     image: imgGymFlooring,
-    gallery: [imgGymFlooring, imgGymFlooringJpeg],
+    gallery: [imgGymFlooring],
     short: 'Impact-absorbing rubber and PVC flooring built for gyms and sports floors.',
     description: 'Durable, shock-absorbing flooring for gyms, sports halls, play areas and multipurpose rooms. Protects joints and equipment while resisting heavy foot traffic and impact.',
     features: ['High shock absorption', 'Slip-resistant surface', 'Easy to clean', 'Long service life'],
@@ -491,7 +485,7 @@ export const products = [
     name: 'HDHMR 3D Wall Panels',
     category: 'Wall Finishes',
     image: imgHdhmr,
-    gallery: [imgHdhmr, imgHdhmrJpeg],
+    gallery: [imgHdhmr],
     short: 'Durable HDHMR-based 3D panels for crisp, moisture-resistant feature walls.',
     description: 'HDHMR 3D wall panels combine the sculptural look of 3D panelling with the moisture resistance of HDHMR board. A dependable choice for feature walls that need to stay crisp in Indian climate.',
     features: ['Moisture-resistant HDHMR base', 'Sculpted 3D relief', 'Crisp, clean edges', 'Paint-ready finish'],
@@ -607,8 +601,8 @@ export const products = [
     id: 'grass-tiles',
     name: 'Grass Tiles',
     category: 'Exterior & Outdoor',
-    image: imgGrass2,
-    gallery: [imgGrass2],
+    image: imgArtificialGrass,
+    gallery: [imgArtificialGrass],
     short: 'Interlocking grass tiles that turn balconies and terraces green in minutes.',
     description: 'Grass tiles snap together over any flat surface to create an instant lush green floor. Perfect for balconies, terraces and event spaces, they are quick to install, easy to replace and simple to maintain.',
     features: ['Click-lock interlocking design', 'Installs in minutes, no glue', 'Drainage-ready base', 'Replace individual tiles easily'],
@@ -710,7 +704,7 @@ export const products = [
     name: 'HDPC Louvers',
     category: 'Exterior & Outdoor',
     image: imgHdpcLouvers,
-    gallery: [imgHdpcLouvers, imgExteriorLouvers, imgExteriorLouversJpeg],
+    gallery: [imgHdpcLouvers, imgExteriorLouvers],
     short: 'High-density HDPC louvers for durable, elegant outdoor shading.',
     description: 'HDPC (high-density polymer composite) louvers combine the richness of wood with all-weather toughness. Ideal for façade shading, balcony screens and outdoor ceilings that need to last.',
     features: ['High-density composite core', 'Water & termite proof', 'UV-stable colours', 'Low maintenance'],
