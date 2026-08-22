@@ -149,13 +149,7 @@ export default function ProductDetail({ productId: propProductId }) {
                 </DetailRow>
               </div>
 
-              <div className="mt-8">
-                <Button onClick={openQuote} size="lg">
-                  Get Quote
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" aria-hidden="true" />
-                </Button>
-              </div>
-              <p className="mt-4 text-xs leading-relaxed text-stone">
+              <p className="mt-8 text-xs leading-relaxed text-stone">
                 Free physical samples available on request. Bulk and trade pricing for
                 architects and contractors.
               </p>

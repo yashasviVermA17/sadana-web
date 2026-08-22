@@ -54,7 +54,6 @@ export default function Projects() {
             timeline and budget — we’ll send a detailed proposal within a week.
           </p>
           <div className="mt-7 flex flex-wrap items-center justify-center gap-3.5">
-            <Button onClick={openQuote}>Start Your Project</Button>
             <Button to="/contact" variant="outline">
               Talk to Our Team
             </Button>

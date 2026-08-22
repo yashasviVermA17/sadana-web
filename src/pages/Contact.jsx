@@ -81,9 +81,6 @@ export default function Contact() {
                   <MessageCircle className="h-5 w-5" aria-hidden="true" />
                   Chat on WhatsApp
                 </Button>
-                <Button onClick={openQuote} variant="outlineLight" size="lg" className="w-full">
-                  Request a Quote
-                </Button>
               </div>
 
               <div className="flex flex-col gap-1 border-t border-white/12 pt-6 text-sm text-taupe">

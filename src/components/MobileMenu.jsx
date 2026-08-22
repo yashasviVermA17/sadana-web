@@ -5,7 +5,7 @@ import { useUI } from '../context/UIContext'
 import Button from './Button'
 
 export default function MobileMenu({ open, onClose }) {
-  const { openSearch, openQuote } = useUI()
+  const { openSearch } = useUI()
 
   return (
     <div
@@ -35,9 +35,10 @@ export default function MobileMenu({ open, onClose }) {
           </NavLink>
         ))}
 
-        <div className="mt-4 grid grid-cols-2 gap-3">
+        <div className="mt-4">
           <Button
             variant="outline"
+            className="w-full"
             onClick={() => {
               onClose()
               openSearch()
@@ -45,14 +46,6 @@ export default function MobileMenu({ open, onClose }) {
           >
             <Search className="h-4 w-4" aria-hidden="true" />
             Search
-          </Button>
-          <Button
-            onClick={() => {
-              onClose()
-              openQuote()
-            }}
-          >
-            Get Quote
           </Button>
         </div>
       </nav>

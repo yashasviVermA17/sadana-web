@@ -8,7 +8,6 @@ import SectionHeading from '../components/SectionHeading'
 import PageHero from '../components/PageHero'
 import TiltCard from '../components/TiltCard'
 import TiltImage from '../components/TiltImage'
-import { useUI } from '../context/UIContext'
 import { values } from '../data/site'
 import imgStory from '../assets/about inside image.jpg'
 import imgCtaBg from '../assets/products/Parametric wall panel.jpeg'
@@ -85,8 +84,6 @@ function WhyChooseUs() {
 }
 
 export default function About() {
-  const { openQuote } = useUI()
-
   return (
     <>
       <PageHero
@@ -95,8 +92,8 @@ export default function About() {
         eyebrow="About Us"
         subtitle="At SADANA DECOR & INTERIOR, we believe every space has a story — and we are here to help you design it with perfection."
         overlay="bg-gradient-to-t from-charcoal/80 via-charcoal/40 to-charcoal/25"
-        imageClassName="object-cover object-[68%_center] lg:object-center"
-        className="aspect-[3/4]! h-auto! min-h-[340px]! w-full sm:aspect-[16/10]! lg:aspect-auto! lg:h-[100svh]! lg:min-h-[560px]!"
+        imageClassName="object-cover"
+        className="aspect-[1107/800]! h-auto! min-h-[260px]! w-full"
       />
 
       <section className="mx-auto max-w-none px-5 py-14 sm:px-6 lg:px-8 lg:py-20">
@@ -216,9 +213,6 @@ export default function About() {
           <Reveal delay={200}>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3.5">
               <Button to="/contact">Visit the Showroom</Button>
-              <Button onClick={openQuote} variant="outlineLight">
-                Start Your Project
-              </Button>
             </div>
           </Reveal>
         </div>
