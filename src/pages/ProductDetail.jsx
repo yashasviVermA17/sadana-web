@@ -182,7 +182,7 @@ export default function ProductDetail({ productId: propProductId }) {
                 items={related}
                 itemClassName="h-full"
                 visible={relatedVisible}
-                renderItem={(item) => <ProductCard product={item} />}
+                renderItem={(item) => <ProductCard product={item} categoryFirst={false} />}
               />
             </Reveal>
           </div>

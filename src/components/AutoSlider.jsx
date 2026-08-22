@@ -223,7 +223,7 @@ export default function AutoSlider({
           onPointerCancel={onDragEnd}
         >
           <div
-            className={`flex will-change-transform ${scrollable ? '' : 'justify-center'}`}
+            className={`flex will-change-transform ${scrollable ? '' : 'justify-start'}`}
             style={{
               gap: `${GAP}px`,
               transform: `translateX(${dragOffset - offset}px)`,
