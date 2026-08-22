@@ -3,7 +3,6 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, Search, X } from 'lucide-react'
 import { navLinks } from '../data/site'
 import { useUI } from '../context/UIContext'
-import Button from './Button'
 import MobileMenu from './MobileMenu'
 import logoImage from '../assets/logo 2.jpg'
 
@@ -28,7 +27,7 @@ function Logo({ onNavigate }) {
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [overHero, setOverHero] = useState(true)
-  const { openSearch, openQuote, homeReveal, lightboxOpen } = useUI()
+  const { openSearch, homeReveal, lightboxOpen } = useUI()
   const location = useLocation()
 
   function updateOverHero() {
@@ -113,10 +112,6 @@ export default function Header() {
           >
             <Search className="h-[19px] w-[19px]" aria-hidden="true" />
           </button>
-
-          <Button onClick={openQuote} className="hidden sm:inline-flex">
-            Get Quote
-          </Button>
 
           <button
             type="button"
