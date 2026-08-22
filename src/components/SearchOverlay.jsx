@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowUpRight, Search, X } from 'lucide-react'
 import { products } from '../data/products'
-import { getProductShopSlug, shopCategories } from '../data/filters'
+import { categorySearchText, getProductShopSlug, productSearchText, shopCategories } from '../data/filters'
 import { projects } from '../data/projects'
 import { useUI } from '../context/UIContext'
 
@@ -70,12 +70,7 @@ export default function SearchOverlay() {
     if (!q) return { products: [], projects: [], categories: [] }
     return {
       products: products
-        .filter(
-          (p) =>
-            p.name.toLowerCase().includes(q) ||
-            p.category.toLowerCase().includes(q) ||
-            p.short.toLowerCase().includes(q),
-        )
+        .filter((p) => productSearchText(p).includes(q))
         .slice(0, 6),
       projects: projects
         .filter(
@@ -85,7 +80,7 @@ export default function SearchOverlay() {
             p.short.toLowerCase().includes(q),
         )
         .slice(0, 6),
-      categories: shopCategories.filter((c) => c.name.toLowerCase().includes(q)).slice(0, 4),
+      categories: shopCategories.filter((c) => categorySearchText(c).includes(q)).slice(0, 4),
     }
   }, [query])
 

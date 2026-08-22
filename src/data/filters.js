@@ -148,15 +148,31 @@ export const filterProducts = (products, filters) =>
     }),
   )
 
+export const productSearchText = (product) => {
+  const slug = PRODUCT_SHOP_SLUGS[product.id]
+  const cat = slug ? FILTER_GROUPS[0].options.find((o) => o.slug === slug) : null
+  return [
+    product.name,
+    product.category,
+    product.short,
+    product.material,
+    ...(product.finishes || []),
+    ...(product.applications || []),
+    cat?.label,
+    slug ? slug.split('-').join(' ') : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase()
+}
+
+export const categorySearchText = (category) =>
+  `${category.name} ${category.slug.split('-').join(' ')}`.toLowerCase()
+
 export const searchProducts = (products, query) => {
   const q = query.trim().toLowerCase()
   if (!q) return products
-  return products.filter((p) =>
-    [p.name, p.category, p.short, p.material, ...(p.finishes || []), ...(p.applications || [])]
-      .join(' ')
-      .toLowerCase()
-      .includes(q),
-  )
+  return products.filter((p) => productSearchText(p).includes(q))
 }
 
 export const countActiveFilters = (filters) =>
