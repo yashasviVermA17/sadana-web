@@ -5,8 +5,6 @@ import SectionHeading from './SectionHeading'
 
 const REELS = [
   'https://www.instagram.com/reel/Db3FeVAAil0/',
-  'https://www.instagram.com/reel/DbSdC2EmK1K/',
-  'https://www.instagram.com/reel/DbI1Je8oPSg/',
   'https://www.instagram.com/reel/DaxnvCrEm_1/',
   'https://www.instagram.com/reel/DakxjnKCe7x/',
   'https://www.instagram.com/reel/DcBf8gsCbBQ/',
