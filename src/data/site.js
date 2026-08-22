@@ -33,7 +33,7 @@ export const whatsappNumber = '9179979797'
 export const whatsappUrl = `https://wa.me/${whatsappNumber}`
 
 export const mapEmbedUrl =
-  'https://www.google.com/maps?q=SADANA%20Decor%20%26%20Interior%20@22.757592,75.884144&hl=en&z=17&output=embed'
+  'https://www.google.com/maps?q=SADANA%20Decor%20%26%20Interior,%20Rosoma%20circle,%20behind%20Country%20Inn%20hotel,%20Scheme%2054%20PU4,%20Indore,%20Madhya%20Pradesh%20452010&hl=en&z=17&ll=22.7475838,75.8968454&output=embed'
 
 export const stats = [
   { value: '5000+', label: 'Projects Delivered' },
