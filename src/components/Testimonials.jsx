@@ -1,22 +1,24 @@
 import SectionHeading from './SectionHeading'
 import LogoCarousel from './LogoCarousel'
 
-const clientLogoModules = import.meta.glob('../assets/clients/*.png', {
-  eager: true,
-  import: 'default',
-})
+const clientLogoModules = import.meta.glob(
+  '../assets/Sadana_Client_Logos_Enhanced/*.png',
+  {
+    eager: true,
+    import: 'default',
+  },
+)
 
 const clientLogos = Object.entries(clientLogoModules)
   .sort(([a], [b]) => a.localeCompare(b))
-  .map(([path, src]) => ({
-    src,
-    name: path
-      .split('/')
-      .pop()
-      .replace(/^\d+_/, '')
-      .replace(/\.png$/i, '')
-      .replace(/_/g, ' '),
-  }))
+  .map(([path, src]) => {
+    const fileName = path.split('/').pop()
+    const num = fileName.match(/\d+/)?.[0] ?? ''
+    return {
+      src,
+      name: num ? `Client Logo ${Number(num)}` : fileName.replace(/\.png$/i, ''),
+    }
+  })
 
 export default function Testimonials() {
   return (
@@ -38,12 +40,12 @@ export default function Testimonials() {
             <LogoCarousel
               items={clientLogos}
               renderItem={(logo) => (
-                <div className="flex h-52 w-full items-center justify-center rounded-2xl border border-charcoal/10 bg-white px-10 shadow-card sm:h-64 sm:px-14">
+                <div className="group flex h-20 w-full items-center justify-center rounded-xl border border-charcoal/10 bg-white p-2 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-soft sm:h-24 sm:p-3">
                   <img
                     src={logo.src}
                     alt={logo.name}
                     loading="lazy"
-                    className="max-h-full w-full object-contain"
+                    className="max-h-full w-auto max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.04]"
                   />
                 </div>
               )}

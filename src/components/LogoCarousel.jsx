@@ -3,11 +3,11 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 const AUTOPLAY_MS = 3000
 
 function getPerView() {
-  if (typeof window === 'undefined') return 4
+  if (typeof window === 'undefined') return 6
   const w = window.innerWidth
-  if (w < 640) return 1
-  if (w < 1024) return 2
-  return 4
+  if (w < 640) return 2
+  if (w < 1024) return 3
+  return 6
 }
 
 export default function LogoCarousel({ items, renderItem }) {

@@ -16,76 +16,63 @@ export const PRODUCT_SHOP_SLUGS = {
   // Wall Panels
   '3d-panels': 'wall-panels',
   'hdhmr-3d-panels': 'wall-panels',
-  'parametric-panel': 'wall-panels',
   'pvc-wall-panels': 'wall-panels',
-  'wpc-panels': 'wall-panels',
-  'wpc-cladding': 'wall-panels',
-  'customized-wall-paneling': 'wall-panels',
-  'wall-cladding': 'wall-panels',
   'pu-stones': 'wall-panels',
-  // Sheets
-  'acp-hpl-sheets': 'sheets',
-  'acrylic-sheets': 'sheets',
-  'alabaster-sheets': 'sheets',
-  'cork-sheets': 'sheets',
-  'highlight-sheets': 'sheets',
-  laminates: 'sheets',
-  'uv-marble-sheets': 'sheets',
-  'veneer-sheets': 'sheets',
+  'parametric-panel': 'wall-panels',
+  'victara-panel': 'wall-panels',
+  'wpc-panels': 'wall-panels',
+  'exterior-wall-panel': 'wall-panels',
+  // Decorative Sheets
+  'acrylic-sheets': 'decorative-sheets',
+  'alabaster-sheets': 'decorative-sheets',
+  'metal-highlighter-sheet': 'decorative-sheets',
+  'charcoal-sheets': 'decorative-sheets',
+  laminates: 'decorative-sheets',
+  'ripple-sheet': 'decorative-sheets',
   // Ceiling
+  'alabaster-ceiling': 'ceiling',
   'baffle-ceiling': 'ceiling',
   'stretch-fiber-ceiling': 'ceiling',
-  'pvc-ceiling': 'ceiling',
   'vox-soffit-ceiling': 'ceiling',
   // Flooring
-  'gym-flooring': 'flooring',
+  'wooden-flooring': 'flooring',
   'spc-flooring': 'flooring',
   'vinyl-flooring': 'flooring',
-  'wooden-flooring': 'flooring',
-  'rugs-carpets': 'flooring',
-  // Grass
-  'artificial-grass': 'grass',
-  'grass-tiles': 'grass',
-  // Charcoal / Decorative
-  'charcoal-louvers': 'charcoal-decorative',
-  'charcoal-sheets': 'charcoal-decorative',
-  'charcoal-highlighter-sheet': 'charcoal-decorative',
-  'hdpc-louvers': 'charcoal-decorative',
-  // Outdoor
-  'exterior-cladding': 'outdoor',
-  'exterior-vox-panel': 'outdoor',
-  'roofing-thatch': 'outdoor',
-  'rattan-cane': 'outdoor',
+  'gym-flooring': 'flooring',
+  rungs: 'flooring',
+  // Roofing
+  'roofing-thatch': 'roofing',
   // Doors
   'customized-doors': 'doors',
-  // Glass
-  'glass-films': 'glass',
-  // Wallpaper
-  wallpapers: 'wallpaper',
-  'designer-wallpapers': 'wallpaper',
-  'wallpapers-textured': 'wallpaper',
-  'wallpapers-floral': 'wallpaper',
-  'wallpapers-geometric': 'wallpaper',
-  'wallpapers-3d': 'wallpaper',
-  'wallpapers-kids': 'wallpaper',
-  'wallpapers-metallic': 'wallpaper',
+  'glass-films': 'doors',
   // Blinds & Curtains
   blinds: 'blinds-curtains',
-  curtains: 'blinds-curtains',
   'wooden-blinds': 'blinds-curtains',
-  // Furniture
-  upholstery: 'furniture',
-  mattress: 'furniture',
-  // Tiles
-  'marble-sheets': 'tiles',
-  // Wooden / Interior Work
-  'cnc-work': 'wooden-work',
-  'french-mouldings': 'wooden-work',
-  plywood: 'wooden-work',
-  // Rugs
-  'ladder-rungs': 'rugs',
-  // Vertical Garden
-  'vertical-garden': 'vertical-garden',
+  curtains: 'blinds-curtains',
+  // Wallpaper
+  wallpapers: 'wallpaper',
+  // Artificial Grass
+  'artificial-grass': 'artificial-grass',
+  // Exterior / Outdoor
+  'hdpc-louvers': 'exterior-outdoor',
+  'vertical-garden': 'exterior-outdoor',
+  'outdoor-deck-tile': 'exterior-outdoor',
+  // Moulding & Decorative
+  mouldings: 'moulding-decorative',
+  'mosaic-tiles': 'moulding-decorative',
+  // Soft Panels
+  'vox-soft-panel': 'soft-panels',
+  // Carpet
+  carpet: 'carpet',
+  // CNC Work
+  'cnc-work': 'cnc-work',
+  // Rattan Cane
+  'rattan-cane': 'rattan-cane',
+  // Mattress
+  mattress: 'mattress',
+  cushion: 'mattress',
+  // Sofa
+  sofa: 'sofa',
 }
 
 const byShopSlug = (slug) => (p) => PRODUCT_SHOP_SLUGS[p.id] === slug
@@ -96,33 +83,42 @@ export const FILTER_GROUPS = [
     title: 'Category',
     options: [
       { label: 'Wall Panels', slug: 'wall-panels', test: byShopSlug('wall-panels') },
-      { label: 'Sheets', slug: 'sheets', test: byShopSlug('sheets') },
+      {
+        label: 'Decorative Sheets',
+        slug: 'decorative-sheets',
+        test: byShopSlug('decorative-sheets'),
+      },
       { label: 'Ceiling', slug: 'ceiling', test: byShopSlug('ceiling') },
       { label: 'Flooring', slug: 'flooring', test: byShopSlug('flooring') },
-      { label: 'Grass', slug: 'grass', test: byShopSlug('grass') },
-      {
-        label: 'Charcoal / Decorative',
-        slug: 'charcoal-decorative',
-        test: byShopSlug('charcoal-decorative'),
-      },
-      { label: 'Outdoor', slug: 'outdoor', test: byShopSlug('outdoor') },
+      { label: 'Roofing', slug: 'roofing', test: byShopSlug('roofing') },
       { label: 'Doors', slug: 'doors', test: byShopSlug('doors') },
-      { label: 'Glass', slug: 'glass', test: byShopSlug('glass') },
-      { label: 'Wallpaper', slug: 'wallpaper', test: byShopSlug('wallpaper') },
       {
         label: 'Blinds & Curtains',
         slug: 'blinds-curtains',
         test: byShopSlug('blinds-curtains'),
       },
-      { label: 'Furniture', slug: 'furniture', test: byShopSlug('furniture') },
-      { label: 'Tiles', slug: 'tiles', test: byShopSlug('tiles') },
+      { label: 'Customized Wallpaper', slug: 'wallpaper', test: byShopSlug('wallpaper') },
       {
-        label: 'Wooden / Interior Work',
-        slug: 'wooden-work',
-        test: byShopSlug('wooden-work'),
+        label: 'Artificial Grass',
+        slug: 'artificial-grass',
+        test: byShopSlug('artificial-grass'),
       },
-      { label: 'Rugs', slug: 'rugs', test: byShopSlug('rugs') },
-      { label: 'Vertical Garden', slug: 'vertical-garden', test: byShopSlug('vertical-garden') },
+      {
+        label: 'Exterior / Outdoor',
+        slug: 'exterior-outdoor',
+        test: byShopSlug('exterior-outdoor'),
+      },
+      {
+        label: 'Moulding & Decorative',
+        slug: 'moulding-decorative',
+        test: byShopSlug('moulding-decorative'),
+      },
+      { label: 'Soft Panels', slug: 'soft-panels', test: byShopSlug('soft-panels') },
+      { label: 'Carpet', slug: 'carpet', test: byShopSlug('carpet') },
+      { label: 'CNC Work', slug: 'cnc-work', test: byShopSlug('cnc-work') },
+      { label: 'Rattan Cane', slug: 'rattan-cane', test: byShopSlug('rattan-cane') },
+      { label: 'Mattress', slug: 'mattress', test: byShopSlug('mattress') },
+      { label: 'Sofa', slug: 'sofa', test: byShopSlug('sofa') },
     ],
   },
 ]

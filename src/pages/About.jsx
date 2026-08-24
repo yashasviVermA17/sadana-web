@@ -10,7 +10,7 @@ import TiltCard from '../components/TiltCard'
 import TiltImage from '../components/TiltImage'
 import { values } from '../data/site'
 import imgStory from '../assets/about inside image.jpg'
-import imgCtaBg from '../assets/products/Parametric wall panel.jpeg'
+import imgCtaBg from '../assets/products/wall-panels/Parametric wall panel.jpeg'
 import imgHero from '../assets/new about hero image.png'
 
 function MissionVision() {

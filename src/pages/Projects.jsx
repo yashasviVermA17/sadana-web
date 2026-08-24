@@ -4,7 +4,7 @@ import Button from '../components/Button'
 import PageHero from '../components/PageHero'
 import { projectImageGroups } from '../data/imageGroups'
 import { useUI } from '../context/UIContext'
-import imgHero from '../assets/projects/Charcoal sheet with louvers.jpeg'
+import imgHero from '../assets/projects/wall-panels/Charcoal sheet with louvers.jpeg'
 
 export default function Projects() {
   const { openQuote } = useUI()
