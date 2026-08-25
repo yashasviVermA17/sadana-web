@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const AUTOPLAY_MS = 3000
 const SWIPE_THRESHOLD = 40
@@ -18,9 +19,12 @@ export default function LogoCarousel({ items, renderItem }) {
   const [hoverable] = useState(
     () => typeof window === 'undefined' || window.matchMedia('(hover: hover)').matches,
   )
-  const touchRef = useRef({ startX: 0, startY: 0 })
+  const dragRef = useRef({ startX: 0, dragging: false })
 
   const pageCount = Math.max(1, Math.ceil(items.length / perView))
+
+  const goNext = () => setPage((p) => Math.min(p + 1, pageCount - 1))
+  const goPrev = () => setPage((p) => Math.max(p - 1, 0))
 
   useEffect(() => {
     const onResize = () => setPerView(getPerView())
@@ -53,48 +57,55 @@ export default function LogoCarousel({ items, renderItem }) {
     return out
   }, [items, perView])
 
-  const onTouchStart = (e) => {
-    touchRef.current.startX = e.touches[0].clientX
-    touchRef.current.startY = e.touches[0].clientY
-  }
-
-  const onTouchEnd = (e) => {
-    const dx = e.changedTouches[0].clientX - touchRef.current.startX
-    const dy = e.changedTouches[0].clientY - touchRef.current.startY
-    if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
-      e.stopPropagation()
-      if (dx < 0) setPage((p) => Math.min(p + 1, pageCount - 1))
-      else setPage((p) => Math.max(p - 1, 0))
-    }
-  }
-
   const onPointerDown = (e) => {
-    if (e.pointerType !== 'mouse') return
-    touchRef.current.startX = e.clientX
+    dragRef.current.startX = e.clientX
+    dragRef.current.dragging = true
     e.currentTarget.setPointerCapture(e.pointerId)
   }
 
   const onPointerUp = (e) => {
-    if (e.pointerType !== 'mouse') return
-    const dx = e.clientX - touchRef.current.startX
+    if (!dragRef.current.dragging) return
+    dragRef.current.dragging = false
+    const dx = e.clientX - dragRef.current.startX
     if (Math.abs(dx) > SWIPE_THRESHOLD) {
-      if (dx < 0) setPage((p) => Math.min(p + 1, pageCount - 1))
-      else setPage((p) => Math.max(p - 1, 0))
+      if (dx < 0) goNext()
+      else goPrev()
     }
+  }
+
+  const onTouchStart = (e) => {
+    dragRef.current.startX = e.touches[0].clientX
+  }
+
+  const onTouchEnd = (e) => {
+    const dx = e.changedTouches[0].clientX - dragRef.current.startX
+    if (Math.abs(dx) > SWIPE_THRESHOLD) {
+      e.stopPropagation()
+      if (dx < 0) goNext()
+      else goPrev()
+    }
+  }
+
+  const onWheel = (e) => {
+    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
+    if (Math.abs(delta) < 15) return
+    if (delta > 0) goNext()
+    else goPrev()
   }
 
   return (
     <div
       onMouseEnter={hoverable ? () => setPaused(true) : undefined}
       onMouseLeave={hoverable ? () => setPaused(false) : undefined}
+      className="relative"
     >
       <div
         className="overflow-hidden"
-        style={{ touchAction: 'pan-y' }}
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+        onWheel={onWheel}
       >
         <div
           className="flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
@@ -115,6 +126,31 @@ export default function LogoCarousel({ items, renderItem }) {
           ))}
         </div>
       </div>
+
+      {pageCount > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={goPrev}
+            aria-label="Previous"
+            className={`absolute left-0 top-1/2 z-10 grid h-9 w-9 -translate-y-1/2 -translate-x-1/2 place-items-center rounded-full border border-charcoal/10 bg-white/90 text-charcoal shadow-sm transition-all duration-200 hover:bg-white hover:shadow-md focus:outline-none sm:h-10 sm:w-10 ${
+              page === 0 ? 'pointer-events-none opacity-0' : 'opacity-100'
+            }`}
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <button
+            type="button"
+            onClick={goNext}
+            aria-label="Next"
+            className={`absolute right-0 top-1/2 z-10 grid h-9 w-9 -translate-y-1/2 translate-x-1/2 place-items-center rounded-full border border-charcoal/10 bg-white/90 text-charcoal shadow-sm transition-all duration-200 hover:bg-white hover:shadow-md focus:outline-none sm:h-10 sm:w-10 ${
+              page === pageCount - 1 ? 'pointer-events-none opacity-0' : 'opacity-100'
+            }`}
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </>
+      )}
 
       {pageCount > 1 && (
         <div className="mt-8 flex justify-center" style={{ whiteSpace: 'nowrap' }}>
