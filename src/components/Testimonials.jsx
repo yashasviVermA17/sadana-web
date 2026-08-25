@@ -43,6 +43,7 @@ const CLIENT_NAMES = {
   36: 'Ralamandal Wildlife Sanctuary',
   37: 'Skye Luxuria',
   38: 'Bank of Baroda',
+  39: 'Hotel Omni Palace',
 }
 
 const clientLogos = Object.entries(clientLogoModules)
