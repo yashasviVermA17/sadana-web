@@ -11,7 +11,7 @@ import TiltImage from '../components/TiltImage'
 import { values } from '../data/site'
 import imgStory from '../assets/about inside image.jpg'
 import imgCtaBg from '../assets/products/wall-panels/Parametric wall panel.jpeg'
-import imgHero from '../assets/new about hero image.png'
+import imgHero from '../assets/about hero image 17.jpeg'
 
 function MissionVision() {
   const cards = [
