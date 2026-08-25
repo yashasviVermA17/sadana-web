@@ -152,26 +152,31 @@ export default function LogoCarousel({ items, renderItem }) {
         </>
       )}
 
-      {pageCount > 1 && (
-        <div className="mt-8 flex justify-center" style={{ whiteSpace: 'nowrap' }}>
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            {Array.from({ length: pageCount }, (_, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => setPage(i)}
-                aria-label={`Go to slide ${i + 1}`}
-                aria-current={i === page}
-                className={`rounded-full transition-all duration-300 focus:outline-none ${
-                  i === page
-                    ? 'h-2 w-7 bg-brand sm:h-2.5 sm:w-8'
-                    : 'h-2 w-2 bg-charcoal/20 hover:bg-charcoal/40'
-                }`}
-              />
-            ))}
+      {pageCount > 1 && (() => {
+        const MAX_DOTS = 3
+        const dotCount = Math.min(pageCount, MAX_DOTS)
+        const dotIndex = Math.round((page / (pageCount - 1)) * (dotCount - 1))
+        return (
+          <div className="mt-8 flex justify-center" style={{ whiteSpace: 'nowrap' }}>
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              {Array.from({ length: dotCount }, (_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => setPage(Math.round((i / (dotCount - 1)) * (pageCount - 1)))}
+                  aria-label={`Go to slide ${i + 1}`}
+                  aria-current={i === dotIndex}
+                  className={`rounded-full transition-all duration-300 focus:outline-none ${
+                    i === dotIndex
+                      ? 'h-2 w-7 bg-brand sm:h-2.5 sm:w-8'
+                      : 'h-2 w-2 bg-charcoal/20 hover:bg-charcoal/40'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )
+      })()}
     </div>
   )
 }
