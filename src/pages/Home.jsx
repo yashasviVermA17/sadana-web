@@ -62,7 +62,7 @@ function FeaturedCollection() {
       </div>
 
       <div className="mt-12">
-        <ProductGrid items={products} categoryFirst linkToCategory />
+        <ProductGrid items={products} categoryFirst />
       </div>
     </section>
   )
