@@ -9,6 +9,7 @@ export function UIProvider({ children }) {
   const [introDone, setIntroDone] = useState(false)
   const [homeReveal, setHomeReveal] = useState(false)
   const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const location = useLocation()
 
   const openSearch = useCallback(() => setSearchOpen(true), [])
@@ -24,14 +25,15 @@ export function UIProvider({ children }) {
     setSearchOpen(false)
     setQuoteOpen(false)
     setLightboxOpen(false)
+    setMobileMenuOpen(false)
   }, [location.pathname])
 
   useEffect(() => {
-    document.body.style.overflow = searchOpen || quoteOpen ? 'hidden' : ''
+    document.body.style.overflow = searchOpen || quoteOpen || mobileMenuOpen ? 'hidden' : ''
     return () => {
       document.body.style.overflow = ''
     }
-  }, [searchOpen, quoteOpen])
+  }, [searchOpen, quoteOpen, mobileMenuOpen])
 
   return (
     <UIContext.Provider
@@ -49,6 +51,8 @@ export function UIProvider({ children }) {
         lightboxOpen,
         openLightbox,
         closeLightbox,
+        mobileMenuOpen,
+        setMobileMenuOpen,
       }}
     >
       {children}

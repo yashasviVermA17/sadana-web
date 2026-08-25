@@ -87,12 +87,12 @@ function WhyChooseUs() {
 export default function About() {
   return (
     <>
-      <section data-hero className="relative h-[50vh] min-h-[300px] w-full overflow-hidden sm:h-[52vh] sm:min-h-[360px] lg:h-[50vh] lg:min-h-[420px]">
+      <section data-hero className="relative h-[50vh] min-h-[300px] w-full overflow-hidden sm:h-[52vh] sm:min-h-[360px] lg:h-[95vh] lg:min-h-[720px]">
         <img
           src={imgHero}
           alt=""
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 block h-full w-full object-cover object-center"
+          className="absolute inset-x-0 top-0 block h-full w-full object-cover object-top lg:object-[center_30%]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/40 to-charcoal/25" aria-hidden="true" />
         <div className="absolute inset-0 mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-5 pb-10 sm:px-6 sm:pb-12 lg:px-8 lg:pb-16">

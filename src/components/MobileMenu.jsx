@@ -9,11 +9,17 @@ export default function MobileMenu({ open, onClose }) {
 
   return (
     <div
-      className={`fixed inset-x-0 top-[88px] z-40 origin-top border-b border-charcoal/10 bg-ivory transition-all duration-300 lg:hidden ${
-        open ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-3 opacity-0'
+      className={`fixed inset-0 z-40 flex flex-col bg-ivory transition-all duration-300 lg:hidden ${
+        open
+          ? 'pointer-events-auto translate-y-0 opacity-100'
+          : 'pointer-events-none -translate-y-3 opacity-0'
       }`}
     >
-      <nav className="mx-auto flex max-w-none flex-col gap-0.5 px-5 pt-3 pb-4" aria-label="Mobile navigation" style={{ maxHeight: 'calc(100svh - 88px - 120px)', overflowY: 'auto' }}>
+      <nav
+        className="mx-auto flex w-full max-w-none flex-col gap-0.5 overflow-y-auto px-5 pt-[100px] pb-6"
+        aria-label="Mobile navigation"
+        style={{ paddingBottom: 'max(1.5rem, env(safe-area-inset-bottom, 0px) + 1rem)' }}
+      >
         {navLinks.map((link, i) => (
           <NavLink
             key={link.to}
@@ -21,7 +27,7 @@ export default function MobileMenu({ open, onClose }) {
             onClick={onClose}
             style={{ transitionDelay: `${i * 30}ms` }}
             className={({ isActive }) =>
-              `flex items-center justify-between rounded-xl px-4 py-2.5 font-serif text-base transition-colors duration-300 ${
+              `flex items-center justify-between rounded-xl px-4 py-3 font-serif text-[17px] transition-colors duration-300 ${
                 open ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
               } ${
                 isActive
@@ -35,7 +41,7 @@ export default function MobileMenu({ open, onClose }) {
           </NavLink>
         ))}
 
-        <div className="mt-2">
+        <div className="mt-3">
           <Button
             variant="outline"
             className="w-full"

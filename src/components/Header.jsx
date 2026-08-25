@@ -27,8 +27,12 @@ function Logo({ onNavigate }) {
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [overHero, setOverHero] = useState(true)
-  const { openSearch, homeReveal, lightboxOpen } = useUI()
+  const { openSearch, homeReveal, lightboxOpen, setMobileMenuOpen } = useUI()
   const location = useLocation()
+
+  useEffect(() => {
+    setMobileMenuOpen(menuOpen)
+  }, [menuOpen, setMobileMenuOpen])
 
   function updateOverHero() {
     const hero = document.querySelector('[data-hero]')
@@ -72,9 +76,11 @@ export default function Header() {
       className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow,opacity] duration-300 ease-out ${
         lightboxOpen
           ? 'pointer-events-none bg-transparent opacity-0'
-          : overHero
-            ? 'bg-transparent'
-            : 'border-b border-charcoal/10 bg-white shadow-[0_12px_32px_-18px_rgba(39,38,36,0.35)]'
+          : menuOpen
+            ? 'bg-ivory shadow-sm lg:bg-transparent lg:shadow-none'
+            : overHero
+              ? 'bg-transparent'
+              : 'border-b border-charcoal/10 bg-white shadow-[0_12px_32px_-18px_rgba(39,38,36,0.35)]'
       } ${homeReveal ? 'nav-reveal' : ''}`}
     >
       <div className="mx-auto flex h-[88px] max-w-none items-center justify-between gap-6 px-5 sm:px-6 lg:px-8">

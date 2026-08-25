@@ -13,7 +13,7 @@ import FloatingContact from './components/FloatingContact'
 import IntroAnimation from './components/IntroAnimation'
 import QuoteModal from './components/QuoteModal'
 import SearchOverlay from './components/SearchOverlay'
-import { UIProvider } from './context/UIContext'
+import { UIProvider, useUI } from './context/UIContext'
 import Home from './pages/Home'
 import Products from './pages/Products'
 import ProductDetail from './pages/ProductDetail'
@@ -70,6 +70,7 @@ function ProjectDetailRoute() {
 
 function Layout() {
   const { pathname } = useLocation()
+  const { mobileMenuOpen } = useUI()
 
   return (
     <>
@@ -89,7 +90,7 @@ function Layout() {
         </Routes>
       </main>
       <Footer />
-      <FloatingContact />
+      <FloatingContact hidden={mobileMenuOpen} />
       <SearchOverlay />
       <QuoteModal />
     </>

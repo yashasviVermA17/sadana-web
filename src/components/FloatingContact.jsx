@@ -17,7 +17,7 @@ function WhatsAppIcon() {
   )
 }
 
-export default function FloatingContact() {
+export default function FloatingContact({ hidden }) {
   const [openMenu, setOpenMenu] = useState(null)
   const rootRef = useRef(null)
 
@@ -38,7 +38,7 @@ export default function FloatingContact() {
   }, [openMenu])
 
   return (
-    <div className="floating-contact" ref={rootRef}>
+    <div className={`floating-contact ${hidden ? 'pointer-events-none invisible' : ''}`} ref={rootRef}>
       <div className="floating-wrap">
         {openMenu === 'whatsapp' && (
           <div className="floating-menu" role="menu" aria-label="Choose WhatsApp number">
