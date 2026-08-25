@@ -772,3 +772,9 @@ img {
     animation: none;
   }
 }
+
+html,
+body {
+  overflow-x: clip;
+}
+

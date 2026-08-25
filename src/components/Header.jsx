@@ -37,7 +37,7 @@ export default function Header() {
       return
     }
     const rect = hero.getBoundingClientRect()
-    setOverHero(rect.top < 88 && rect.bottom > 88)
+    setOverHero(rect.top <= 88 && rect.bottom > 88)
   }
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export default function Header() {
           ? 'pointer-events-none bg-transparent opacity-0'
           : overHero
             ? 'bg-transparent'
-            : 'border-b border-charcoal/10 bg-mist shadow-[0_12px_32px_-18px_rgba(39,38,36,0.35)]'
+            : 'max-lg:border-b-0 max-lg:bg-charcoal/90 max-lg:shadow-none border-b border-charcoal/10 bg-mist shadow-[0_12px_32px_-18px_rgba(39,38,36,0.35)]'
       } ${homeReveal ? 'nav-reveal' : ''}`}
     >
       <div className="mx-auto flex h-[88px] max-w-none items-center justify-between gap-6 px-5 sm:px-6 lg:px-8">
@@ -108,7 +108,7 @@ export default function Header() {
             className={`grid h-10 w-10 place-items-center rounded-full transition-colors duration-300 ${
               overHero
                 ? 'text-cream hover:bg-white/10 hover:text-cream'
-                : 'text-charcoal hover:bg-brand-soft hover:text-brand'
+                : 'max-lg:text-cream max-lg:hover:bg-white/10 max-lg:hover:text-cream text-charcoal hover:bg-brand-soft hover:text-brand'
             }`}
           >
             <Search className="h-[19px] w-[19px]" aria-hidden="true" />
@@ -122,7 +122,7 @@ export default function Header() {
             className={`grid h-10 w-10 place-items-center rounded-full transition-colors duration-300 ${
               overHero
                 ? 'text-cream hover:bg-white/10 hover:text-cream'
-                : 'text-charcoal hover:bg-brand-soft hover:text-brand'
+                : 'max-lg:text-cream max-lg:hover:bg-white/10 max-lg:hover:text-cream text-charcoal hover:bg-brand-soft hover:text-brand'
             } lg:hidden`}
           >
             {menuOpen ? (

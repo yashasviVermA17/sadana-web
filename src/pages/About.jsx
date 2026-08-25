@@ -11,7 +11,8 @@ import TiltImage from '../components/TiltImage'
 import { values } from '../data/site'
 import imgStory from '../assets/about inside image.jpg'
 import imgCtaBg from '../assets/products/wall-panels/Parametric wall panel.jpeg'
-import imgHero from '../assets/new about hero image.png'
+import imgHero from '../assets/about hero image current.png'
+import imgHeroMobile from '../assets/about hero new 1.png'
 
 function MissionVision() {
   const cards = [
@@ -88,13 +89,14 @@ export default function About() {
     <>
       <PageHero
         image={imgHero}
+        mobileImage={imgHeroMobile}
         breadcrumb={[{ label: 'About' }]}
         eyebrow="About Us"
         subtitle="At SADANA DECOR & INTERIOR, we believe every space has a story — and we are here to help you design it with perfection."
         overlay="bg-gradient-to-t from-charcoal/80 via-charcoal/40 to-charcoal/25"
-        imageClassName="absolute inset-x-0 bottom-0 h-[115%]! object-cover object-bottom lg:h-[132%]!"
-        contentClassName="pb-5! sm:pb-8! lg:pb-12!"
-        className="aspect-[1107/800]! h-auto! min-h-[260px]! w-full"
+        imageClassName=""
+        contentClassName="pb-3! sm:pb-8! lg:pb-12! [&_p]:max-lg:max-w-none!"
+        className="max-lg:aspect-[370/310]! max-lg:min-h-0! h-auto! w-full lg:aspect-[704/536]!"
       />
 
       <section className="mx-auto max-w-none px-5 py-14 sm:px-6 lg:px-8 lg:py-20">

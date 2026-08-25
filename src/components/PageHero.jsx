@@ -1,7 +1,7 @@
 import Breadcrumb from './Breadcrumb'
 import Reveal from './Reveal'
 
-export default function PageHero({ image, video, breadcrumb, eyebrow, title, subtitle, children, fit = 'cover', className = '', overlay, imageClassName = '', contentClassName = '', heightClass = 'h-[65vh] min-h-[440px] sm:h-[70vh] lg:h-[78vh]' }) {
+export default function PageHero({ image, mobileImage, video, breadcrumb, eyebrow, title, subtitle, children, fit = 'cover', className = '', overlay, imageClassName = '', contentClassName = '', heightClass = 'h-[65vh] min-h-[440px] sm:h-[70vh] lg:h-[78vh]' }) {
   return (
     <section data-hero>
       <div className={`relative ${heightClass} w-full overflow-hidden ${className}`}>
@@ -17,12 +17,15 @@ export default function PageHero({ image, video, breadcrumb, eyebrow, title, sub
             className={`img-settle block h-full w-full object-${fit} ${imageClassName}`}
           />
         ) : (
-          <img
-            src={image}
-            alt=""
-            aria-hidden="true"
-            className={`img-settle block h-full w-full object-${fit} ${imageClassName}`}
-          />
+          <picture>
+            {mobileImage && <source media="(max-width: 1023px)" srcSet={mobileImage} />}
+            <img
+              src={image}
+              alt=""
+              aria-hidden="true"
+              className={`img-settle block h-full w-full object-${fit} ${imageClassName}`}
+            />
+          </picture>
         )}
         <div
           className={`absolute inset-0 ${
