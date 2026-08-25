@@ -1,5 +1,6 @@
 import { Target, Eye } from 'lucide-react'
 import Button from '../components/Button'
+import Breadcrumb from '../components/Breadcrumb'
 import Reveal from '../components/Reveal'
 import StatsSection from '../components/StatsSection'
 import Timeline from '../components/Timeline'
@@ -86,16 +87,25 @@ function WhyChooseUs() {
 export default function About() {
   return (
     <>
-      <PageHero
-        image={imgHero}
-        breadcrumb={[{ label: 'About' }]}
-        eyebrow="About Us"
-        subtitle="At SADANA DECOR & INTERIOR, we believe every space has a story — and we are here to help you design it with perfection."
-        overlay="bg-gradient-to-t from-charcoal/80 via-charcoal/40 to-charcoal/25"
-        heightClass="h-[60vh] min-h-[380px] sm:h-[65vh] sm:min-h-[420px] lg:h-[85vh] lg:min-h-[560px]"
-        imageClassName="object-cover object-center"
-        className="!min-h-[320px]"
-      />
+      <section data-hero className="relative h-[55vh] min-h-[320px] w-full overflow-hidden sm:h-[60vh] sm:min-h-[400px] lg:h-[78vh] lg:min-h-[520px]">
+        <img
+          src={imgHero}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 block h-full w-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/40 to-charcoal/25" aria-hidden="true" />
+        <div className="absolute inset-0 mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-5 pb-10 sm:px-6 sm:pb-12 lg:px-8 lg:pb-16">
+          <Breadcrumb items={[{ label: 'About' }]} light />
+          <span className="mt-5 inline-flex items-center gap-2.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand sm:mt-6 sm:text-xs">
+            <span className="h-px w-8 bg-brand" aria-hidden="true" />
+            About Us
+          </span>
+          <p className="mt-4 max-w-xl text-sm leading-relaxed text-cream/80 sm:mt-5 sm:text-lg">
+            At SADANA DECOR &amp; INTERIOR, we believe every space has a story — and we are here to help you design it with perfection.
+          </p>
+        </div>
+      </section>
 
       <section className="mx-auto max-w-none px-5 py-14 sm:px-6 lg:px-8 lg:py-20">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
