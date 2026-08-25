@@ -101,7 +101,7 @@ export default function LogoCarousel({ items, renderItem }) {
           style={{ transform: `translateX(-${page * 100}%)` }}
         >
           {pages.map((group, gi) => (
-            <div key={gi} className="flex w-full shrink-0">
+            <div key={gi} className="flex w-full shrink-0 overflow-hidden">
               {group.map(({ item, key }) => (
                 <div
                   key={key}
