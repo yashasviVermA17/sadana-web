@@ -272,21 +272,26 @@ export default function AutoSlider({
         )}
       </div>
 
-      {scrollable && (
-        <div className="mt-8 flex items-center justify-center gap-2">
-          {items.map((item, i) => (
-            <button
-              key={i}
-              type="button"
-              aria-label={`Go to ${item?.name || `slide ${i + 1}`}`}
-              onClick={() => jumpTo(i)}
-              className={`h-2 rounded-full transition-all duration-500 ${
-                i === active ? 'w-7 bg-brand' : 'w-2 bg-charcoal/20 hover:bg-charcoal/40'
-              }`}
-            />
-          ))}
-        </div>
-      )}
+      {scrollable && (() => {
+        const maxDots = 5
+        const dotCount = Math.min(items.length, maxDots)
+        const dotIndex = Math.round((active / items.length) * (dotCount - 1))
+        return (
+          <div className="mt-8 flex items-center justify-center gap-2">
+            {Array.from({ length: dotCount }).map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                aria-label={`Go to slide ${i + 1}`}
+                onClick={() => jumpTo(Math.round((i / (dotCount - 1)) * (items.length - 1)))}
+                className={`h-2 rounded-full transition-all duration-500 ${
+                  i === dotIndex ? 'w-7 bg-brand' : 'w-2 bg-charcoal/20 hover:bg-charcoal/40'
+                }`}
+              />
+            ))}
+          </div>
+        )
+      })()}
     </>
   )
 }

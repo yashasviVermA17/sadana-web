@@ -24,27 +24,6 @@ const testimonials = [
     review:
       'Excellent collection and excellent service. The quality of the interior materials exceeded our expectations.',
   },
-  {
-    name: 'Neha Verma',
-    role: 'Homeowner, Vijay Nagar',
-    initial: 'N',
-    review:
-      'Our living space looks completely different now. The design suggestions and material selection were excellent.',
-  },
-  {
-    name: 'Rohit Agarwal',
-    role: 'Homeowner, Indore',
-    initial: 'R',
-    review:
-      'From material selection to installation, everything was handled professionally. Highly recommended.',
-  },
-  {
-    name: 'Kavita Gupta',
-    role: 'Homeowner, Indore',
-    initial: 'K',
-    review:
-      'Beautiful materials, great finishing and a very helpful team. Sadana Decor made the entire process easy.',
-  },
 ]
 
 function TestimonialContent({ data }) {
