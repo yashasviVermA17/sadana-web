@@ -73,7 +73,7 @@ export default function Testimonials() {
             <LogoCarousel
               items={clientLogos}
               renderItem={(logo) => (
-                <div className="group flex aspect-[3/2] w-full items-center justify-center overflow-hidden rounded-xl bg-mist p-3 transition-all duration-300 hover:-translate-y-1 sm:p-4">
+                <div className="group flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-xl bg-mist p-4 transition-all duration-300 hover:-translate-y-1 sm:p-5">
                   <img
                     src={logo.src}
                     alt={logo.name}
