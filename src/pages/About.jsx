@@ -92,7 +92,7 @@ export default function About() {
           src={imgHero}
           alt=""
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 block h-full w-full object-cover object-top lg:object-[center_10%]"
+          className="absolute inset-x-0 top-0 block h-full w-full object-cover object-top lg:object-[center_5%]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/40 to-charcoal/25" aria-hidden="true" />
         <div className="absolute inset-0 mx-auto flex h-full w-full max-w-none flex-col items-start justify-end px-5 pb-10 sm:px-6 sm:pb-12 lg:px-8 lg:pb-16">
