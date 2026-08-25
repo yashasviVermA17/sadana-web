@@ -8,7 +8,6 @@ const clientLogoModules = import.meta.glob('../assets/clients/*.jpg', {
 })
 
 const CLIENT_NAMES = {
-  1: 'Prestige Institute of Management & Research',
   2: 'Agarwal Group',
   3: 'Golden Leaves',
   4: 'Dainik Bhaskar Group',
