@@ -92,9 +92,9 @@ export default function About() {
         eyebrow="About Us"
         subtitle="At SADANA DECOR & INTERIOR, we believe every space has a story — and we are here to help you design it with perfection."
         overlay="bg-gradient-to-t from-charcoal/80 via-charcoal/40 to-charcoal/25"
-        imageClassName="absolute inset-x-0 bottom-0 h-[115%]! object-cover object-bottom lg:h-[132%]!"
-        contentClassName="pb-5! sm:pb-8! lg:pb-12!"
-        className="aspect-[1107/800]! h-auto! min-h-[260px]! w-full"
+        heightClass="h-[60vh] min-h-[380px] sm:h-[65vh] sm:min-h-[420px] lg:h-[85vh] lg:min-h-[560px]"
+        imageClassName="object-cover object-center"
+        className="!min-h-[320px]"
       />
 
       <section className="mx-auto max-w-none px-5 py-14 sm:px-6 lg:px-8 lg:py-20">
