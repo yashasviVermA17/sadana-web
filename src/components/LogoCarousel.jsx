@@ -17,8 +17,6 @@ export default function LogoCarousel({ items, renderItem }) {
   const [hoverable] = useState(
     () => typeof window === 'undefined' || window.matchMedia('(hover: hover)').matches,
   )
-  const wheelLock = useRef(0)
-  const touchStart = useRef({ x: 0, y: 0 })
 
   const pageCount = Math.max(1, Math.ceil(items.length / perView))
 
@@ -41,66 +39,29 @@ export default function LogoCarousel({ items, renderItem }) {
   const pages = useMemo(() => {
     const out = []
     for (let start = 0; start < items.length; start += perView) {
-      out.push(
-        Array.from({ length: perView }, (_, i) => ({
-          item: items[(start + i) % items.length],
-          key: `${start}-${i}`,
-        })),
-      )
+      const pageItems = []
+      for (let i = 0; i < perView; i++) {
+        const idx = start + i
+        if (idx >= items.length) break
+        pageItems.push({ item: items[idx], key: `${start}-${i}` })
+      }
+      out.push(pageItems)
     }
     return out
   }, [items, perView])
-
-  const onViewportClick = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    if (e.clientX - rect.left < rect.width / 2) {
-      setPage((p) => (p - 1 + pageCount) % pageCount)
-    } else {
-      setPage((p) => (p + 1) % pageCount)
-    }
-  }
-
-  const onWheel = (e) => {
-    const now = Date.now()
-    if (now - wheelLock.current < 900) return
-    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
-    if (Math.abs(delta) < 25) return
-    wheelLock.current = now
-    if (delta > 0) setPage((p) => (p + 1) % pageCount)
-    else setPage((p) => (p - 1 + pageCount) % pageCount)
-  }
-
-  const onTouchStart = (e) => {
-    touchStart.current.x = e.touches[0].clientX
-    touchStart.current.y = e.touches[0].clientY
-  }
-
-  const onTouchEnd = (e) => {
-    const dx = e.changedTouches[0].clientX - touchStart.current.x
-    const dy = e.changedTouches[0].clientY - touchStart.current.y
-    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
-      if (dx < 0) setPage((p) => (p + 1) % pageCount)
-      else setPage((p) => (p - 1 + pageCount) % pageCount)
-    }
-  }
 
   return (
     <div
       onMouseEnter={hoverable ? () => setPaused(true) : undefined}
       onMouseLeave={hoverable ? () => setPaused(false) : undefined}
     >
-      <div
-        className="overflow-hidden"
-        onWheel={onWheel}
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
-      >
+      <div className="overflow-hidden">
         <div
           className="flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
           style={{ transform: `translateX(-${page * 100}%)` }}
         >
           {pages.map((group, gi) => (
-            <div key={gi} className="flex w-full shrink-0 overflow-hidden">
+            <div key={gi} className="flex w-full shrink-0">
               {group.map(({ item, key }) => (
                 <div
                   key={key}
@@ -115,31 +76,26 @@ export default function LogoCarousel({ items, renderItem }) {
         </div>
       </div>
 
-      {pageCount > 1 && (() => {
-        const MAX_DOTS = 5
-        const dotCount = Math.min(pageCount, MAX_DOTS)
-        const dotIndex = Math.round((page / (pageCount - 1)) * (dotCount - 1))
-        return (
-          <div className="mt-8 flex justify-center" style={{ whiteSpace: 'nowrap' }}>
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              {Array.from({ length: dotCount }, (_, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => setPage(Math.round((i / (dotCount - 1)) * (pageCount - 1)))}
-                  aria-label={`Go to slide ${i + 1}`}
-                  aria-current={i === dotIndex}
-                  className={`h-1.5 rounded-full transition-all duration-300 sm:h-2 ${
-                    i === dotIndex
-                      ? 'w-5 bg-brand sm:w-7'
-                      : 'w-1.5 bg-charcoal/20 hover:bg-charcoal/40 sm:w-2'
-                  }`}
-                />
-              ))}
-            </div>
+      {pageCount > 1 && (
+        <div className="mt-8 flex justify-center" style={{ whiteSpace: 'nowrap' }}>
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            {Array.from({ length: pageCount }, (_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setPage(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                aria-current={i === page}
+                className={`h-1.5 rounded-full transition-all duration-300 sm:h-2 ${
+                  i === page
+                    ? 'w-5 bg-brand sm:w-7'
+                    : 'w-1.5 bg-charcoal/20 hover:bg-charcoal/40 sm:w-2'
+                }`}
+              />
+            ))}
           </div>
-        )
-      })()}
+        </div>
+      )}
     </div>
   )
 }
