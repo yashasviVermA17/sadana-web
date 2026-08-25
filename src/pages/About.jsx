@@ -87,7 +87,7 @@ function WhyChooseUs() {
 export default function About() {
   return (
     <>
-      <section data-hero className="relative h-[55vh] min-h-[320px] w-full overflow-hidden sm:h-[60vh] sm:min-h-[400px] lg:h-[78vh] lg:min-h-[520px]">
+      <section data-hero className="relative h-[55vh] min-h-[320px] w-full overflow-hidden sm:h-[58vh] sm:min-h-[380px] lg:h-[60vh] lg:min-h-[440px]">
         <img
           src={imgHero}
           alt=""
