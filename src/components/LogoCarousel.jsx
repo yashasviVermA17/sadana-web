@@ -90,8 +90,7 @@ export default function LogoCarousel({ items, renderItem }) {
       onMouseLeave={hoverable ? () => setPaused(false) : undefined}
     >
       <div
-        className="cursor-pointer overflow-hidden"
-        onClick={onViewportClick}
+        className="overflow-hidden"
         onWheel={onWheel}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
