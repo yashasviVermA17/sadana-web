@@ -2,12 +2,13 @@ import SectionHeading from './SectionHeading'
 import LogoCarousel from './LogoCarousel'
 
 // Web-optimized copies (800px JPEG) generated from src/assets/Sadana_Client_Logos_Enhanced
-const clientLogoModules = import.meta.glob('../assets/clients/*.jpg', {
+const clientLogoModules = import.meta.glob('../assets/clients/*.{jpg,png}', {
   eager: true,
   import: 'default',
 })
 
 const CLIENT_NAMES = {
+  1: 'Prestige Institute of Management & Research',
   2: 'Agarwal Group',
   3: 'Golden Leaves',
   4: 'Dainik Bhaskar Group',
@@ -49,7 +50,7 @@ const CLIENT_NAMES = {
 const clientLogos = Object.entries(clientLogoModules)
   .sort(([a], [b]) => a.localeCompare(b))
   .map(([path, src]) => {
-    const num = Number(path.match(/(\d+)\.jpg$/)?.[1] ?? 0)
+    const num = Number(path.match(/(\d+)\.(jpg|png)$/)?.[1] ?? 0)
     return { src, name: CLIENT_NAMES[num] || 'Valued Client' }
   })
 

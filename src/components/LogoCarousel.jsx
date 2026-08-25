@@ -29,7 +29,7 @@ export default function LogoCarousel({ items, renderItem }) {
   }, [])
 
   useEffect(() => {
-    setPage((p) => (p < pageCount ? p : 0))
+    setPage((p) => Math.min(p, pageCount - 1))
   }, [pageCount])
 
   useEffect(() => {
@@ -44,8 +44,9 @@ export default function LogoCarousel({ items, renderItem }) {
       const pageItems = []
       for (let i = 0; i < perView; i++) {
         const idx = start + i
-        if (idx >= items.length) break
-        pageItems.push({ item: items[idx], key: `${start}-${i}` })
+        if (idx < items.length) {
+          pageItems.push({ item: items[idx], key: `${start}-${i}` })
+        }
       }
       out.push(pageItems)
     }
@@ -70,15 +71,13 @@ export default function LogoCarousel({ items, renderItem }) {
   const onPointerDown = (e) => {
     if (e.pointerType !== 'mouse') return
     touchRef.current.startX = e.clientX
-    touchRef.current.moved = false
     e.currentTarget.setPointerCapture(e.pointerId)
   }
 
   const onPointerUp = (e) => {
     if (e.pointerType !== 'mouse') return
     const dx = e.clientX - touchRef.current.startX
-    if (Math.abs(dx) > SWIPE_THRESHOLD && !touchRef.current.moved) {
-      touchRef.current.moved = true
+    if (Math.abs(dx) > SWIPE_THRESHOLD) {
       if (dx < 0) setPage((p) => Math.min(p + 1, pageCount - 1))
       else setPage((p) => Math.max(p - 1, 0))
     }
@@ -127,10 +126,10 @@ export default function LogoCarousel({ items, renderItem }) {
                 onClick={() => setPage(i)}
                 aria-label={`Go to slide ${i + 1}`}
                 aria-current={i === page}
-                className={`h-1.5 rounded-full transition-all duration-300 sm:h-2 ${
+                className={`rounded-full transition-all duration-300 focus:outline-none ${
                   i === page
-                    ? 'w-5 bg-brand sm:w-7'
-                    : 'w-1.5 bg-charcoal/20 hover:bg-charcoal/40 sm:w-2'
+                    ? 'h-2 w-7 bg-brand sm:h-2.5 sm:w-8'
+                    : 'h-2 w-2 bg-charcoal/20 hover:bg-charcoal/40'
                 }`}
               />
             ))}
