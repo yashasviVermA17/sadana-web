@@ -7,11 +7,15 @@ import imgVictaraPanel from '../assets/products/wall-panels/Victara panel.jpg'
 import imgWpcPanels from '../assets/products/wall-panels/W.p.c panel.jpg'
 import imgExteriorWallPanel from '../assets/products/wall-panels/Exterior wall panel.jpg'
 import imgAcrylicSheet from '../assets/products/decorative-sheets/Acrylic sheet.jpg'
-import imgAlabasterSheet from '../assets/products/decorative-sheets/Alabaster sheet.jpeg'
 import imgLaminates from '../assets/products/decorative-sheets/Laminate sheet.jpeg'
 import imgRippleSheet from '../assets/products/decorative-sheets/Ripple sheet.jpg'
 import imgHighlighterSheet from '../assets/products/decorative-sheets/metal highjlighter sheet 2.jpeg'
 import imgCharcoalSheet from '../assets/products/decorative-sheets/Charcoal sheets.jpeg'
+import imgAcpSheet from '../assets/products/decorative-sheets/Acp sheet.jpeg'
+import imgCorkSheet from '../assets/products/decorative-sheets/Cork sheet.jpg'
+import imgUvMarbleSheet from '../assets/products/decorative-sheets/Uv marble sheet.jpg'
+import imgVeneerSheet from '../assets/products/decorative-sheets/Veneer sheets.jpeg'
+import imgFabricSheet from '../assets/products/decorative-sheets/Fabric sheet.png'
 import imgAlabasterCeiling from '../assets/products/ceiling/Alabaster ceiling.jpg'
 import imgBaffle from '../assets/products/ceiling/Baffle ceiling.jpg'
 import imgStretchFiber from '../assets/products/ceiling/Stretch fiber ceiling.jpg'
@@ -19,7 +23,7 @@ import imgVoxSoffit from '../assets/products/ceiling/Vox soffit celling.jpg'
 import imgWoodenFlooring from '../assets/products/flooring/Wooden flooring.jpg'
 import imgSpcFlooring from '../assets/products/flooring/S.p.c flooring.jpg'
 import imgGymFlooring from '../assets/products/flooring/Gym rubber flooring.jpg'
-import imgRungs from '../assets/products/flooring/rungs.jpg'
+import imgRugs from '../assets/products/flooring/rugs.jpg'
 import imgVinylFlooring from '../assets/products/flooring/Vinyl flooring.jpeg'
 import imgMosaicTiles from '../assets/products/flooring/Mosaic tiles.jpg'
 import imgRoofingThatch from '../assets/products/roofing/Roofing Thatch.jpeg'
@@ -32,6 +36,7 @@ import imgCurtains from '../assets/products/blinds-curtains/Curtain.jpg'
 import imgWallpapers from '../assets/products/wallpaper/customized wallpaper .jpeg'
 import imgArtificialGrass from '../assets/products/artificial-grass/Artificial grass1.jpg'
 import imgExteriorLouvers from '../assets/products/exterior-outdoor/HDPC lowers.jpeg'
+import imgFabricLouvers from '../assets/products/exterior-outdoor/Fabric lowers.png'
 import imgVerticalGarden from '../assets/products/exterior-outdoor/Vertical garden.jpg'
 import imgMouldings from '../assets/products/moulding-decorative/Moulding.jpg'
 import imgVoxSoftPanel from '../assets/products/soft-panels/Exterior vox panel.jpeg'
@@ -40,7 +45,7 @@ import imgCncWork from '../assets/products/cnc-work/C.n.c work.jpeg'
 import imgRattan from '../assets/products/rattan-cane/Rattan cane.jpg'
 import imgMattress from '../assets/products/mattress/Mattress.jpeg'
 import imgCushion from '../assets/products/mattress/cushion.jpg'
-import imgSofa from '../assets/products/sofa/Sofa.jpg'
+import imgSofa from '../assets/products/sofa/upholstery.jpg'
 
 export const categories = [
   'Wall Panels',
@@ -196,21 +201,6 @@ export const products = [
     material: 'High-gloss acrylic sheets laminated onto board for shutters and panels.',
     applications: ['Wardrobe shutters', 'Kitchen cabinets', 'TV & feature panels', 'Showroom displays'],
     finishes: ['Glossy Solid', 'Pearl', 'High Gloss Wood', 'Frosted'],
-    related: ['alabaster-sheets', 'laminates'],
-  },
-  {
-    id: 'alabaster-sheets',
-    name: 'Alabaster Sheet',
-    category: 'Decorative Sheets',
-    image: imgAlabasterSheet,
-    gallery: [imgAlabasterSheet],
-    short: 'Elegant alabaster sheets with a soft, glowing premium finish.',
-    description:
-      'Alabaster sheets bring the milky glow of natural stone to walls, ceilings and light features. Available in translucent panels that light up beautifully from behind.',
-    features: ['Soft, natural glow', 'Ceiling & wall panels', 'Works with backlighting', 'Modern premium finish'],
-    material: 'Translucent alabaster-look panels finished for ceilings, walls and light features.',
-    applications: ['Ceiling panels', 'Feature walls', 'Backlit panels', 'Reception areas'],
-    finishes: ['Ivory', 'Honey', 'White Glow', 'Amber'],
     related: ['acrylic-sheets', 'laminates'],
   },
   {
@@ -226,7 +216,7 @@ export const products = [
     material: 'High-pressure and decorative laminate sheets in various finishes.',
     applications: ['Furniture & wardrobes', 'Kitchen shutters', 'Door surfaces', 'Panelling'],
     finishes: ['Gloss', 'Matte', 'Wood Grain', 'Textured'],
-    related: ['acrylic-sheets', 'alabaster-sheets'],
+    related: ['acrylic-sheets', 'charcoal-sheets'],
   },
   {
     id: 'ripple-sheet',
@@ -241,7 +231,7 @@ export const products = [
     material: 'Decorative translucent PVC / acrylic sheets in ripple finishes.',
     applications: ['Ceiling highlights', 'Lighting panels', 'Partitions & screens', 'Feature panel details'],
     finishes: ['Transparent', 'White Glow', 'Amber', 'Frosted'],
-    related: ['acrylic-sheets', 'alabaster-sheets'],
+    related: ['acrylic-sheets', 'charcoal-sheets'],
   },
   {
     id: 'metal-highlighter-sheet',
@@ -256,7 +246,7 @@ export const products = [
     material: 'Metallic-finish decorative highlighter sheets for wall cladding and accents.',
     applications: ['Accent walls', 'Pillar cladding', 'Lobby & reception walls', 'Panel inserts'],
     finishes: ['Metallic', 'Charcoal Black', 'Grey Wash', 'Textured'],
-    related: ['acrylic-sheets', 'alabaster-sheets'],
+    related: ['acrylic-sheets', 'charcoal-sheets'],
   },
   {
     id: 'charcoal-sheets',
@@ -272,6 +262,81 @@ export const products = [
     applications: ['Accent walls', 'Furniture surfaces', 'TV unit panelling', 'Showroom displays'],
     finishes: ['Matte Charcoal', 'Textured', 'Wood Grain', 'Metallic'],
     related: ['acrylic-sheets', 'metal-highlighter-sheet'],
+  },
+  {
+    id: 'acp-sheets',
+    name: 'ACP Sheet',
+    category: 'Decorative Sheets',
+    image: imgAcpSheet,
+    gallery: [imgAcpSheet],
+    short: 'Lightweight aluminium composite panels for modern facades and interiors.',
+    description:
+      'ACP sheets combine a polyethylene core with aluminium facings for a rigid, lightweight and weather-resistant surface. Ideal for exterior cladding, signage and interior wall panelling.',
+    features: ['Lightweight & rigid', 'Weather resistant', 'Fire-retardant options', 'Easy to fabricate'],
+    material: 'Aluminium composite panels with PE or FR core in various finishes.',
+    applications: ['Exterior cladding', 'Signage & branding', 'Interior wall panelling', 'Ceiling accents'],
+    finishes: ['Glossy', 'Matte', 'Wood Grain', 'Mirror'],
+    related: ['acrylic-sheets', 'charcoal-sheets'],
+  },
+  {
+    id: 'cork-sheets',
+    name: 'Cork Sheet',
+    category: 'Decorative Sheets',
+    image: imgCorkSheet,
+    gallery: [imgCorkSheet],
+    short: 'Natural cork sheets that add warmth, texture and acoustic comfort.',
+    description:
+      'Cork sheets bring a natural, warm texture to walls, ceilings and pin boards. Excellent acoustic insulation and a soft, tactile surface.',
+    features: ['Natural & sustainable', 'Acoustic insulation', 'Soft tactile surface', 'Easy to install'],
+    material: 'Natural cork sheets in various thicknesses and finishes.',
+    applications: ['Pin boards', 'Wall accents', 'Ceiling panels', 'Study walls'],
+    finishes: ['Natural', 'Pressed', 'Painted', 'Custom'],
+    related: ['charcoal-sheets', 'acrylic-sheets'],
+  },
+  {
+    id: 'uv-marble-sheets',
+    name: 'UV Marble Sheet',
+    category: 'Decorative Sheets',
+    image: imgUvMarbleSheet,
+    gallery: [imgUvMarbleSheet],
+    short: 'High-gloss UV marble sheets with a realistic stone look and scratch resistance.',
+    description:
+      'UV marble sheets deliver a stunning, high-gloss marble finish with UV-coated surface for scratch and fade resistance.',
+    features: ['High-gloss marble look', 'UV-coated scratch resistance', 'Waterproof surface', 'Easy to maintain'],
+    material: 'UV-coated decorative sheets with realistic marble patterns.',
+    applications: ['Feature walls', 'Kitchen cabinets', 'Wardrobe shutters', 'Bathroom walls'],
+    finishes: ['White Marble', 'Black Marble', 'Gold Vein', 'Grey Statuario'],
+    related: ['acrylic-sheets', 'charcoal-sheets'],
+  },
+  {
+    id: 'veneer-sheets',
+    name: 'Veneer Sheet',
+    category: 'Decorative Sheets',
+    image: imgVeneerSheet,
+    gallery: [imgVeneerSheet],
+    short: 'Natural wood veneer sheets for a rich, authentic wood finish.',
+    description:
+      'Wood veneer sheets bring the beauty of real wood to furniture, wardrobes and panelling at a fraction of the cost of solid wood.',
+    features: ['Real wood grain', 'Cost-effective luxury', 'Wide species range', 'Easy to apply'],
+    material: 'Natural wood veneer sheets in various species and thicknesses.',
+    applications: ['Furniture & wardrobes', 'Wall panelling', 'Doors & cabinets', 'Ceiling accents'],
+    finishes: ['Teak', 'Walnut', 'Oak', 'Maple'],
+    related: ['acrylic-sheets', 'charcoal-sheets'],
+  },
+  {
+    id: 'fabric-sheets',
+    name: 'Fabric Sheet',
+    category: 'Decorative Sheets',
+    image: imgFabricSheet,
+    gallery: [imgFabricSheet],
+    short: 'Textured fabric-finish sheets that add a soft, premium feel to surfaces.',
+    description:
+      'Fabric-finish decorative sheets bring a rich, tactile texture to walls, cabinets and furniture. Available in a range of woven and embossed patterns for a warm, elegant interior.',
+    features: ['Soft tactile texture', 'Woven & embossed patterns', 'Scratch resistant', 'Easy to clean'],
+    material: 'Fabric-laminated decorative sheets in various textures.',
+    applications: ['Wardrobe shutters', 'Feature walls', 'Furniture surfaces', 'TV units'],
+    finishes: ['Linen', 'Denim', 'Velvet Touch', 'Woven'],
+    related: ['acrylic-sheets', 'veneer-sheets'],
   },
   {
     id: 'alabaster-ceiling',
@@ -346,7 +411,7 @@ export const products = [
     material: 'Laminated and engineered wooden flooring with durable, wear-resistant top layers.',
     applications: ['Bedrooms & living rooms', 'Offices & cabins', 'Showrooms', 'Retail spaces'],
     finishes: ['Natural Oak', 'Walnut', 'Smoked', 'Grey Wood'],
-    related: ['spc-flooring', 'rungs'],
+    related: ['spc-flooring', 'rugs'],
   },
   {
     id: 'spc-flooring',
@@ -361,7 +426,7 @@ export const products = [
     material: 'Stone-plastic composite planks with rigid, waterproof cores and wear layers.',
     applications: ['Living & bedrooms', 'Kitchens & bathrooms', 'Offices & retail', 'Balconies'],
     finishes: ['Oak', 'Walnut', 'Marble', 'Textured Wood'],
-    related: ['wooden-flooring', 'rungs'],
+    related: ['wooden-flooring', 'rugs'],
   },
   {
     id: 'vinyl-flooring',
@@ -394,18 +459,18 @@ export const products = [
     related: ['wooden-flooring', 'spc-flooring'],
   },
   {
-    id: 'rungs',
-    name: 'Rungs',
+    id: 'rugs',
+    name: 'Rugs',
     category: 'Flooring',
-    image: imgRungs,
-    gallery: [imgRungs],
-    short: 'Sturdy rung and step systems for lofts, mezzanines and access points.',
+    image: imgRugs,
+    gallery: [imgRugs],
+    short: 'Stylish, durable rugs to elevate any room with warmth and texture.',
     description:
-      'Quality rungs and step systems for lofts, mezzanines, storerooms and access points. Built to be strong, stable and easy to install.',
-    features: ['Strong, stable construction', 'Indoor & outdoor use', 'Easy installation', 'Wide size range'],
-    material: 'Metal and WPC rung systems in durable finishes.',
-    applications: ['Lofts & mezzanines', 'Storerooms', 'Exterior access', 'Play & activity areas'],
-    finishes: ['Powder Coated', 'Wood Finish', 'Galvanised', 'Matte Black'],
+      'A wide range of rugs for living rooms, bedrooms and offices — available in multiple sizes, textures and patterns to complement every interior.',
+    features: ['Soft & comfortable', 'Wide range of designs', 'Durable construction', 'Easy to maintain'],
+    material: 'Wool, cotton and synthetic fibre rugs in various pile styles.',
+    applications: ['Living rooms & bedrooms', 'Office spaces', 'Hotel lobbies', 'Hallways & entryways'],
+    finishes: ['Hand-tufted', 'Flatweave', 'Shaggy', 'Printed'],
     related: ['wooden-flooring', 'spc-flooring'],
   },
   {
@@ -541,11 +606,11 @@ export const products = [
     material: 'UV-stabilised synthetic grass in natural green shades.',
     applications: ['Lawns & gardens', 'Terraces & balconies', 'Play areas', 'Event & stage floors'],
     finishes: ['Realistic Green', 'Multi-tone Green', 'Indoor', 'Sports'],
-    related: ['rungs', 'outdoor-deck-tile'],
+    related: ['rugs', 'outdoor-deck-tile'],
   },
   {
-    id: 'hdpc-louvers',
-    name: 'HDPC Louvers',
+    id: 'hdpc-lowers',
+    name: 'HDPC Lowers',
     category: 'Exterior / Outdoor',
     image: imgExteriorLouvers,
     gallery: [imgExteriorLouvers],
@@ -557,6 +622,21 @@ export const products = [
     applications: ['Façade shading', 'Balcony screens', 'Outdoor ceilings', 'Terrace pergolas'],
     finishes: ['Teak', 'Walnut', 'Grey Wood', 'Charcoal'],
     related: ['exterior-wall-panel', 'outdoor-deck-tile', 'pu-stones'],
+  },
+  {
+    id: 'fabric-lowers',
+    name: 'Fabric Lowers',
+    category: 'Exterior / Outdoor',
+    image: imgFabricLouvers,
+    gallery: [imgFabricLouvers],
+    short: 'Elegant fabric louver panels for privacy screens and decorative shading.',
+    description:
+      'Fabric louver panels combine soft fabric textures with a structured louver frame for decorative shading, privacy screens and wall accents. A stylish alternative to traditional louvers.',
+    features: ['Soft fabric finish', 'Privacy & shading', 'Lightweight panels', 'Easy to install'],
+    material: 'Fabric-wrapped louver panels on aluminium or WPC frames.',
+    applications: ['Privacy screens', 'Balcony dividers', 'Wall accents', 'Window shading'],
+    finishes: ['Linen', 'Canvas', 'Textured', 'Custom'],
+    related: ['hdpc-lowers', 'outdoor-deck-tile'],
   },
   {
     id: 'vertical-garden',
@@ -586,7 +666,7 @@ export const products = [
     material: 'WPC and solid-wood deck tiles on interlocking plastic bases.',
     applications: ['Balcony floors', 'Terrace decks', 'Poolside surrounds', 'Garden paths'],
     finishes: ['Teak', 'Walnut', 'Grey Wood', 'Natural'],
-    related: ['hdpc-louvers', 'vertical-garden'],
+    related: ['hdpc-lowers', 'vertical-garden'],
   },
   {
     id: 'mouldings',

@@ -24,11 +24,14 @@ export const PRODUCT_SHOP_SLUGS = {
   'exterior-wall-panel': 'wall-panels',
   // Decorative Sheets
   'acrylic-sheets': 'decorative-sheets',
-  'alabaster-sheets': 'decorative-sheets',
   'metal-highlighter-sheet': 'decorative-sheets',
   'charcoal-sheets': 'decorative-sheets',
   laminates: 'decorative-sheets',
   'ripple-sheet': 'decorative-sheets',
+  'acp-sheets': 'decorative-sheets',
+  'cork-sheets': 'decorative-sheets',
+  'uv-marble-sheets': 'decorative-sheets',
+  'veneer-sheets': 'decorative-sheets',
   // Ceiling
   'alabaster-ceiling': 'ceiling',
   'baffle-ceiling': 'ceiling',
@@ -39,7 +42,7 @@ export const PRODUCT_SHOP_SLUGS = {
   'spc-flooring': 'flooring',
   'vinyl-flooring': 'flooring',
   'gym-flooring': 'flooring',
-  rungs: 'flooring',
+  rugs: 'flooring',
   // Roofing
   'roofing-thatch': 'roofing',
   // Doors
@@ -54,7 +57,8 @@ export const PRODUCT_SHOP_SLUGS = {
   // Artificial Grass
   'artificial-grass': 'artificial-grass',
   // Exterior / Outdoor
-  'hdpc-louvers': 'exterior-outdoor',
+  'hdpc-lowers': 'exterior-outdoor',
+  'fabric-lowers': 'exterior-outdoor',
   'vertical-garden': 'exterior-outdoor',
   'outdoor-deck-tile': 'exterior-outdoor',
   // Moulding & Decorative
