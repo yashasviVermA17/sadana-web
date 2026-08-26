@@ -33,7 +33,7 @@ export const PRODUCT_SHOP_SLUGS = {
   'uv-marble-sheets': 'decorative-sheets',
   'veneer-sheets': 'decorative-sheets',
   // Ceiling
-  'alabaster-ceiling': 'ceiling',
+  'alabaster-sheet': 'decorative-sheets',
   'baffle-ceiling': 'ceiling',
   'stretch-fiber-ceiling': 'ceiling',
   'vox-sofit-ceiling': 'ceiling',
