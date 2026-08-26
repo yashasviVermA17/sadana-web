@@ -76,7 +76,7 @@ export default function ProductDetail({ productId: propProductId }) {
       </section>
 
       <section className="mx-auto max-w-none px-5 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <div className="grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
+        <div className="flex flex-col gap-10 lg:gap-14">
           <Reveal>
             <ImageGallery images={product.gallery} alt={product.name} />
           </Reveal>

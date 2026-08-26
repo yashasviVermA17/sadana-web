@@ -685,7 +685,7 @@ export const products = [
   },
   {
     id: 'vox-soft-panel',
-    name: 'Vox Soft Panel',
+    name: 'Vox Soffit Panel',
     category: 'Soft Panels',
     image: imgVoxSoftPanel,
     gallery: [imgVoxSoftPanel],
