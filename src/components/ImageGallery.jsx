@@ -9,7 +9,7 @@ export default function ImageGallery({ images, alt = 'Product', className = '' }
 
   return (
     <div className={`${className}`}>
-      <div className="group relative img-zoom aspect-[3/4] overflow-hidden rounded-card">
+      <div className="group relative img-zoom aspect-[4/3] overflow-hidden rounded-card">
         <img
           src={images[active]}
           alt={`${alt} — view ${active + 1}`}
