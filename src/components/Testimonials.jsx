@@ -1,5 +1,4 @@
 import SectionHeading from './SectionHeading'
-import LogoCarousel from './LogoCarousel'
 
 // Web-optimized copies (800px JPEG) generated from src/assets/Sadana_Client_Logos_Enhanced
 const clientLogoModules = import.meta.glob('../assets/clients/*.{jpg,png}', {
@@ -44,6 +43,8 @@ const CLIENT_NAMES = {
   37: 'Skye Luxuria',
   38: 'Bank of Baroda',
   39: 'Hotel Omni Palace',
+  41: 'CDPIS',
+  43: 'DEL',
 }
 
 const clientLogos = Object.entries(clientLogoModules)
@@ -61,7 +62,6 @@ export default function Testimonials() {
           align="center"
           eyebrow="Testimonials"
           title="Happy Clients"
-          text="Fifteen years of relationships built one room at a time."
           className="max-w-2xl"
         />
 
@@ -69,20 +69,20 @@ export default function Testimonials() {
           <p className="text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-stone">
             Brands & institutions we have served
           </p>
-          <div className="mt-8">
-            <LogoCarousel
-              items={clientLogos}
-              renderItem={(logo) => (
-                <div className="group flex aspect-[5/4] w-full items-center justify-center overflow-hidden rounded-xl bg-mist p-4 transition-all duration-300 hover:-translate-y-1 sm:p-5">
-                  <img
-                    src={logo.src}
-                    alt={logo.name}
-                    loading="lazy"
-                    className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.04]"
-                  />
-                </div>
-              )}
-            />
+          <div className="mt-8 grid grid-cols-3 gap-3 sm:grid-cols-4 sm:gap-4 md:grid-cols-5 lg:grid-cols-6">
+            {clientLogos.map((logo, i) => (
+              <div
+                key={i}
+                className="group flex aspect-[5/4] items-center justify-center overflow-hidden rounded-xl bg-mist p-4 transition-all duration-300 hover:-translate-y-1 sm:p-5"
+              >
+                <img
+                  src={logo.src}
+                  alt={logo.name}
+                  loading="lazy"
+                  className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.04]"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>

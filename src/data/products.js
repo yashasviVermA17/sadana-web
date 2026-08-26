@@ -775,7 +775,7 @@ export const products = [
   },
   {
     id: 'sofa',
-    name: 'Sofa',
+    name: 'Upholstery',
     category: 'Sofa',
     image: imgSofa,
     gallery: [imgSofa],
