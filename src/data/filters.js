@@ -36,7 +36,7 @@ export const PRODUCT_SHOP_SLUGS = {
   'alabaster-ceiling': 'ceiling',
   'baffle-ceiling': 'ceiling',
   'stretch-fiber-ceiling': 'ceiling',
-  'vox-soffit-ceiling': 'ceiling',
+  'vox-sofit-ceiling': 'ceiling',
   // Flooring
   'wooden-flooring': 'flooring',
   'spc-flooring': 'flooring',
@@ -65,7 +65,7 @@ export const PRODUCT_SHOP_SLUGS = {
   mouldings: 'moulding-decorative',
   'mosaic-tiles': 'moulding-decorative',
   // Soft Panels
-  'vox-soft-panel': 'soft-panels',
+  'vox-sofit-panel': 'soft-panels',
   // Carpet
   carpet: 'carpet',
   // CNC Work
@@ -117,7 +117,7 @@ export const FILTER_GROUPS = [
         slug: 'moulding-decorative',
         test: byShopSlug('moulding-decorative'),
       },
-      { label: 'Soft Panels', slug: 'soft-panels', test: byShopSlug('soft-panels') },
+      { label: 'Sofit Panels', slug: 'soft-panels', test: byShopSlug('soft-panels') },
       { label: 'Carpet', slug: 'carpet', test: byShopSlug('carpet') },
       { label: 'CNC Work', slug: 'cnc-work', test: byShopSlug('cnc-work') },
       { label: 'Rattan Cane', slug: 'rattan-cane', test: byShopSlug('rattan-cane') },

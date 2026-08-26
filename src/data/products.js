@@ -19,7 +19,7 @@ import imgFabricSheet from '../assets/products/decorative-sheets/Fabric sheet.pn
 import imgAlabasterCeiling from '../assets/products/ceiling/Alabaster ceiling.jpg'
 import imgBaffle from '../assets/products/ceiling/Baffle ceiling.jpg'
 import imgStretchFiber from '../assets/products/ceiling/Stretch fiber ceiling.jpg'
-import imgVoxSoffit from '../assets/products/ceiling/Vox soffit celling.jpg'
+import imgVoxSofit from '../assets/products/ceiling/Vox sofit celling.jpg'
 import imgWoodenFlooring from '../assets/products/flooring/Wooden flooring.jpg'
 import imgSpcFlooring from '../assets/products/flooring/S.p.c flooring.jpg'
 import imgGymFlooring from '../assets/products/flooring/Gym rubber flooring.jpg'
@@ -59,7 +59,7 @@ export const categories = [
   'Artificial Grass',
   'Exterior / Outdoor',
   'Moulding & Decorative',
-  'Soft Panels',
+  'Sofit Panels',
   'Carpet',
   'CNC Work',
   'Rattan Cane',
@@ -351,7 +351,7 @@ export const products = [
     material: 'Translucent alabaster-look ceiling panels mounted on lightweight framing.',
     applications: ['Lobbies & receptions', 'Showrooms', 'Modern homes', 'Hotels & restaurants'],
     finishes: ['Ivory', 'White Glow', 'Amber', 'Custom'],
-    related: ['stretch-fiber-ceiling', 'vox-soffit-ceiling'],
+    related: ['stretch-fiber-ceiling', 'vox-sofit-ceiling'],
   },
   {
     id: 'baffle-ceiling',
@@ -366,7 +366,7 @@ export const products = [
     material: 'Powder-coated aluminium / metal baffle systems in a range of finishes.',
     applications: ['Retail stores', 'Office reception', 'Cafés & restaurants', 'Shopping malls'],
     finishes: ['White', 'Black', 'Wood Finish', 'Custom Colour'],
-    related: ['stretch-fiber-ceiling', 'vox-soffit-ceiling'],
+    related: ['stretch-fiber-ceiling', 'vox-sofit-ceiling'],
   },
   {
     id: 'stretch-fiber-ceiling',
@@ -381,19 +381,19 @@ export const products = [
     material: 'Stretch fiber membrane mounted on a lightweight aluminium track system.',
     applications: ['Showrooms', 'Hotel lobbies', 'Corporate offices', 'Retail & cafés'],
     finishes: ['Matte White', 'Satin', 'Backlit', 'Custom Colour'],
-    related: ['baffle-ceiling', 'vox-soffit-ceiling'],
+    related: ['baffle-ceiling', 'vox-sofit-ceiling'],
   },
   {
-    id: 'vox-soffit-ceiling',
-    name: 'Vox Soffit Ceiling',
+    id: 'vox-sofit-ceiling',
+    name: 'Vox Sofit Ceiling',
     category: 'Ceiling',
-    image: imgVoxSoffit,
-    gallery: [imgVoxSoffit],
-    short: 'Sleek vox soffit systems that make ceilings look custom and refined.',
+    image: imgVoxSofit,
+    gallery: [imgVoxSofit],
+    short: 'Sleek vox sofit systems that make ceilings look custom and refined.',
     description:
-      'Vox soffit ceilings use slim profiles to create a refined, layered ceiling look. Perfect for retail, offices and modern homes where the ceiling should feel considered.',
+      'Vox sofit ceilings use slim profiles to create a refined, layered ceiling look. Perfect for retail, offices and modern homes where the ceiling should feel considered.',
     features: ['Slim, modern profiles', 'Layered design', 'Conceals services above', 'Fast installation'],
-    material: 'Vox soffit ceiling system in powder-coated and wood-grain finishes.',
+    material: 'Vox sofit ceiling system in powder-coated and wood-grain finishes.',
     applications: ['Retail stores', 'Office reception', 'Modern homes', 'Cafés & restaurants'],
     finishes: ['White', 'Black', 'Wood Grain', 'Grey'],
     related: ['stretch-fiber-ceiling', 'baffle-ceiling'],
@@ -684,9 +684,9 @@ export const products = [
     related: ['customized-doors', '3d-panels'],
   },
   {
-    id: 'vox-soft-panel',
-    name: 'Vox Soffit Panel',
-    category: 'Soft Panels',
+    id: 'vox-sofit-panel',
+    name: 'Vox Sofit Panel',
+    category: 'Sofit Panels',
     image: imgVoxSoftPanel,
     gallery: [imgVoxSoftPanel],
     short: 'Elegant soft-finish panels that bring a smooth, premium layer to walls.',
@@ -696,7 +696,7 @@ export const products = [
     material: 'Soft-finish decorative panels in durable, ready-to-install profiles.',
     applications: ['Feature walls', 'Bedroom & living areas', 'Office receptions', 'Showroom displays'],
     finishes: ['White', 'Wood Finish', 'Textured', 'Custom Colour'],
-    related: ['vox-soffit-ceiling', 'victara-panel', 'pvc-wall-panels'],
+    related: ['vox-sofit-ceiling', 'victara-panel', 'pvc-wall-panels'],
   },
   {
     id: 'carpet',
