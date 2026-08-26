@@ -16,8 +16,8 @@ const relatedVisible = { base: 1.1, sm: 2.2, lg: 3, xl: 3 }
 function DetailRow({ label, children }) {
   return (
     <div className="flex flex-col gap-1.5 py-4 first:pt-0 last:pb-0">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-stone">{label}</p>
-      <div className="text-sm leading-relaxed text-charcoal">{children}</div>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-stone">{label}</p>
+      <div className="text-xs leading-relaxed text-charcoal sm:text-sm">{children}</div>
     </div>
   )
 }
@@ -76,7 +76,7 @@ export default function ProductDetail({ productId: propProductId }) {
       </section>
 
       <section className="mx-auto max-w-none px-5 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1fr] lg:gap-14">
+        <div className="grid gap-10 items-start lg:grid-cols-[1fr_1fr] lg:gap-14">
           <Reveal>
             <ImageGallery images={product.gallery} alt={product.name} />
           </Reveal>
@@ -86,10 +86,10 @@ export default function ProductDetail({ productId: propProductId }) {
               <span className="inline-flex w-fit items-center gap-2 rounded-full bg-brand-soft px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand">
                 {product.category}
               </span>
-              <h1 className="mt-4 font-serif text-3xl leading-tight text-charcoal sm:text-4xl">
+              <h1 className="mt-4 font-serif text-2xl leading-tight text-charcoal sm:text-3xl">
                 {product.name}
               </h1>
-              <p className="mt-4 text-base leading-relaxed text-stone">
+              <p className="mt-3 text-sm leading-relaxed text-stone sm:text-base">
                 {product.description}
               </p>
 
