@@ -60,7 +60,6 @@ export default function Products({ activeCategorySlug }) {
   const filteredCards = useMemo(() => expandToCards(filtered), [filtered])
 
   const activeCount = countActiveFilters(filters)
-  const hasActive = activeCount > 0 || Boolean(query.trim()) || Boolean(activeCategory)
 
   const handleToggle = (groupKey, label) =>
     setFilters((prev) => toggleFilter(prev, groupKey, label))
@@ -194,11 +193,6 @@ export default function Products({ activeCategorySlug }) {
                 <p className="max-w-sm text-sm leading-relaxed text-stone">
                   Try adjusting your search or removing some filters.
                 </p>
-                {hasActive && (
-                  <Button variant="outline" onClick={clearAll} className="mt-2">
-                    Clear all filters
-                  </Button>
-                )}
               </Reveal>
             )}
           </div>

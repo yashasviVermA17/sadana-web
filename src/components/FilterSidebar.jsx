@@ -123,16 +123,6 @@ function FilterPanel({ categories, activeCategorySlug, filters, onToggle, onClea
         </section>
       ))}
 
-      <div className="mt-8 border-t border-charcoal/10 pt-7">
-        <button
-          type="button"
-          onClick={onClear}
-          disabled={activeCount === 0}
-          className="w-full rounded-full border border-brand/60 bg-white px-5 py-2.5 text-sm font-medium text-charcoal transition-colors duration-300 hover:border-brand disabled:pointer-events-none disabled:opacity-40"
-        >
-          Clear all filters
-        </button>
-      </div>
     </div>
   )
 }

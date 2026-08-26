@@ -6,7 +6,7 @@ import imgParametric from '../assets/products/wall-panels/Parametric wall panel.
 import imgVictaraPanel from '../assets/products/wall-panels/Victara panel.jpg'
 import imgWpcPanels from '../assets/products/wall-panels/W.p.c panel.jpg'
 import imgExteriorWallPanel from '../assets/products/wall-panels/Exterior wall panel.jpg'
-import imgAcrylicSheet from '../assets/products/decorative-sheets/Acrylic sheet.jpg'
+import imgAcrylicSheet from '../assets/products/decorative-sheets/acrylic sheet1.png'
 import imgLaminates from '../assets/products/decorative-sheets/Laminate sheet.jpeg'
 import imgRippleSheet from '../assets/products/decorative-sheets/Ripple sheet.jpg'
 import imgHighlighterSheet from '../assets/products/decorative-sheets/metal highjlighter sheet 2.jpeg'
