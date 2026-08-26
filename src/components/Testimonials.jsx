@@ -45,6 +45,9 @@ const CLIENT_NAMES = {
   39: 'Hotel Omni Palace',
   41: 'CDPIS',
   43: 'DEL',
+  45: 'AIC Prestige',
+  46: 'Bonton',
+  47: 'Indore Institute',
 }
 
 const clientLogos = Object.entries(clientLogoModules)
