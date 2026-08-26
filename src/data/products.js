@@ -685,7 +685,7 @@ export const products = [
   },
   {
     id: 'vox-sofit-panel',
-    name: 'Vox Sofit Panel',
+    name: 'Exterior Clading',
     category: 'Sofit Panels',
     image: imgVoxSoftPanel,
     gallery: [imgVoxSoftPanel],
